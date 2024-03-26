@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WebservicesModelStoreContainer" CdmEntityContainer="WebservicesEntities">
+    <EntitySetMapping Name="APIUsers">
+      <EntityTypeMapping TypeName="WebservicesModel.APIUser">
+        <MappingFragment StoreEntitySet="APIUsers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EDIClientAccountId" ColumnName="EDIClientAccountId" />
+          <ScalarProperty Name="clientid" ColumnName="clientid" />
+          <ScalarProperty Name="client_secret" ColumnName="client_secret" />
+          <ScalarProperty Name="TokenDateTime" ColumnName="TokenDateTime" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="callbackurl" ColumnName="callbackurl" />
+          <ScalarProperty Name="maxTransId" ColumnName="maxTransId" />
+          <ScalarProperty Name="CustomerAuthenticationKey" ColumnName="CustomerAuthenticationKey" />
+          <ScalarProperty Name="CallbackURLRegistrationDate" ColumnName="CallbackURLRegistrationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APIUsersSandboxes">
+      <EntityTypeMapping TypeName="WebservicesModel.APIUsersSandbox">
+        <MappingFragment StoreEntitySet="APIUsersSandbox">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EDIClientAccountId" ColumnName="EDIClientAccountId" />
+          <ScalarProperty Name="clientid" ColumnName="clientid" />
+          <ScalarProperty Name="client_secret" ColumnName="client_secret" />
+          <ScalarProperty Name="TokenDateTime" ColumnName="TokenDateTime" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="callbackurl" ColumnName="callbackurl" />
+          <ScalarProperty Name="maxTransId" ColumnName="maxTransId" />
+          <ScalarProperty Name="CustomerAuthenticationKey" ColumnName="CustomerAuthenticationKey" />
+          <ScalarProperty Name="CallbackURLRegistrationDate" ColumnName="CallbackURLRegistrationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

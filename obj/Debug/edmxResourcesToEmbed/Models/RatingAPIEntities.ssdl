@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ratingAPIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccessorialRate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccessorialID" Type="int" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Accessorials">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
+    <Property Name="UOM" Type="varchar" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="64" />
+    <Property Name="AccountNumber" Type="varchar" MaxLength="32" />
+    <Property Name="Address1" Type="varchar" MaxLength="256" />
+    <Property Name="Address2" Type="varchar" MaxLength="256" />
+    <Property Name="City" Type="varchar" MaxLength="64" />
+    <Property Name="ProvState" Type="varchar" MaxLength="32" />
+    <Property Name="Country" Type="varchar" MaxLength="32" />
+    <Property Name="Phone" Type="varchar" MaxLength="32" />
+    <Property Name="Email" Type="varchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="timestamp" Type="datetime" />
+    <Property Name="logentry" Type="varchar" MaxLength="1024" />
+  </EntityType>
+  <EntityType Name="LookupReferences">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LookupType" Type="varchar" MaxLength="32" />
+    <Property Name="ClientlD" Type="int" />
+    <Property Name="Generic1" Type="varchar" MaxLength="64" />
+    <Property Name="Generic2" Type="varchar" MaxLength="64" />
+    <Property Name="Generic3" Type="varchar" MaxLength="64" />
+    <Property Name="Value" Type="varchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="PostalZone">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="16" />
+    <Property Name="Zone" Type="varchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="Rates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="Service" Type="varchar" MaxLength="32" />
+    <Property Name="Zone" Type="varchar" MaxLength="16" />
+    <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="RatesArchive">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="Zone" Type="varchar" MaxLength="16" />
+    <Property Name="Service" Type="varchar" MaxLength="32" />
+    <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Timestamp" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Shipment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipmentNumber" Type="varchar" MaxLength="32" />
+    <Property Name="FromPostalCode" Type="varchar" MaxLength="16" />
+    <Property Name="ToPostalCode" Type="varchar" MaxLength="16" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="Service" Type="varchar" MaxLength="32" />
+    <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="SpecialRates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="Service" Type="varchar" MaxLength="32" />
+    <Property Name="Zone" Type="varchar" MaxLength="16" />
+    <Property Name="FromWeight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ToWeight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="WebRepsonseErrorMessage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebResponseID" Type="int" />
+    <Property Name="Error" Type="varchar" MaxLength="512" />
+    <Property Name="ErrorMessage" Type="text" />
+  </EntityType>
+  <EntityType Name="WebRequest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="Service" Type="varchar" MaxLength="32" />
+    <Property Name="AuthenticationToken" Type="varchar" MaxLength="64" />
+    <Property Name="FromPostal" Type="varchar" MaxLength="16" />
+    <Property Name="ToPostal" Type="varchar" MaxLength="16" />
+    <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="WebRequestAccessorial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebRequestID" Type="int" />
+    <Property Name="AccessorialID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="WebResponse">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebRequestID" Type="int" />
+    <Property Name="StatusCode" Type="int" />
+    <Property Name="Zone" Type="varchar" MaxLength="16" />
+    <Property Name="Service" Type="varchar" MaxLength="32" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityContainer Name="ratingAPIModelStoreContainer">
+    <EntitySet Name="AccessorialRate" EntityType="Self.AccessorialRate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupReferences" EntityType="Self.LookupReferences" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostalZone" EntityType="Self.PostalZone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RatesArchive" EntityType="Self.RatesArchive" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpecialRates" EntityType="Self.SpecialRates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebRepsonseErrorMessage" EntityType="Self.WebRepsonseErrorMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebRequest" EntityType="Self.WebRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebRequestAccessorial" EntityType="Self.WebRequestAccessorial" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebResponse" EntityType="Self.WebResponse" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
