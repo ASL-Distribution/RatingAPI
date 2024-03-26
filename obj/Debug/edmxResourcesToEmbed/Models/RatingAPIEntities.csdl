@@ -69,15 +69,6 @@
     <Property Name="ToWeight" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
-  <EntityType Name="WebRepsonseErrorMessage">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="WebResponseID" Type="Int32" />
-    <Property Name="Error" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-    <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="WebRequestAccessorial">
     <Key>
       <PropertyRef Name="ID" />
@@ -94,13 +85,12 @@
     <EntitySet Name="RatesArchives" EntityType="Self.RatesArchive" />
     <EntitySet Name="Shipments" EntityType="Self.Shipment" />
     <EntitySet Name="SpecialRates" EntityType="Self.SpecialRate" />
-    <EntitySet Name="WebRepsonseErrorMessages" EntityType="Self.WebRepsonseErrorMessage" />
     <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorial" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
     <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
     <EntitySet Name="Clients" EntityType="ratingAPIModel.Client" />
-    <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebResponse" />
+    <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
   </EntityContainer>
   <EntityType Name="Log">
     <Key>
@@ -140,22 +130,6 @@
     <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
     <Property Name="PostalCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="WebRequest">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ClientID" Type="Int32" />
-    <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="AuthenticationToken" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="timestamp" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="WebResponse">
     <Key>
       <PropertyRef Name="ID" />
@@ -173,5 +147,21 @@
     <Property Name="Milliseconds" Type="Int32" />
     <Property Name="timestamp" Type="DateTime" Precision="3" />
     <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="WebRequest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="AuthenticationToken" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="timestamp" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>
