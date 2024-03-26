@@ -130,6 +130,7 @@
     <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="timestamp" Type="datetime" />
   </EntityType>
   <EntityType Name="WebRequestAccessorial">
     <Key>
@@ -154,6 +155,8 @@
     <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Milliseconds" Type="int" />
+    <Property Name="timestamp" Type="datetime" />
   </EntityType>
   <EntityContainer Name="ratingAPIModelStoreContainer">
     <EntitySet Name="AccessorialRate" EntityType="Self.AccessorialRate" Schema="dbo" store:Type="Tables" />

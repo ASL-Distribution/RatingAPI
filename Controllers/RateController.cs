@@ -17,6 +17,10 @@ namespace RatingAPI.Controllers
             WebservicesEntities we = new WebservicesEntities();
             RatingAPIEntities re = new RatingAPIEntities();
 
+            request.timestamp = DateTime.Now;
+            re.WebRequests.Add(request);
+            re.SaveChanges();
+
             /*var start = DateTime.Now;
 
             var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
@@ -52,6 +56,12 @@ namespace RatingAPI.Controllers
                     webResponse.StatusCode = 200;
                     webResponse.Zone = rate.Zone;
                     webResponse.Weight = request.Weight;
+                    webResponse.WebRequestID = request.ID;
+                    webResponse.timestamp = DateTime.Now;
+                    webResponse.Milliseconds = (int)(DateTime.Now - request.timestamp.Value).TotalMilliseconds;
+
+                    re.WebResponses.Add(webResponse);
+                    re.SaveChanges();
 
                     return Ok(webResponse);
                 }
