@@ -35,17 +35,16 @@ namespace RatingAPI.Controllers
                 if (authResult.Passed)
                 {*/
                 var rate = re.Rates
-                                .FirstOrDefault(m => request.ClientID == m.ClientID
+                                .FirstOrDefault(m =>    request.ClientID == m.ClientID
                                                         && request.Service == m.Service
                                                         &&
-                                                            request.ToPostal.CompareTo(m.PostalFrom) == 0
-                                                            || request.ToPostal.CompareTo(m.PostalFrom) == 1
+                                                            (request.ToPostal.CompareTo(m.PostalFrom) == 0
+                                                            || request.ToPostal.CompareTo(m.PostalFrom) == 1)
                                                         &&
-                                                            request.ToPostal.CompareTo(m.PostalTo) == 0
-                                                            || request.ToPostal.CompareTo(m.PostalTo) == -1
-                                                        &&
-                                                            request.Weight >= m.WeightFrom
-                                                            && request.Weight <= m.WeightTo);
+                                                            (request.ToPostal.CompareTo(m.PostalTo) == 0
+                                                            || request.ToPostal.CompareTo(m.PostalTo) == -1)
+                                                        && request.Weight >= m.WeightFrom
+                                                        && request.Weight <= m.WeightTo);
 
                 if (rate == null)
                 {
@@ -56,6 +55,9 @@ namespace RatingAPI.Controllers
                     webResponse.Service = request.Service;
                     webResponse.Weight = request.Weight;
                     webResponse.StatusCode = (int)HttpStatusCode.NoContent;
+
+                    re.WebResponses.Add(webResponse);
+                    re.SaveChanges();
 
                     return StatusCode(HttpStatusCode.NoContent);
                 }
@@ -86,6 +88,9 @@ namespace RatingAPI.Controllers
             catch (Exception ex)
             {
                 webResponse.ErrorMessages = ex.Message;
+
+                re.WebResponses.Add(webResponse);
+                re.SaveChanges();
                 return Ok(webResponse);
             }
         }
