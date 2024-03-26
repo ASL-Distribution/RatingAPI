@@ -21,22 +21,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Clients">
-      <EntityTypeMapping TypeName="ratingAPIModel.Client">
-        <MappingFragment StoreEntitySet="Client">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-          <ScalarProperty Name="Address1" ColumnName="Address1" />
-          <ScalarProperty Name="Address2" ColumnName="Address2" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="ProvState" ColumnName="ProvState" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LookupReferences">
       <EntityTypeMapping TypeName="ratingAPIModel.LookupReference">
         <MappingFragment StoreEntitySet="LookupReferences">
@@ -47,27 +31,6 @@
           <ScalarProperty Name="Generic2" ColumnName="Generic2" />
           <ScalarProperty Name="Generic3" ColumnName="Generic3" />
           <ScalarProperty Name="Value" ColumnName="Value" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PostalZones">
-      <EntityTypeMapping TypeName="ratingAPIModel.PostalZone">
-        <MappingFragment StoreEntitySet="PostalZone">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-          <ScalarProperty Name="Zone" ColumnName="Zone" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Rates">
-      <EntityTypeMapping TypeName="ratingAPIModel.Rate">
-        <MappingFragment StoreEntitySet="Rates">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-          <ScalarProperty Name="Service" ColumnName="Service" />
-          <ScalarProperty Name="Zone" ColumnName="Zone" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="Rate1" ColumnName="Rate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -170,6 +133,38 @@
         <MappingFragment StoreEntitySet="Log">
           <ScalarProperty Name="logentry" ColumnName="logentry" />
           <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rates">
+      <EntityTypeMapping TypeName="ratingAPIModel.Rate">
+        <MappingFragment StoreEntitySet="Rates">
+          <ScalarProperty Name="Rate1" ColumnName="Rate" />
+          <ScalarProperty Name="WeightTo" ColumnName="WeightTo" />
+          <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
+          <ScalarProperty Name="PostalTo" ColumnName="PostalTo" />
+          <ScalarProperty Name="PostalFrom" ColumnName="PostalFrom" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="ratingAPIModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ProvState" ColumnName="ProvState" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

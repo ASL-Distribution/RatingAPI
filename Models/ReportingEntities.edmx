@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ReportingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" />
+          <Property Name="logentry" Type="varchar" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="monitor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScansPerMinute" Type="int" />
+        </EntityType>
+        <EntityType Name="TimedNotifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimedNotificationType" Type="varchar" MaxLength="64" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
+          <Property Name="Description" Type="varchar" MaxLength="256" />
+          <Property Name="Message" Type="varchar" MaxLength="512" />
+          <Property Name="Subject" Type="varchar" MaxLength="128" />
+          <Property Name="Timestamp" Type="datetime" />
+          <Property Name="ElapsedTime" Type="int" />
+          <Property Name="MaxAllowableTime" Type="int" />
+          <Property Name="LastEmailSentOut" Type="datetime" />
+          <Property Name="EmailInterval" Type="int" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Reporting.dbo.user_roles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="user_roles">
+          <Key>
+            <PropertyRef Name="user_role_id" />
+          </Key>
+          <Property Name="user_role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_number" Type="int" />
+          <Property Name="role_name" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="varchar" MaxLength="32" />
+          <Property Name="password" Type="varchar" MaxLength="32" />
+          <Property Name="role" Type="int" />
+          <Property Name="token" Type="varchar" MaxLength="32" />
+          <Property Name="tokendatetime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="ReportingModelStoreContainer">
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="monitor" EntityType="Self.monitor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimedNotifications" EntityType="Self.TimedNotifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_roles" EntityType="Self.user_roles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [user_roles].[user_role_id] AS [user_role_id], 
+    [user_roles].[role_number] AS [role_number], 
+    [user_roles].[role_name] AS [role_name]
+    FROM [dbo].[user_roles] AS [user_roles]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReportingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="timestamp" Type="DateTime" Precision="3" />
+          <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="monitor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScansPerMinute" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TimedNotification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimedNotificationType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="ElapsedTime" Type="Int32" />
+          <Property Name="MaxAllowableTime" Type="Int32" />
+          <Property Name="LastEmailSentOut" Type="DateTime" Precision="3" />
+          <Property Name="EmailInterval" Type="Int32" />
+          <Property Name="Enabled" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="token" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="tokendatetime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="user_roles">
+          <Key>
+            <PropertyRef Name="user_role_id" />
+          </Key>
+          <Property Name="user_role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_number" Type="Int32" />
+          <Property Name="role_name" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="ReportingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="monitors" EntityType="Self.monitor" />
+          <EntitySet Name="TimedNotifications" EntityType="Self.TimedNotification" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="user_roles" EntityType="Self.user_roles" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReportingModelStoreContainer" CdmEntityContainer="ReportingEntities">
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="ReportingModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="logentry" ColumnName="logentry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="monitors">
+            <EntityTypeMapping TypeName="ReportingModel.monitor">
+              <MappingFragment StoreEntitySet="monitor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ScansPerMinute" ColumnName="ScansPerMinute" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimedNotifications">
+            <EntityTypeMapping TypeName="ReportingModel.TimedNotification">
+              <MappingFragment StoreEntitySet="TimedNotifications">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="TimedNotificationType" ColumnName="TimedNotificationType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ElapsedTime" ColumnName="ElapsedTime" />
+                <ScalarProperty Name="MaxAllowableTime" ColumnName="MaxAllowableTime" />
+                <ScalarProperty Name="LastEmailSentOut" ColumnName="LastEmailSentOut" />
+                <ScalarProperty Name="EmailInterval" ColumnName="EmailInterval" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="ReportingModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="tokendatetime" ColumnName="tokendatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_roles">
+            <EntityTypeMapping TypeName="ReportingModel.user_roles">
+              <MappingFragment StoreEntitySet="user_roles">
+                <ScalarProperty Name="user_role_id" ColumnName="user_role_id" />
+                <ScalarProperty Name="role_number" ColumnName="role_number" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

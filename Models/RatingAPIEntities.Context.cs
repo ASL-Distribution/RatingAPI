@@ -27,10 +27,7 @@ namespace RatingAPI.Models
     
         public virtual DbSet<AccessorialRate> AccessorialRates { get; set; }
         public virtual DbSet<Accessorial> Accessorials { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<LookupReference> LookupReferences { get; set; }
-        public virtual DbSet<PostalZone> PostalZones { get; set; }
-        public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<RatesArchive> RatesArchives { get; set; }
         public virtual DbSet<Shipment> Shipments { get; set; }
         public virtual DbSet<SpecialRate> SpecialRates { get; set; }
@@ -39,5 +36,7 @@ namespace RatingAPI.Models
         public virtual DbSet<WebRequestAccessorial> WebRequestAccessorials { get; set; }
         public virtual DbSet<WebResponse> WebResponses { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Rate> Rates { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
     }
 }

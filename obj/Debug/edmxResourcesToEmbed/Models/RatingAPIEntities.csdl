@@ -18,21 +18,6 @@
     <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="Client">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="AccountNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Address1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-    <Property Name="Address2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="ProvState" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Country" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="LookupReference">
     <Key>
       <PropertyRef Name="ID" />
@@ -44,25 +29,6 @@
     <Property Name="Generic2" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Generic3" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Value" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="PostalZone">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PostalCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Rate">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ClientID" Type="Int32" />
-    <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="RatesArchive">
     <Key>
@@ -154,10 +120,7 @@
   <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRate" />
     <EntitySet Name="Accessorials" EntityType="Self.Accessorial" />
-    <EntitySet Name="Clients" EntityType="Self.Client" />
     <EntitySet Name="LookupReferences" EntityType="Self.LookupReference" />
-    <EntitySet Name="PostalZones" EntityType="Self.PostalZone" />
-    <EntitySet Name="Rates" EntityType="Self.Rate" />
     <EntitySet Name="RatesArchives" EntityType="Self.RatesArchive" />
     <EntitySet Name="Shipments" EntityType="Self.Shipment" />
     <EntitySet Name="SpecialRates" EntityType="Self.SpecialRate" />
@@ -166,6 +129,8 @@
     <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorial" />
     <EntitySet Name="WebResponses" EntityType="Self.WebResponse" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
+    <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
+    <EntitySet Name="Clients" EntityType="ratingAPIModel.Client" />
   </EntityContainer>
   <EntityType Name="Log">
     <Key>
@@ -174,5 +139,35 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="timestamp" Type="DateTime" Precision="3" />
     <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Rate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="PostalFrom" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="PostalTo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="AccountNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="ProvState" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

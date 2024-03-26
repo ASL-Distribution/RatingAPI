@@ -12,18 +12,13 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class user
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string AccountNumber { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string City { get; set; }
-        public string ProvState { get; set; }
-        public string Country { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string PostalCode { get; set; }
+        public int user_id { get; set; }
+        public string userid { get; set; }
+        public string password { get; set; }
+        public Nullable<int> role { get; set; }
+        public string token { get; set; }
+        public Nullable<System.DateTime> tokendatetime { get; set; }
     }
 }

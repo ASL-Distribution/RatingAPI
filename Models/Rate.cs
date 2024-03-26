@@ -18,7 +18,10 @@ namespace RatingAPI.Models
         public Nullable<int> ClientID { get; set; }
         public string Service { get; set; }
         public string Zone { get; set; }
-        public Nullable<decimal> Weight { get; set; }
+        public string PostalFrom { get; set; }
+        public string PostalTo { get; set; }
+        public Nullable<decimal> WeightFrom { get; set; }
+        public Nullable<decimal> WeightTo { get; set; }
         public Nullable<decimal> Rate1 { get; set; }
     }
 }

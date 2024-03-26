@@ -12,10 +12,9 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PostalZone
+    public partial class monitor
     {
-        public int ID { get; set; }
-        public string PostalCode { get; set; }
-        public string Zone { get; set; }
+        public int id { get; set; }
+        public Nullable<int> ScansPerMinute { get; set; }
     }
 }

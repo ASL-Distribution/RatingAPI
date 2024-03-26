@@ -14,25 +14,52 @@ namespace RatingAPI.Controllers
     {
         public IHttpActionResult Get([FromBody] RatingAPI.Models.WebRequest request)
         {
-            var start = DateTime.Now;
-
             WebservicesEntities we = new WebservicesEntities();
+            RatingAPIEntities re = new RatingAPIEntities();
+
+            /*var start = DateTime.Now;
+
             var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
             Logging.Log("authentication fine.");
 
             if (authResult.Passed)
-            {
-                ///return Ok(webResponse);
-            }
+            {*/
+                var rate = re.Rates
+                                .FirstOrDefault(m => request.ClientID == m.ClientID
+                                                        && request.Service == m.Service
+                                                        &&
+                                                            request.ToPostal.CompareTo(m.PostalFrom) == 0
+                                                            || request.ToPostal.CompareTo(m.PostalFrom) == 1
+                                                        &&
+                                                            request.ToPostal.CompareTo(m.PostalTo) == 0
+                                                            || request.ToPostal.CompareTo(m.PostalTo) == -1
+                                                        &&
+                                                            request.Weight >= m.WeightFrom
+                                                            && request.Weight <= m.WeightTo);
+
+                if (rate == null)
+                {
+                    return StatusCode(HttpStatusCode.NoContent);
+                }
+                else
+                {
+                    var webResponse = new Models.WebResponse();
+                    webResponse.Rate = rate.Rate1.Value * request.Weight;
+                    webResponse.Height = request.Height;
+                    webResponse.Width = request.Width;
+                    webResponse.Length = request.Length;
+                    webResponse.Service = request.Service;
+                    webResponse.StatusCode = 200;
+                    webResponse.Zone = rate.Zone;
+                    webResponse.Weight = request.Weight;
+
+                    return Ok(webResponse);
+                }
+            /*}
             else
             {
                 return StatusCode(HttpStatusCode.Unauthorized);
-            }
-
-            var response = new RatingAPI.Models.WebResponse();
-            response.Rate = (decimal)5.99;
-
-            return Ok(response);
+            }*/
         }
     }
 }

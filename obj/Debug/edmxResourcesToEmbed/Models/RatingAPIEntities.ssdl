@@ -32,6 +32,7 @@
     <Property Name="Country" Type="varchar" MaxLength="32" />
     <Property Name="Phone" Type="varchar" MaxLength="32" />
     <Property Name="Email" Type="varchar" MaxLength="128" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="16" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
@@ -53,14 +54,6 @@
     <Property Name="Generic3" Type="varchar" MaxLength="64" />
     <Property Name="Value" Type="varchar" MaxLength="256" />
   </EntityType>
-  <EntityType Name="PostalZone">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PostalCode" Type="varchar" MaxLength="16" />
-    <Property Name="Zone" Type="varchar" MaxLength="16" />
-  </EntityType>
   <EntityType Name="Rates">
     <Key>
       <PropertyRef Name="ID" />
@@ -69,7 +62,10 @@
     <Property Name="ClientID" Type="int" />
     <Property Name="Service" Type="varchar" MaxLength="32" />
     <Property Name="Zone" Type="varchar" MaxLength="16" />
-    <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PostalFrom" Type="varchar" MaxLength="16" />
+    <Property Name="PostalTo" Type="varchar" MaxLength="16" />
+    <Property Name="WeightFrom" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="WeightTo" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="RatesArchive">
@@ -165,7 +161,6 @@
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LookupReferences" EntityType="Self.LookupReferences" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PostalZone" EntityType="Self.PostalZone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RatesArchive" EntityType="Self.RatesArchive" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />

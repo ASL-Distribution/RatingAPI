@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReportingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="timestamp" Type="datetime" />
+    <Property Name="logentry" Type="varchar" MaxLength="1024" />
+  </EntityType>
+  <EntityType Name="monitor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ScansPerMinute" Type="int" />
+  </EntityType>
+  <EntityType Name="TimedNotifications">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimedNotificationType" Type="varchar" MaxLength="64" />
+    <Property Name="Name" Type="varchar" MaxLength="64" />
+    <Property Name="Description" Type="varchar" MaxLength="256" />
+    <Property Name="Message" Type="varchar" MaxLength="512" />
+    <Property Name="Subject" Type="varchar" MaxLength="128" />
+    <Property Name="Timestamp" Type="datetime" />
+    <Property Name="ElapsedTime" Type="int" />
+    <Property Name="MaxAllowableTime" Type="int" />
+    <Property Name="LastEmailSentOut" Type="datetime" />
+    <Property Name="EmailInterval" Type="int" />
+    <Property Name="Enabled" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Reporting.dbo.user_roles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="user_roles">
+    <Key>
+      <PropertyRef Name="user_role_id" />
+    </Key>
+    <Property Name="user_role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role_number" Type="int" />
+    <Property Name="role_name" Type="varchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="varchar" MaxLength="32" />
+    <Property Name="password" Type="varchar" MaxLength="32" />
+    <Property Name="role" Type="int" />
+    <Property Name="token" Type="varchar" MaxLength="32" />
+    <Property Name="tokendatetime" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="ReportingModelStoreContainer">
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="monitor" EntityType="Self.monitor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimedNotifications" EntityType="Self.TimedNotifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_roles" EntityType="Self.user_roles" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [user_roles].[user_role_id] AS [user_role_id], 
+    [user_roles].[role_number] AS [role_number], 
+    [user_roles].[role_name] AS [role_name]
+    FROM [dbo].[user_roles] AS [user_roles]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

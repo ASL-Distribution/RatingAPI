@@ -164,6 +164,10 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Business\Authentication.cs" />
     <Compile Include="Business\Logging.cs" />
+    <Compile Include="Business\PostalCodeHelper.cs" />
+    <Compile Include="Business\ReportingAuthentication.cs" />
+    <Compile Include="Business\ReportingLogging.cs" />
+    <Compile Include="Business\Tracking.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RateController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -193,8 +197,8 @@
     <Compile Include="Models\LookupReference.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PostalZone.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    <Compile Include="Models\monitor.cs">
+      <DependentUpon>ReportingEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rate.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
@@ -217,13 +221,38 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RatingAPIEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportingAuthenticationResult.cs" />
+    <Compile Include="Models\ReportingEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportingEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportingEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportingEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportingEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportingEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Shipment.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SpecialRate.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TimedNotification.cs">
+      <DependentUpon>ReportingEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TokenResult.cs" />
+    <Compile Include="Models\user.cs">
+      <DependentUpon>ReportingEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_roles.cs">
+      <DependentUpon>ReportingEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WebRepsonseErrorMessage.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
@@ -272,6 +301,16 @@
       <DependentUpon>RatingAPIEntities.edmx</DependentUpon>
       <LastGenOutput>RatingAPIEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\ReportingEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReportingEntities.edmx</DependentUpon>
+      <LastGenOutput>ReportingEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ReportingEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReportingEntities.edmx</DependentUpon>
+      <LastGenOutput>ReportingEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\WebserviceEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WebserviceEntities.edmx</DependentUpon>
@@ -316,6 +355,13 @@
     </EntityDeploy>
     <Content Include="Models\WebserviceEntities.edmx.diagram">
       <DependentUpon>WebserviceEntities.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ReportingEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ReportingEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ReportingEntities.edmx.diagram">
+      <DependentUpon>ReportingEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
