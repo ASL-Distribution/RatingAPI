@@ -21,13 +21,19 @@ namespace RatingAPI.Controllers
             re.WebRequests.Add(request);
             re.SaveChanges();
 
-            /*var start = DateTime.Now;
+            var webResponse = new Models.WebResponse();
+            webResponse.WebRequestID = request.ID;
 
-            var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
-            Logging.Log("authentication fine.");
+            try
+            {
 
-            if (authResult.Passed)
-            {*/
+                /*var start = DateTime.Now;
+
+                var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
+                Logging.Log("authentication fine.");
+
+                if (authResult.Passed)
+                {*/
                 var rate = re.Rates
                                 .FirstOrDefault(m => request.ClientID == m.ClientID
                                                         && request.Service == m.Service
@@ -43,33 +49,45 @@ namespace RatingAPI.Controllers
 
                 if (rate == null)
                 {
+                    webResponse.timestamp = DateTime.Now;
+                    webResponse.Height = request.Height;
+                    webResponse.Width = request.Width;
+                    webResponse.Length = request.Length;
+                    webResponse.Service = request.Service;
+                    webResponse.Weight = request.Weight;
+                    webResponse.StatusCode = (int)HttpStatusCode.NoContent;
+
                     return StatusCode(HttpStatusCode.NoContent);
                 }
                 else
                 {
-                    var webResponse = new Models.WebResponse();
                     webResponse.Rate = rate.Rate1.Value * request.Weight;
                     webResponse.Height = request.Height;
                     webResponse.Width = request.Width;
                     webResponse.Length = request.Length;
                     webResponse.Service = request.Service;
-                    webResponse.StatusCode = 200;
                     webResponse.Zone = rate.Zone;
                     webResponse.Weight = request.Weight;
-                    webResponse.WebRequestID = request.ID;
                     webResponse.timestamp = DateTime.Now;
                     webResponse.Milliseconds = (int)(DateTime.Now - request.timestamp.Value).TotalMilliseconds;
+                    webResponse.StatusCode = (int)HttpStatusCode.NoContent;
 
                     re.WebResponses.Add(webResponse);
                     re.SaveChanges();
 
                     return Ok(webResponse);
                 }
-            /*}
-            else
+                /*}
+                else
+                {
+                    return StatusCode(HttpStatusCode.Unauthorized);
+                }*/
+            }
+            catch (Exception ex)
             {
-                return StatusCode(HttpStatusCode.Unauthorized);
-            }*/
+                webResponse.ErrorMessages = ex.Message;
+                return Ok(webResponse);
+            }
         }
     }
 }

@@ -26,5 +26,6 @@ namespace RatingAPI.Models
         public Nullable<decimal> Weight { get; set; }
         public Nullable<int> Milliseconds { get; set; }
         public Nullable<System.DateTime> timestamp { get; set; }
+        public string ErrorMessages { get; set; }
     }
 }

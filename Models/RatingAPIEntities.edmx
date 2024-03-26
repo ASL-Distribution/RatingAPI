@@ -112,15 +112,6 @@
           <Property Name="ToWeight" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
-        <EntityType Name="WebRepsonseErrorMessage">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WebResponseID" Type="int" />
-          <Property Name="Error" Type="varchar" MaxLength="512" />
-          <Property Name="ErrorMessage" Type="text" />
-        </EntityType>
         <EntityType Name="WebRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -162,6 +153,7 @@
           <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Milliseconds" Type="int" />
           <Property Name="timestamp" Type="datetime" />
+          <Property Name="ErrorMessages" Type="text" />
         </EntityType>
         <EntityContainer Name="ratingAPIModelStoreContainer">
           <EntitySet Name="AccessorialRate" EntityType="Self.AccessorialRate" Schema="dbo" store:Type="Tables" />
@@ -173,7 +165,6 @@
           <EntitySet Name="RatesArchive" EntityType="Self.RatesArchive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialRates" EntityType="Self.SpecialRates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WebRepsonseErrorMessage" EntityType="Self.WebRepsonseErrorMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequest" EntityType="Self.WebRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequestAccessorial" EntityType="Self.WebRequestAccessorial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebResponse" EntityType="Self.WebResponse" Schema="dbo" store:Type="Tables" />
@@ -354,6 +345,7 @@
           <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Milliseconds" Type="Int32" />
           <Property Name="timestamp" Type="DateTime" Precision="3" />
+          <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -436,16 +428,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WebRepsonseErrorMessages">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebRepsonseErrorMessage">
-              <MappingFragment StoreEntitySet="WebRepsonseErrorMessage">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="WebResponseID" ColumnName="WebResponseID" />
-                <ScalarProperty Name="Error" ColumnName="Error" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WebRequestAccessorials">
             <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
               <MappingFragment StoreEntitySet="WebRequestAccessorial">
@@ -517,6 +499,7 @@
           <EntitySetMapping Name="WebResponses">
             <EntityTypeMapping TypeName="ratingAPIModel.WebResponse">
               <MappingFragment StoreEntitySet="WebResponse">
+                <ScalarProperty Name="ErrorMessages" ColumnName="ErrorMessages" />
                 <ScalarProperty Name="timestamp" ColumnName="timestamp" />
                 <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />

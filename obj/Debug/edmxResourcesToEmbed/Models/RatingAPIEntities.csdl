@@ -172,5 +172,6 @@
     <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Milliseconds" Type="Int32" />
     <Property Name="timestamp" Type="DateTime" Precision="3" />
+    <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

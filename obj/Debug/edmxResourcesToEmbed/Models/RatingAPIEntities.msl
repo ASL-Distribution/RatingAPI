@@ -76,16 +76,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="WebRepsonseErrorMessages">
-      <EntityTypeMapping TypeName="ratingAPIModel.WebRepsonseErrorMessage">
-        <MappingFragment StoreEntitySet="WebRepsonseErrorMessage">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="WebResponseID" ColumnName="WebResponseID" />
-          <ScalarProperty Name="Error" ColumnName="Error" />
-          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="WebRequestAccessorials">
       <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
         <MappingFragment StoreEntitySet="WebRequestAccessorial">
@@ -157,6 +147,7 @@
     <EntitySetMapping Name="WebResponses">
       <EntityTypeMapping TypeName="ratingAPIModel.WebResponse">
         <MappingFragment StoreEntitySet="WebResponse">
+          <ScalarProperty Name="ErrorMessages" ColumnName="ErrorMessages" />
           <ScalarProperty Name="timestamp" ColumnName="timestamp" />
           <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
