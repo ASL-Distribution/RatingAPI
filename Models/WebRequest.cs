@@ -25,5 +25,7 @@ namespace RatingAPI.Models
         public Nullable<decimal> Height { get; set; }
         public Nullable<decimal> Weight { get; set; }
         public Nullable<System.DateTime> timestamp { get; set; }
+
+        public WebRequestAccessorial[] Accessorials { get; set; }
     }
 }

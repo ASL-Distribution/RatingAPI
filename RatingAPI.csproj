@@ -203,6 +203,9 @@
     <Compile Include="Models\Rate.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RateRequestAccessorial.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RatesArchive.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
@@ -247,14 +250,14 @@
       <DependentUpon>ReportingEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TokenResult.cs" />
+    <Compile Include="Models\UOM.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>ReportingEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user_roles.cs">
       <DependentUpon>ReportingEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WebRepsonseErrorMessage.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WebRequest.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>

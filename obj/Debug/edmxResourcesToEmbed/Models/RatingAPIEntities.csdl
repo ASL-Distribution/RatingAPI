@@ -1,23 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ratingAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="AccessorialRate">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="AccessorialID" Type="Int32" />
-    <Property Name="ClientID" Type="Int32" />
-    <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-  </EntityType>
-  <EntityType Name="Accessorial">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="LookupReference">
     <Key>
       <PropertyRef Name="ID" />
@@ -69,28 +51,20 @@
     <Property Name="ToWeight" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
-  <EntityType Name="WebRequestAccessorial">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="WebRequestID" Type="Int32" />
-    <Property Name="AccessorialID" Type="Int32" />
-    <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
-  </EntityType>
   <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRate" />
-    <EntitySet Name="Accessorials" EntityType="Self.Accessorial" />
     <EntitySet Name="LookupReferences" EntityType="Self.LookupReference" />
     <EntitySet Name="RatesArchives" EntityType="Self.RatesArchive" />
     <EntitySet Name="Shipments" EntityType="Self.Shipment" />
     <EntitySet Name="SpecialRates" EntityType="Self.SpecialRate" />
-    <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorial" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
     <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
     <EntitySet Name="Clients" EntityType="ratingAPIModel.Client" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebResponse" />
     <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
+    <EntitySet Name="AccessorialRates" EntityType="ratingAPIModel.AccessorialRate" />
+    <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
+    <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
+    <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
   </EntityContainer>
   <EntityType Name="Log">
     <Key>
@@ -163,5 +137,38 @@
     <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="timestamp" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="AccessorialRate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="Accessorial" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Accessorial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UOM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="WebRequestAccessorial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WebRequestID" Type="Int32" />
+    <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
 </Schema>

@@ -12,11 +12,9 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WebRepsonseErrorMessage
+    public partial class UOM
     {
         public int ID { get; set; }
-        public Nullable<int> WebResponseID { get; set; }
-        public string Error { get; set; }
-        public string ErrorMessage { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -21,6 +21,13 @@ namespace RatingAPI.Controllers
             re.WebRequests.Add(request);
             re.SaveChanges();
 
+            foreach (var accessorial in request.Accessorials)
+            {
+                accessorial.WebRequestID = request.ID;
+            }
+            re.WebRequestAccessorials.AddRange(request.Accessorials);
+            re.SaveChanges();
+
             var webResponse = new Models.WebResponse();
             webResponse.WebRequestID = request.ID;
 
@@ -63,7 +70,7 @@ namespace RatingAPI.Controllers
                 }
                 else
                 {
-                    webResponse.Rate = rate.Rate1.Value * request.Weight;
+                    webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request);
                     webResponse.Height = request.Height;
                     webResponse.Width = request.Width;
                     webResponse.Length = request.Length;
@@ -93,6 +100,25 @@ namespace RatingAPI.Controllers
                 re.SaveChanges();
                 return Ok(webResponse);
             }
+        }
+
+        private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request)
+        {
+            decimal total = 0;
+
+            foreach (var accessorial in request.Accessorials)
+            {
+                var accessorialRate = re.AccessorialRates
+                                            .FirstOrDefault(m =>    m.ClientID == request.ClientID
+                                                                    && m.Accessorial == accessorial.AccessorialName);
+
+                if (accessorialRate != null)
+                {
+                    total += accessorialRate.Rate.Value * accessorial.Amount.Value;
+                }
+            }
+
+            return total;
         }
     }
 }

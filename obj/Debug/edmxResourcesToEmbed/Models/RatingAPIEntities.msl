@@ -1,26 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ratingAPIModelStoreContainer" CdmEntityContainer="RatingAPIEntities">
-    <EntitySetMapping Name="AccessorialRates">
-      <EntityTypeMapping TypeName="ratingAPIModel.AccessorialRate">
-        <MappingFragment StoreEntitySet="AccessorialRate">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="AccessorialID" ColumnName="AccessorialID" />
-          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Accessorials">
-      <EntityTypeMapping TypeName="ratingAPIModel.Accessorial">
-        <MappingFragment StoreEntitySet="Accessorials">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
-          <ScalarProperty Name="UOM" ColumnName="UOM" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LookupReferences">
       <EntityTypeMapping TypeName="ratingAPIModel.LookupReference">
         <MappingFragment StoreEntitySet="LookupReferences">
@@ -73,16 +53,6 @@
           <ScalarProperty Name="FromWeight" ColumnName="FromWeight" />
           <ScalarProperty Name="ToWeight" ColumnName="ToWeight" />
           <ScalarProperty Name="Rate" ColumnName="Rate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="WebRequestAccessorials">
-      <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
-        <MappingFragment StoreEntitySet="WebRequestAccessorial">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-          <ScalarProperty Name="AccessorialID" ColumnName="AccessorialID" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -159,6 +129,43 @@
           <ScalarProperty Name="AuthenticationToken" ColumnName="AuthenticationToken" />
           <ScalarProperty Name="Service" ColumnName="Service" />
           <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccessorialRates">
+      <EntityTypeMapping TypeName="ratingAPIModel.AccessorialRate">
+        <MappingFragment StoreEntitySet="AccessorialRate">
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Accessorial" ColumnName="Accessorial" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accessorials">
+      <EntityTypeMapping TypeName="ratingAPIModel.Accessorial">
+        <MappingFragment StoreEntitySet="Accessorials">
+          <ScalarProperty Name="UOM" ColumnName="UOM" />
+          <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UOMs">
+      <EntityTypeMapping TypeName="ratingAPIModel.UOM">
+        <MappingFragment StoreEntitySet="UOM">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebRequestAccessorials">
+      <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
+        <MappingFragment StoreEntitySet="WebRequestAccessorial">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
+          <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

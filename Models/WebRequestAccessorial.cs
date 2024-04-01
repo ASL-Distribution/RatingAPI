@@ -16,7 +16,7 @@ namespace RatingAPI.Models
     {
         public int ID { get; set; }
         public Nullable<int> WebRequestID { get; set; }
-        public Nullable<int> AccessorialID { get; set; }
+        public string AccessorialName { get; set; }
         public Nullable<decimal> Amount { get; set; }
     }
 }

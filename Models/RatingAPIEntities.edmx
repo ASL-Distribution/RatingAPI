@@ -10,9 +10,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccessorialID" Type="int" />
           <Property Name="ClientID" Type="int" />
-          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Accessorial" Type="varchar" MaxLength="64" />
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Accessorials">
@@ -112,6 +111,13 @@
           <Property Name="ToWeight" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
+        </EntityType>
         <EntityType Name="WebRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -134,7 +140,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WebRequestID" Type="int" />
-          <Property Name="AccessorialID" Type="int" />
+          <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
           <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="WebResponse">
@@ -165,6 +171,7 @@
           <EntitySet Name="RatesArchive" EntityType="Self.RatesArchive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialRates" EntityType="Self.SpecialRates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequest" EntityType="Self.WebRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequestAccessorial" EntityType="Self.WebRequestAccessorial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebResponse" EntityType="Self.WebResponse" Schema="dbo" store:Type="Tables" />
@@ -173,24 +180,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ratingAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AccessorialRate">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccessorialID" Type="Int32" />
-          <Property Name="ClientID" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="Accessorial">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="LookupReference">
           <Key>
             <PropertyRef Name="ID" />
@@ -242,28 +231,20 @@
           <Property Name="ToWeight" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
-        <EntityType Name="WebRequestAccessorial">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WebRequestID" Type="Int32" />
-          <Property Name="AccessorialID" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
         <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRate" />
-          <EntitySet Name="Accessorials" EntityType="Self.Accessorial" />
           <EntitySet Name="LookupReferences" EntityType="Self.LookupReference" />
           <EntitySet Name="RatesArchives" EntityType="Self.RatesArchive" />
           <EntitySet Name="Shipments" EntityType="Self.Shipment" />
           <EntitySet Name="SpecialRates" EntityType="Self.SpecialRate" />
-          <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorial" />
           <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
           <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
           <EntitySet Name="Clients" EntityType="ratingAPIModel.Client" />
           <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebResponse" />
           <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
+          <EntitySet Name="AccessorialRates" EntityType="ratingAPIModel.AccessorialRate" />
+          <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
+          <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
+          <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
         </EntityContainer>
         <EntityType Name="Log">
           <Key>
@@ -337,32 +318,45 @@
           <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="timestamp" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="AccessorialRate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="Accessorial" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Accessorial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WebRequestAccessorial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebRequestID" Type="Int32" />
+          <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ratingAPIModelStoreContainer" CdmEntityContainer="RatingAPIEntities">
-          <EntitySetMapping Name="AccessorialRates">
-            <EntityTypeMapping TypeName="ratingAPIModel.AccessorialRate">
-              <MappingFragment StoreEntitySet="AccessorialRate">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="AccessorialID" ColumnName="AccessorialID" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Accessorials">
-            <EntityTypeMapping TypeName="ratingAPIModel.Accessorial">
-              <MappingFragment StoreEntitySet="Accessorials">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
-                <ScalarProperty Name="UOM" ColumnName="UOM" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LookupReferences">
             <EntityTypeMapping TypeName="ratingAPIModel.LookupReference">
               <MappingFragment StoreEntitySet="LookupReferences">
@@ -415,16 +409,6 @@
                 <ScalarProperty Name="FromWeight" ColumnName="FromWeight" />
                 <ScalarProperty Name="ToWeight" ColumnName="ToWeight" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WebRequestAccessorials">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
-              <MappingFragment StoreEntitySet="WebRequestAccessorial">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-                <ScalarProperty Name="AccessorialID" ColumnName="AccessorialID" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -501,6 +485,43 @@
                 <ScalarProperty Name="AuthenticationToken" ColumnName="AuthenticationToken" />
                 <ScalarProperty Name="Service" ColumnName="Service" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessorialRates">
+            <EntityTypeMapping TypeName="ratingAPIModel.AccessorialRate">
+              <MappingFragment StoreEntitySet="AccessorialRate">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Accessorial" ColumnName="Accessorial" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accessorials">
+            <EntityTypeMapping TypeName="ratingAPIModel.Accessorial">
+              <MappingFragment StoreEntitySet="Accessorials">
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="ratingAPIModel.UOM">
+              <MappingFragment StoreEntitySet="UOM">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebRequestAccessorials">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
+              <MappingFragment StoreEntitySet="WebRequestAccessorial">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
+                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

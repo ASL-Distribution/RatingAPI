@@ -5,9 +5,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="AccessorialID" Type="int" />
     <Property Name="ClientID" Type="int" />
-    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Accessorial" Type="varchar" MaxLength="64" />
     <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Accessorials">
@@ -107,6 +106,13 @@
     <Property Name="ToWeight" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
+  <EntityType Name="UOM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="64" />
+  </EntityType>
   <EntityType Name="WebRequest">
     <Key>
       <PropertyRef Name="ID" />
@@ -129,7 +135,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WebRequestID" Type="int" />
-    <Property Name="AccessorialID" Type="int" />
+    <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
     <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="WebResponse">
@@ -160,6 +166,7 @@
     <EntitySet Name="RatesArchive" EntityType="Self.RatesArchive" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SpecialRates" EntityType="Self.SpecialRates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebRequest" EntityType="Self.WebRequest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebRequestAccessorial" EntityType="Self.WebRequestAccessorial" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebResponse" EntityType="Self.WebResponse" Schema="dbo" store:Type="Tables" />

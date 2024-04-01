@@ -12,11 +12,11 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AccessorialRate
+    public partial class RateRequestAccessorial
     {
         public int ID { get; set; }
-        public Nullable<int> ClientID { get; set; }
-        public string Accessorial { get; set; }
-        public Nullable<decimal> Rate { get; set; }
+        public Nullable<int> WebRequestID { get; set; }
+        public string AccessorialName { get; set; }
+        public Nullable<decimal> Amount { get; set; }
     }
 }
