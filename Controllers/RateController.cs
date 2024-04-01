@@ -33,14 +33,13 @@ namespace RatingAPI.Controllers
 
             try
             {
-
-                /*var start = DateTime.Now;
+                //var start = DateTime.Now;
 
                 var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
                 Logging.Log("authentication fine.");
 
                 if (authResult.Passed)
-                {*/
+                {
                 var rate = re.Rates
                                 .FirstOrDefault(m =>    request.ClientID == m.ClientID
                                                         && request.Service == m.Service
@@ -86,11 +85,11 @@ namespace RatingAPI.Controllers
 
                     return Ok(webResponse);
                 }
-                /*}
+                }
                 else
                 {
                     return StatusCode(HttpStatusCode.Unauthorized);
-                }*/
+                }
             }
             catch (Exception ex)
             {
