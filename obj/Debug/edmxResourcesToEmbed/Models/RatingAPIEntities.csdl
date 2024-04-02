@@ -57,7 +57,6 @@
     <EntitySet Name="Shipments" EntityType="Self.Shipment" />
     <EntitySet Name="SpecialRates" EntityType="Self.SpecialRate" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
-    <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
     <EntitySet Name="Clients" EntityType="ratingAPIModel.Client" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebResponse" />
     <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
@@ -65,6 +64,7 @@
     <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
     <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
     <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
+    <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
   </EntityContainer>
   <EntityType Name="Log">
     <Key>
@@ -73,20 +73,6 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="timestamp" Type="DateTime" Precision="3" />
     <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Rate">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ClientID" Type="Int32" />
-    <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="PostalFrom" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="PostalTo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
@@ -170,5 +156,21 @@
     <Property Name="WebRequestID" Type="Int32" />
     <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Rate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="OriginPostalFrom" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="OriginPostalTo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationPostalFrom" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationPostalTo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
 </Schema>

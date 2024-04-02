@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="ratingAPIModel.Shipment" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ratingAPIModel.SpecialRate" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ratingAPIModel.Log" Width="1.5" PointX="7.375" PointY="8.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.Rate" Width="1.5" PointX="9.375" PointY="7.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Client" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.WebResponse" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="ratingAPIModel.WebRequest" Width="1.5" PointX="3.375" PointY="10.75" />
@@ -18,6 +17,7 @@
         <EntityTypeShape EntityType="ratingAPIModel.Accessorial" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.UOM" Width="1.5" PointX="3.75" PointY="7.75" />
         <EntityTypeShape EntityType="ratingAPIModel.WebRequestAccessorial" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.Rate" Width="1.5" PointX="9.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

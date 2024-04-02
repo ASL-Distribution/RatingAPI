@@ -59,10 +59,12 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClientID" Type="int" />
-    <Property Name="Service" Type="varchar" MaxLength="32" />
+    <Property Name="Service" Type="varchar" MaxLength="64" />
     <Property Name="Zone" Type="varchar" MaxLength="16" />
-    <Property Name="PostalFrom" Type="varchar" MaxLength="16" />
-    <Property Name="PostalTo" Type="varchar" MaxLength="16" />
+    <Property Name="OriginPostalFrom" Type="varchar" MaxLength="16" />
+    <Property Name="OriginPostalTo" Type="varchar" MaxLength="16" />
+    <Property Name="DestinationPostalFrom" Type="varchar" MaxLength="16" />
+    <Property Name="DestinationPostalTo" Type="varchar" MaxLength="16" />
     <Property Name="WeightFrom" Type="decimal" Precision="10" Scale="2" />
     <Property Name="WeightTo" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />

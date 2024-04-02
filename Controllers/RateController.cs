@@ -46,11 +46,17 @@ namespace RatingAPI.Controllers
                                 .FirstOrDefault(m =>    authResult.APIUser.id == m.ClientID
                                                         && request.Service == m.Service
                                                         &&
-                                                            (request.ToPostal.CompareTo(m.PostalFrom) == 0
-                                                            || request.ToPostal.CompareTo(m.PostalFrom) == 1)
+                                                            (request.FromPostal.CompareTo(m.OriginPostalFrom) == 0
+                                                            || request.FromPostal.CompareTo(m.OriginPostalFrom) == 1)
                                                         &&
-                                                            (request.ToPostal.CompareTo(m.PostalTo) == 0
-                                                            || request.ToPostal.CompareTo(m.PostalTo) == -1)
+                                                            (request.FromPostal.CompareTo(m.OriginPostalTo) == 0
+                                                            || request.FromPostal.CompareTo(m.OriginPostalTo) == -1)
+                                                        &&
+                                                            (request.ToPostal.CompareTo(m.DestinationPostalFrom) == 0
+                                                            || request.ToPostal.CompareTo(m.DestinationPostalFrom) == 1)
+                                                        &&
+                                                            (request.ToPostal.CompareTo(m.DestinationPostalTo) == 0
+                                                            || request.ToPostal.CompareTo(m.DestinationPostalTo) == -1)
                                                         && request.Weight >= m.WeightFrom
                                                         && request.Weight <= m.WeightTo);
 

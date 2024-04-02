@@ -203,9 +203,6 @@
     <Compile Include="Models\Rate.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RateRequestAccessorial.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\RatesArchive.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
