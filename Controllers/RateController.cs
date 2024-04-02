@@ -38,10 +38,12 @@ namespace RatingAPI.Controllers
                 var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
                 Logging.Log("authentication fine.");
 
+                request.ClientID = authResult.APIUser.id;
+
                 if (authResult.Passed)
                 {
                 var rate = re.Rates
-                                .FirstOrDefault(m =>    request.ClientID == m.ClientID
+                                .FirstOrDefault(m =>    authResult.APIUser.id == m.ClientID
                                                         && request.Service == m.Service
                                                         &&
                                                             (request.ToPostal.CompareTo(m.PostalFrom) == 0
