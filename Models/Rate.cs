@@ -15,15 +15,10 @@ namespace RatingAPI.Models
     public partial class Rate
     {
         public int ID { get; set; }
-        public Nullable<int> ClientID { get; set; }
+        public Nullable<int> RateGroupID { get; set; }
         public string Service { get; set; }
-        public string Zone { get; set; }
-        public string OriginPostalFrom { get; set; }
-        public string OriginPostalTo { get; set; }
-        public string DestinationPostalFrom { get; set; }
-        public string DestinationPostalTo { get; set; }
-        public Nullable<decimal> WeightFrom { get; set; }
-        public Nullable<decimal> WeightTo { get; set; }
+        public Nullable<int> ZoneID { get; set; }
+        public Nullable<decimal> Weight { get; set; }
         public Nullable<decimal> Rate1 { get; set; }
     }
 }

@@ -12,14 +12,11 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SpecialRate
+    public partial class RateGroup
     {
         public int ID { get; set; }
-        public Nullable<int> ClientID { get; set; }
-        public string Service { get; set; }
-        public string Zone { get; set; }
-        public Nullable<decimal> FromWeight { get; set; }
-        public Nullable<decimal> ToWeight { get; set; }
-        public Nullable<decimal> Rate { get; set; }
+        public string Name { get; set; }
+        public Nullable<System.DateTime> Created { get; set; }
+        public Nullable<System.DateTime> Modified { get; set; }
     }
 }

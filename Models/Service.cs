@@ -12,14 +12,9 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LookupReference
+    public partial class Service
     {
         public int ID { get; set; }
-        public string LookupType { get; set; }
-        public Nullable<int> ClientlD { get; set; }
-        public string Generic1 { get; set; }
-        public string Generic2 { get; set; }
-        public string Generic3 { get; set; }
-        public string Value { get; set; }
+        public string Name { get; set; }
     }
 }

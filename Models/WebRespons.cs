@@ -12,7 +12,7 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WebResponse
+    public partial class WebRespons
     {
         public int ID { get; set; }
         public Nullable<int> WebRequestID { get; set; }

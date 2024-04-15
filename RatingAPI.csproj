@@ -183,18 +183,15 @@
     <Compile Include="Models\APIUser.cs">
       <DependentUpon>WebserviceEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\APIUserGroup.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\APIUsersSandbox.cs">
       <DependentUpon>WebserviceEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthenticationResult.cs" />
     <Compile Include="Models\AuthenticationResultSandbox.cs" />
-    <Compile Include="Models\Client.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Log.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LookupReference.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\monitor.cs">
@@ -203,7 +200,7 @@
     <Compile Include="Models\Rate.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RatesArchive.cs">
+    <Compile Include="Models\RateGroup.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RatingAPIEntities.Context.cs">
@@ -237,10 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportingEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Shipment.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SpecialRate.cs">
+    <Compile Include="Models\Service.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TimedNotification.cs">
@@ -262,7 +256,7 @@
     <Compile Include="Models\WebRequestAccessorial.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\WebResponse.cs">
+    <Compile Include="Models\WebRespons.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WebserviceEntities.Context.cs">
@@ -279,6 +273,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WebserviceEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZonePostalCode.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

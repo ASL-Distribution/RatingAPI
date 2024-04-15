@@ -25,18 +25,17 @@ namespace RatingAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<LookupReference> LookupReferences { get; set; }
-        public virtual DbSet<RatesArchive> RatesArchives { get; set; }
-        public virtual DbSet<Shipment> Shipments { get; set; }
-        public virtual DbSet<SpecialRate> SpecialRates { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<WebResponse> WebResponses { get; set; }
-        public virtual DbSet<WebRequest> WebRequests { get; set; }
         public virtual DbSet<AccessorialRate> AccessorialRates { get; set; }
         public virtual DbSet<Accessorial> Accessorials { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<RateGroup> RateGroups { get; set; }
         public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<WebRequestAccessorial> WebRequestAccessorials { get; set; }
+        public virtual DbSet<WebRespons> WebResponses { get; set; }
+        public virtual DbSet<ZonePostalCode> ZonePostalCodes { get; set; }
+        public virtual DbSet<APIUserGroup> APIUserGroups { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<WebRequest> WebRequests { get; set; }
     }
 }

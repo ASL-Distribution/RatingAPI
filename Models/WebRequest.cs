@@ -15,16 +15,16 @@ namespace RatingAPI.Models
     public partial class WebRequest
     {
         public int ID { get; set; }
-        public Nullable<int> ClientID { get; set; }
+        public Nullable<System.DateTime> Timestamp { get; set; }
+        public Nullable<int> APIUserID { get; set; }
         public string Service { get; set; }
         public string AuthenticationToken { get; set; }
         public string FromPostal { get; set; }
         public string ToPostal { get; set; }
+        public Nullable<decimal> Weight { get; set; }
         public Nullable<decimal> Length { get; set; }
         public Nullable<decimal> Width { get; set; }
         public Nullable<decimal> Height { get; set; }
-        public Nullable<decimal> Weight { get; set; }
-        public Nullable<System.DateTime> timestamp { get; set; }
 
         public WebRequestAccessorial[] Accessorials { get; set; }
     }

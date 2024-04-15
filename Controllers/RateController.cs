@@ -17,7 +17,7 @@ namespace RatingAPI.Controllers
             WebservicesEntities we = new WebservicesEntities();
             RatingAPIEntities re = new RatingAPIEntities();
 
-            request.timestamp = DateTime.Now;
+            request.Timestamp = DateTime.Now;
             re.WebRequests.Add(request);
             re.SaveChanges();
 
@@ -25,10 +25,10 @@ namespace RatingAPI.Controllers
             {
                 accessorial.WebRequestID = request.ID;
             }
-            re.WebRequestAccessorials.AddRange(request.Accessorials);
+            re.WebRequestAccessorials.AddRange(request.);
             re.SaveChanges();
 
-            var webResponse = new Models.WebResponse();
+            var webResponse = new Models.WebRespons();
             webResponse.WebRequestID = request.ID;
 
             try
@@ -38,15 +38,18 @@ namespace RatingAPI.Controllers
                 var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
                 Logging.Log("authentication fine.");
 
-                request.ClientID = authResult.APIUser.id;
+                request.APIUserID = authResult.APIUser.id;
 
                 if (authResult.Passed)
                 {
+                    var apiUserGroup = re.APIUserGroups
+                                            .FirstOrDefault(m => m.APIUserID == authResult.APIUser.id);
+
                 var rate = re.Rates
-                                .FirstOrDefault(m =>    authResult.APIUser.id == m.ClientID
+                                .FirstOrDefault(m =>    m.RateGroupID == apiUserGroup.GroupID
                                                         && request.Service == m.Service
                                                         &&
-                                                            (request.FromPostal.CompareTo(m.OriginPostalFrom) == 0
+                                                            (request.FromPostal.CompareTo(m.) == 0
                                                             || request.FromPostal.CompareTo(m.OriginPostalFrom) == 1)
                                                         &&
                                                             (request.FromPostal.CompareTo(m.OriginPostalTo) == 0
@@ -77,7 +80,7 @@ namespace RatingAPI.Controllers
                 }
                 else
                 {
-                    webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request);
+                    webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, apiUserGroup);
                     webResponse.Height = request.Height;
                     webResponse.Width = request.Width;
                     webResponse.Length = request.Length;
@@ -85,7 +88,7 @@ namespace RatingAPI.Controllers
                     webResponse.Zone = rate.Zone;
                     webResponse.Weight = request.Weight;
                     webResponse.timestamp = DateTime.Now;
-                    webResponse.Milliseconds = (int)(DateTime.Now - request.timestamp.Value).TotalMilliseconds;
+                    webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
                     webResponse.StatusCode = (int)HttpStatusCode.NoContent;
 
                     re.WebResponses.Add(webResponse);
@@ -109,15 +112,15 @@ namespace RatingAPI.Controllers
             }
         }
 
-        private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request)
+        private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request, APIUserGroup apiUserGroup)
         {
             decimal total = 0;
 
             foreach (var accessorial in request.Accessorials)
             {
                 var accessorialRate = re.AccessorialRates
-                                            .FirstOrDefault(m =>    m.ClientID == request.ClientID
-                                                                    && m.Accessorial == accessorial.AccessorialName);
+                                            .FirstOrDefault(m =>    m.RateGroupID == apiUserGroup.GroupID
+                                                                    && m.Name == accessorial.AccessorialName);
 
                 if (accessorialRate != null)
                 {

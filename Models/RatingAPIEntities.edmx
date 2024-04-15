@@ -5,13 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ratingAPIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AccessorialRate">
+        <EntityType Name="AccessorialRates">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientID" Type="int" />
-          <Property Name="Accessorial" Type="varchar" MaxLength="64" />
+          <Property Name="RateGroupID" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Accessorials">
@@ -22,21 +22,13 @@
           <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
           <Property Name="UOM" Type="varchar" MaxLength="8" />
         </EntityType>
-        <EntityType Name="Client">
+        <EntityType Name="APIUserGroups">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="64" />
-          <Property Name="AccountNumber" Type="varchar" MaxLength="32" />
-          <Property Name="Address1" Type="varchar" MaxLength="256" />
-          <Property Name="Address2" Type="varchar" MaxLength="256" />
-          <Property Name="City" Type="varchar" MaxLength="64" />
-          <Property Name="ProvState" Type="varchar" MaxLength="32" />
-          <Property Name="Country" Type="varchar" MaxLength="32" />
-          <Property Name="Phone" Type="varchar" MaxLength="32" />
-          <Property Name="Email" Type="varchar" MaxLength="128" />
-          <Property Name="PostalCode" Type="varchar" MaxLength="16" />
+          <Property Name="APIUserID" Type="int" />
+          <Property Name="GroupID" Type="int" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -46,72 +38,32 @@
           <Property Name="timestamp" Type="datetime" />
           <Property Name="logentry" Type="varchar" MaxLength="1024" />
         </EntityType>
-        <EntityType Name="LookupReferences">
+        <EntityType Name="RateGroups">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LookupType" Type="varchar" MaxLength="32" />
-          <Property Name="ClientlD" Type="int" />
-          <Property Name="Generic1" Type="varchar" MaxLength="64" />
-          <Property Name="Generic2" Type="varchar" MaxLength="64" />
-          <Property Name="Generic3" Type="varchar" MaxLength="64" />
-          <Property Name="Value" Type="varchar" MaxLength="256" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Modified" Type="datetime" />
         </EntityType>
         <EntityType Name="Rates">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientID" Type="int" />
+          <Property Name="RateGroupID" Type="int" />
           <Property Name="Service" Type="varchar" MaxLength="64" />
-          <Property Name="Zone" Type="varchar" MaxLength="16" />
-          <Property Name="OriginPostalFrom" Type="varchar" MaxLength="16" />
-          <Property Name="OriginPostalTo" Type="varchar" MaxLength="16" />
-          <Property Name="DestinationPostalFrom" Type="varchar" MaxLength="16" />
-          <Property Name="DestinationPostalTo" Type="varchar" MaxLength="16" />
-          <Property Name="WeightFrom" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="WeightTo" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="RatesArchive">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientID" Type="int" />
-          <Property Name="Zone" Type="varchar" MaxLength="16" />
-          <Property Name="Service" Type="varchar" MaxLength="32" />
+          <Property Name="ZoneID" Type="int" />
           <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Timestamp" Type="datetime" />
         </EntityType>
-        <EntityType Name="Shipment">
+        <EntityType Name="Services">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ShipmentNumber" Type="varchar" MaxLength="32" />
-          <Property Name="FromPostalCode" Type="varchar" MaxLength="16" />
-          <Property Name="ToPostalCode" Type="varchar" MaxLength="16" />
-          <Property Name="ClientID" Type="int" />
-          <Property Name="Service" Type="varchar" MaxLength="32" />
-          <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="SpecialRates">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientID" Type="int" />
-          <Property Name="Service" Type="varchar" MaxLength="32" />
-          <Property Name="Zone" Type="varchar" MaxLength="16" />
-          <Property Name="FromWeight" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="ToWeight" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="UOM">
           <Key>
@@ -120,23 +72,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="64" />
         </EntityType>
-        <EntityType Name="WebRequest">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientID" Type="int" />
-          <Property Name="Service" Type="varchar" MaxLength="32" />
-          <Property Name="AuthenticationToken" Type="varchar" MaxLength="64" />
-          <Property Name="FromPostal" Type="varchar" MaxLength="16" />
-          <Property Name="ToPostal" Type="varchar" MaxLength="16" />
-          <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="timestamp" Type="datetime" />
-        </EntityType>
-        <EntityType Name="WebRequestAccessorial">
+        <EntityType Name="WebRequestAccessorials">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -145,7 +81,23 @@
           <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
           <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
-        <EntityType Name="WebResponse">
+        <EntityType Name="WebRequests">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" />
+          <Property Name="APIUserID" Type="int" />
+          <Property Name="Service" Type="varchar" MaxLength="64" />
+          <Property Name="AuthenticationToken" Type="varchar" MaxLength="64" />
+          <Property Name="FromPostal" Type="varchar" MaxLength="16" />
+          <Property Name="ToPostal" Type="varchar" MaxLength="16" />
+          <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="WebResponses">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -163,156 +115,56 @@
           <Property Name="timestamp" Type="datetime" />
           <Property Name="ErrorMessages" Type="text" />
         </EntityType>
+        <EntityType Name="ZonePostalCodes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RateGroupID" Type="int" />
+          <Property Name="OriginFromPostal" Type="varchar" MaxLength="16" />
+          <Property Name="OriginToPostal" Type="varchar" MaxLength="16" />
+          <Property Name="DestinationFromPostal" Type="varchar" MaxLength="16" />
+          <Property Name="DestinationToPostal" Type="varchar" MaxLength="16" />
+        </EntityType>
         <EntityContainer Name="ratingAPIModelStoreContainer">
-          <EntitySet Name="AccessorialRate" EntityType="Self.AccessorialRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APIUserGroups" EntityType="Self.APIUserGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LookupReferences" EntityType="Self.LookupReferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RateGroups" EntityType="Self.RateGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RatesArchive" EntityType="Self.RatesArchive" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SpecialRates" EntityType="Self.SpecialRates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WebRequest" EntityType="Self.WebRequest" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WebRequestAccessorial" EntityType="Self.WebRequestAccessorial" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WebResponse" EntityType="Self.WebResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebRequests" EntityType="Self.WebRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebResponses" EntityType="Self.WebResponses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZonePostalCodes" EntityType="Self.ZonePostalCodes" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ratingAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="LookupReference">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LookupType" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="ClientlD" Type="Int32" />
-          <Property Name="Generic1" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Generic2" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Generic3" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Value" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="RatesArchive">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientID" Type="Int32" />
-          <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Timestamp" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Shipment">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ShipmentNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="FromPostalCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="ToPostalCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="ClientID" Type="Int32" />
-          <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="SpecialRate">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientID" Type="Int32" />
-          <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="FromWeight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="ToWeight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
         <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="LookupReferences" EntityType="Self.LookupReference" />
-          <EntitySet Name="RatesArchives" EntityType="Self.RatesArchive" />
-          <EntitySet Name="Shipments" EntityType="Self.Shipment" />
-          <EntitySet Name="SpecialRates" EntityType="Self.SpecialRate" />
-          <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
-          <EntitySet Name="Clients" EntityType="ratingAPIModel.Client" />
-          <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebResponse" />
-          <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
           <EntitySet Name="AccessorialRates" EntityType="ratingAPIModel.AccessorialRate" />
           <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
+          <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
+          <EntitySet Name="RateGroups" EntityType="ratingAPIModel.RateGroup" />
           <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
           <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
+          <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
+          <EntitySet Name="ZonePostalCodes" EntityType="ratingAPIModel.ZonePostalCode" />
+          <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
           <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
+          <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
+          <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
         </EntityContainer>
-        <EntityType Name="Log">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="timestamp" Type="DateTime" Precision="3" />
-          <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="AccountNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Address1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="Address2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="ProvState" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="PostalCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="WebResponse">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WebRequestID" Type="Int32" />
-          <Property Name="StatusCode" Type="Int32" />
-          <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Milliseconds" Type="Int32" />
-          <Property Name="timestamp" Type="DateTime" Precision="3" />
-          <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="WebRequest">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientID" Type="Int32" />
-          <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="AuthenticationToken" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="timestamp" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="AccessorialRate">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientID" Type="Int32" />
-          <Property Name="Accessorial" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="RateGroupID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Accessorial">
@@ -322,6 +174,23 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="timestamp" Type="DateTime" Precision="3" />
+          <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RateGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="UOM">
           <Key>
@@ -339,80 +208,99 @@
           <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
+        <EntityType Name="WebRespons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebRequestID" Type="Int32" />
+          <Property Name="StatusCode" Type="Int32" />
+          <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Service" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Milliseconds" Type="Int32" />
+          <Property Name="timestamp" Type="DateTime" Precision="3" />
+          <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ZonePostalCode">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RateGroupID" Type="Int32" />
+          <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APIUserGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APIUserID" Type="Int32" />
+          <Property Name="GroupID" Type="Int32" />
+        </EntityType>
         <EntityType Name="Rate">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientID" Type="Int32" />
+          <Property Name="RateGroupID" Type="Int32" />
           <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Zone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="OriginPostalFrom" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="OriginPostalTo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationPostalFrom" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationPostalTo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ZoneID" Type="Int32" />
+          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WebRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="APIUserID" Type="Int32" />
+          <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="AuthenticationToken" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ratingAPIModelStoreContainer" CdmEntityContainer="RatingAPIEntities">
-          <EntitySetMapping Name="LookupReferences">
-            <EntityTypeMapping TypeName="ratingAPIModel.LookupReference">
-              <MappingFragment StoreEntitySet="LookupReferences">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LookupType" ColumnName="LookupType" />
-                <ScalarProperty Name="ClientlD" ColumnName="ClientlD" />
-                <ScalarProperty Name="Generic1" ColumnName="Generic1" />
-                <ScalarProperty Name="Generic2" ColumnName="Generic2" />
-                <ScalarProperty Name="Generic3" ColumnName="Generic3" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RatesArchives">
-            <EntityTypeMapping TypeName="ratingAPIModel.RatesArchive">
-              <MappingFragment StoreEntitySet="RatesArchive">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="Zone" ColumnName="Zone" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <EntitySetMapping Name="AccessorialRates">
+            <EntityTypeMapping TypeName="ratingAPIModel.AccessorialRate">
+              <MappingFragment StoreEntitySet="AccessorialRates">
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Shipments">
-            <EntityTypeMapping TypeName="ratingAPIModel.Shipment">
-              <MappingFragment StoreEntitySet="Shipment">
+          <EntitySetMapping Name="Accessorials">
+            <EntityTypeMapping TypeName="ratingAPIModel.Accessorial">
+              <MappingFragment StoreEntitySet="Accessorials">
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ShipmentNumber" ColumnName="ShipmentNumber" />
-                <ScalarProperty Name="FromPostalCode" ColumnName="FromPostalCode" />
-                <ScalarProperty Name="ToPostalCode" ColumnName="ToPostalCode" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
-                <ScalarProperty Name="Width" ColumnName="Width" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SpecialRates">
-            <EntityTypeMapping TypeName="ratingAPIModel.SpecialRate">
-              <MappingFragment StoreEntitySet="SpecialRates">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="Zone" ColumnName="Zone" />
-                <ScalarProperty Name="FromWeight" ColumnName="FromWeight" />
-                <ScalarProperty Name="ToWeight" ColumnName="ToWeight" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -425,26 +313,37 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="ratingAPIModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="ProvState" ColumnName="ProvState" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <EntitySetMapping Name="RateGroups">
+            <EntityTypeMapping TypeName="ratingAPIModel.RateGroup">
+              <MappingFragment StoreEntitySet="RateGroups">
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="ratingAPIModel.UOM">
+              <MappingFragment StoreEntitySet="UOM">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebRequestAccessorials">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
+              <MappingFragment StoreEntitySet="WebRequestAccessorials">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
+                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="WebResponses">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebResponse">
-              <MappingFragment StoreEntitySet="WebResponse">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRespons">
+              <MappingFragment StoreEntitySet="WebResponses">
                 <ScalarProperty Name="ErrorMessages" ColumnName="ErrorMessages" />
                 <ScalarProperty Name="timestamp" ColumnName="timestamp" />
                 <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
@@ -461,56 +360,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WebRequests">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
-              <MappingFragment StoreEntitySet="WebRequest">
-                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Width" ColumnName="Width" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
-                <ScalarProperty Name="ToPostal" ColumnName="ToPostal" />
-                <ScalarProperty Name="FromPostal" ColumnName="FromPostal" />
-                <ScalarProperty Name="AuthenticationToken" ColumnName="AuthenticationToken" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <EntitySetMapping Name="ZonePostalCodes">
+            <EntityTypeMapping TypeName="ratingAPIModel.ZonePostalCode">
+              <MappingFragment StoreEntitySet="ZonePostalCodes">
+                <ScalarProperty Name="DestinationToPostal" ColumnName="DestinationToPostal" />
+                <ScalarProperty Name="DestinationFromPostal" ColumnName="DestinationFromPostal" />
+                <ScalarProperty Name="OriginToPostal" ColumnName="OriginToPostal" />
+                <ScalarProperty Name="OriginFromPostal" ColumnName="OriginFromPostal" />
+                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AccessorialRates">
-            <EntityTypeMapping TypeName="ratingAPIModel.AccessorialRate">
-              <MappingFragment StoreEntitySet="AccessorialRate">
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Accessorial" ColumnName="Accessorial" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Accessorials">
-            <EntityTypeMapping TypeName="ratingAPIModel.Accessorial">
-              <MappingFragment StoreEntitySet="Accessorials">
-                <ScalarProperty Name="UOM" ColumnName="UOM" />
-                <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UOMs">
-            <EntityTypeMapping TypeName="ratingAPIModel.UOM">
-              <MappingFragment StoreEntitySet="UOM">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WebRequestAccessorials">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebRequestAccessorial">
-              <MappingFragment StoreEntitySet="WebRequestAccessorial">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
-                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
+          <EntitySetMapping Name="APIUserGroups">
+            <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
+              <MappingFragment StoreEntitySet="APIUserGroups">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="APIUserID" ColumnName="APIUserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -519,15 +385,35 @@
             <EntityTypeMapping TypeName="ratingAPIModel.Rate">
               <MappingFragment StoreEntitySet="Rates">
                 <ScalarProperty Name="Rate1" ColumnName="Rate" />
-                <ScalarProperty Name="WeightTo" ColumnName="WeightTo" />
-                <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
-                <ScalarProperty Name="DestinationPostalTo" ColumnName="DestinationPostalTo" />
-                <ScalarProperty Name="DestinationPostalFrom" ColumnName="DestinationPostalFrom" />
-                <ScalarProperty Name="OriginPostalTo" ColumnName="OriginPostalTo" />
-                <ScalarProperty Name="OriginPostalFrom" ColumnName="OriginPostalFrom" />
-                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
                 <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="ratingAPIModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebRequests">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
+              <MappingFragment StoreEntitySet="WebRequests">
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="ToPostal" ColumnName="ToPostal" />
+                <ScalarProperty Name="FromPostal" ColumnName="FromPostal" />
+                <ScalarProperty Name="AuthenticationToken" ColumnName="AuthenticationToken" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="APIUserID" ColumnName="APIUserID" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -12,14 +12,13 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RatesArchive
+    public partial class ZonePostalCode
     {
         public int ID { get; set; }
-        public Nullable<int> ClientID { get; set; }
-        public string Zone { get; set; }
-        public string Service { get; set; }
-        public Nullable<decimal> Weight { get; set; }
-        public Nullable<decimal> Rate { get; set; }
-        public Nullable<System.DateTime> Timestamp { get; set; }
+        public Nullable<int> RateGroupID { get; set; }
+        public string OriginFromPostal { get; set; }
+        public string OriginToPostal { get; set; }
+        public string DestinationFromPostal { get; set; }
+        public string DestinationToPostal { get; set; }
     }
 }

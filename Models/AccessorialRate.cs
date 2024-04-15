@@ -15,8 +15,8 @@ namespace RatingAPI.Models
     public partial class AccessorialRate
     {
         public int ID { get; set; }
-        public Nullable<int> ClientID { get; set; }
-        public string Accessorial { get; set; }
+        public Nullable<int> RateGroupID { get; set; }
+        public string Name { get; set; }
         public Nullable<decimal> Rate { get; set; }
     }
 }
