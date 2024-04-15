@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using RatingAPI.Business;
 
 namespace RatingAPI.Models
 {
@@ -24,16 +25,44 @@ namespace RatingAPI.Models
 
         public void GetCharacterOrdinalMatchCounts()
         {
-            var shipmentFromPostal = WebRequest.FromPostal.Trim().Replace(" ", "").ToLower();
-            var shipmentToPostal = WebRequest.ToPostal.Trim().Replace(" ", "").ToLower();
+            var shipmentFromPostal = StringHelper.MakeStringToLength(WebRequest.FromPostal.Trim().Replace(" ", "").ToLower(), 6);
+            var shipmentToPostal = StringHelper.MakeStringToLength(WebRequest.ToPostal.Trim().Replace(" ", "").ToLower(), 6);
 
-            var zoneOriginFromPostal = Zone.OriginFromPostal.Trim().Replace(" ", "").ToLower();
-            var zoneOriginToPostal = Zone.OriginToPostal.Trim().Replace(" ", "").ToLower();
+            var zoneOriginFromPostal = StringHelper.MakeStringToLength(Zone.OriginFromPostal.Trim().Replace(" ", "").ToLower(), 6);
+            var zoneOriginToPostal = StringHelper.MakeStringToLength(Zone.OriginToPostal.Trim().Replace(" ", "").ToLower(), 6);
 
-            var zoneDestinationFromPostal = Zone.DestinationFromPostal.Trim().Replace(" ", "").ToLower();
-            var zoneDestinationToPostal = Zone.DestinationToPostal.Trim().Replace(" ", "").ToLower();
+            var zoneDestinationFromPostal = StringHelper.MakeStringToLength(Zone.DestinationFromPostal.Trim().Replace(" ", "").ToLower(), 6);
+            var zoneDestinationToPostal = StringHelper.MakeStringToLength(Zone.DestinationToPostal.Trim().Replace(" ", "").ToLower(), 6);
 
-            if (shipmentFromPostal[0] == )
+            for (int i = 0; i < 6; i++)
+            {
+                if (shipmentFromPostal[i] != '~'
+                    && shipmentFromPostal[i] == zoneOriginFromPostal[i] 
+                    && shipmentFromPostal[i] == zoneOriginToPostal[i])
+                {
+                    FromCharacterOrdinalMatch++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (shipmentToPostal[i] != '~'
+                    && shipmentToPostal[i] == zoneDestinationFromPostal[i]
+                    && shipmentToPostal[i] == zoneDestinationToPostal[i])
+                {
+                    ToCharacterOrdinalMatch++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            TotalCharacterOrdinalMatch = FromCharacterOrdinalMatch + ToCharacterOrdinalMatch;
         }
     }
 }

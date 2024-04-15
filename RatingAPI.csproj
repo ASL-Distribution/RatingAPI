@@ -167,6 +167,7 @@
     <Compile Include="Business\PostalCodeHelper.cs" />
     <Compile Include="Business\ReportingAuthentication.cs" />
     <Compile Include="Business\ReportingLogging.cs" />
+    <Compile Include="Business\StringHelper.cs" />
     <Compile Include="Business\Tracking.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RateController.cs" />

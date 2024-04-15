@@ -131,11 +131,6 @@ namespace RatingAPI.Controllers
             return processedZones;
         }
 
-        private void GetCharacterOrdinalMatches(List<Zone> zones)
-        {
-            
-        }
-
         private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request, APIUserGroup apiUserGroup)
         {
             decimal total = 0;
