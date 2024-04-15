@@ -12,7 +12,7 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ZonePostalCode
+    public partial class Zone
     {
         public int ID { get; set; }
         public Nullable<int> RateGroupID { get; set; }

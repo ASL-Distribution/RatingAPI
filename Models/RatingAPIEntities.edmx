@@ -115,7 +115,7 @@
           <Property Name="timestamp" Type="datetime" />
           <Property Name="ErrorMessages" Type="text" />
         </EntityType>
-        <EntityType Name="ZonePostalCodes">
+        <EntityType Name="Zones">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -138,7 +138,7 @@
           <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequests" EntityType="Self.WebRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebResponses" EntityType="Self.WebResponses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ZonePostalCodes" EntityType="Self.ZonePostalCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zones" EntityType="Self.Zones" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -152,11 +152,11 @@
           <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
           <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
           <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
-          <EntitySet Name="ZonePostalCodes" EntityType="ratingAPIModel.ZonePostalCode" />
           <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
           <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
           <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
           <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
+          <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
         </EntityContainer>
         <EntityType Name="AccessorialRate">
           <Key>
@@ -226,17 +226,6 @@
           <Property Name="timestamp" Type="DateTime" Precision="3" />
           <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ZonePostalCode">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RateGroupID" Type="Int32" />
-          <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="APIUserGroup">
           <Key>
             <PropertyRef Name="ID" />
@@ -278,6 +267,17 @@
           <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Zone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RateGroupID" Type="Int32" />
+          <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -360,18 +360,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ZonePostalCodes">
-            <EntityTypeMapping TypeName="ratingAPIModel.ZonePostalCode">
-              <MappingFragment StoreEntitySet="ZonePostalCodes">
-                <ScalarProperty Name="DestinationToPostal" ColumnName="DestinationToPostal" />
-                <ScalarProperty Name="DestinationFromPostal" ColumnName="DestinationFromPostal" />
-                <ScalarProperty Name="OriginToPostal" ColumnName="OriginToPostal" />
-                <ScalarProperty Name="OriginFromPostal" ColumnName="OriginFromPostal" />
-                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="APIUserGroups">
             <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
               <MappingFragment StoreEntitySet="APIUserGroups">
@@ -414,6 +402,18 @@
                 <ScalarProperty Name="Service" ColumnName="Service" />
                 <ScalarProperty Name="APIUserID" ColumnName="APIUserID" />
                 <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zones">
+            <EntityTypeMapping TypeName="ratingAPIModel.Zone">
+              <MappingFragment StoreEntitySet="Zones">
+                <ScalarProperty Name="DestinationToPostal" ColumnName="DestinationToPostal" />
+                <ScalarProperty Name="DestinationFromPostal" ColumnName="DestinationFromPostal" />
+                <ScalarProperty Name="OriginToPostal" ColumnName="OriginToPostal" />
+                <ScalarProperty Name="OriginFromPostal" ColumnName="OriginFromPostal" />
+                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
