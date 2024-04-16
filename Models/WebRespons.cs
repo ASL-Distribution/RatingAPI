@@ -17,7 +17,7 @@ namespace RatingAPI.Models
         public int ID { get; set; }
         public Nullable<int> WebRequestID { get; set; }
         public Nullable<int> StatusCode { get; set; }
-        public string Zone { get; set; }
+        public Nullable<int> Zone { get; set; }
         public string Service { get; set; }
         public Nullable<decimal> Rate { get; set; }
         public Nullable<decimal> Length { get; set; }
@@ -25,7 +25,7 @@ namespace RatingAPI.Models
         public Nullable<decimal> Height { get; set; }
         public Nullable<decimal> Weight { get; set; }
         public Nullable<int> Milliseconds { get; set; }
-        public Nullable<System.DateTime> timestamp { get; set; }
+        public Nullable<System.DateTime> Timestamp { get; set; }
         public string ErrorMessages { get; set; }
     }
 }

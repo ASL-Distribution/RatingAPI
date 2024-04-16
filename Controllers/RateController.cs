@@ -63,16 +63,26 @@ namespace RatingAPI.Controllers
 
                     var processedZones = GetProcessedZones(zones, request);
 
-                    var rate = re.Rates
+                    var matchedZone = processedZones
+                                        .OrderByDescending(m => m.ToCharacterOrdinalMatchCount)
+                                        .ThenByDescending(m => m.FromCharacterOrdinalMatchCount)
+                                        .FirstOrDefault();
+
+                    Rate rate = null;
+
+                    if (matchedZone != null)
+                    {
+                        rate = re.Rates
                                     .FirstOrDefault(m =>    m.RateGroupID == apiUserGroup.GroupID
-                                                            && request.Service == m.Service
-                                                            
+                                                            && m.ZoneName == matchedZone.Zone.Name
+                                                            && m.Service == request.Service
                                                             && request.Weight >= m.WeightFrom
-                                                            && request.Weight <= m.WeightTo);
+                                                            && request.Weight < m.WeightTo);
+                    }
 
                     if (rate == null)
                     {
-                        webResponse.timestamp = DateTime.Now;
+                        webResponse.Timestamp = DateTime.Now;
                         webResponse.Height = request.Height;
                         webResponse.Width = request.Width;
                         webResponse.Length = request.Length;
@@ -92,9 +102,9 @@ namespace RatingAPI.Controllers
                         webResponse.Width = request.Width;
                         webResponse.Length = request.Length;
                         webResponse.Service = request.Service;
-                        webResponse.Zone = rate.Zone;
+                        webResponse.Zone = rate.ID;
                         webResponse.Weight = request.Weight;
-                        webResponse.timestamp = DateTime.Now;
+                        webResponse.Timestamp = DateTime.Now;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
 

@@ -11,7 +11,7 @@ namespace RatingAPI.Models
         public Zone Zone;
         public WebRequest WebRequest;
 
-        public int FromCharacterOrdinalMatch, ToCharacterOrdinalMatch, TotalCharacterOrdinalMatch;
+        public int FromCharacterOrdinalMatchCount, ToCharacterOrdinalMatchCount, TotalCharacterOrdinalMatchCount;
         public bool IsFromAndToEqualMatch = false;
         public bool IsToMatchGreater = false;
 
@@ -40,7 +40,7 @@ namespace RatingAPI.Models
                     && shipmentFromPostal[i] == zoneOriginFromPostal[i] 
                     && shipmentFromPostal[i] == zoneOriginToPostal[i])
                 {
-                    FromCharacterOrdinalMatch++;
+                    FromCharacterOrdinalMatchCount++;
                 }
                 else
                 {
@@ -54,7 +54,7 @@ namespace RatingAPI.Models
                     && shipmentToPostal[i] == zoneDestinationFromPostal[i]
                     && shipmentToPostal[i] == zoneDestinationToPostal[i])
                 {
-                    ToCharacterOrdinalMatch++;
+                    ToCharacterOrdinalMatchCount++;
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace RatingAPI.Models
                 }
             }
 
-            TotalCharacterOrdinalMatch = FromCharacterOrdinalMatch + ToCharacterOrdinalMatch;
+            TotalCharacterOrdinalMatchCount = FromCharacterOrdinalMatchCount + ToCharacterOrdinalMatchCount;
         }
     }
 }

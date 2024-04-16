@@ -16,9 +16,10 @@ namespace RatingAPI.Models
     {
         public int ID { get; set; }
         public Nullable<int> RateGroupID { get; set; }
+        public string ZoneName { get; set; }
         public string Service { get; set; }
-        public Nullable<int> ZoneID { get; set; }
-        public Nullable<decimal> Weight { get; set; }
+        public Nullable<decimal> WeightFrom { get; set; }
+        public Nullable<decimal> WeightTo { get; set; }
         public Nullable<decimal> Rate1 { get; set; }
     }
 }

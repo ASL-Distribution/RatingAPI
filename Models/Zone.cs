@@ -16,6 +16,7 @@ namespace RatingAPI.Models
     {
         public int ID { get; set; }
         public Nullable<int> RateGroupID { get; set; }
+        public string Name { get; set; }
         public string OriginFromPostal { get; set; }
         public string OriginToPostal { get; set; }
         public string DestinationFromPostal { get; set; }

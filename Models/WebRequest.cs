@@ -25,7 +25,6 @@ namespace RatingAPI.Models
         public Nullable<decimal> Length { get; set; }
         public Nullable<decimal> Width { get; set; }
         public Nullable<decimal> Height { get; set; }
-
         public WebRequestAccessorial[] Accessorials { get; set; }
     }
 }
