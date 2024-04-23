@@ -15,7 +15,7 @@ namespace RatingAPI.Models
     public partial class APIUserGroup
     {
         public int ID { get; set; }
-        public Nullable<int> APIUserID { get; set; }
-        public Nullable<int> GroupID { get; set; }
+        public string RateGroupName { get; set; }
+        public string APIUserName { get; set; }
     }
 }

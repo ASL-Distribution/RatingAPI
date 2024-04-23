@@ -27,8 +27,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="APIUserID" Type="int" />
-          <Property Name="GroupID" Type="int" />
+          <Property Name="RateGroupName" Type="varchar" MaxLength="64" />
+          <Property Name="APIUserName" Type="varchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -149,15 +149,15 @@
         <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccessorialRates" EntityType="ratingAPIModel.AccessorialRate" />
           <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
+          <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
           <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
           <EntitySet Name="RateGroups" EntityType="ratingAPIModel.RateGroup" />
+          <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
+          <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
           <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
           <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
-          <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
-          <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
           <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
           <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
-          <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
           <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
         </EntityContainer>
         <EntityType Name="AccessorialRate">
@@ -177,6 +177,14 @@
           <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="APIUserGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RateGroupName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="APIUserName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="ID" />
@@ -194,6 +202,25 @@
           <Property Name="Created" Type="DateTime" Precision="3" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RateGroupID" Type="Int32" />
+          <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="UOM">
           <Key>
             <PropertyRef Name="ID" />
@@ -209,21 +236,6 @@
           <Property Name="WebRequestID" Type="Int32" />
           <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="APIUserGroup">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="APIUserID" Type="Int32" />
-          <Property Name="GroupID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="WebRequest">
           <Key>
@@ -258,18 +270,6 @@
           <Property Name="Milliseconds" Type="Int32" />
           <Property Name="Timestamp" Type="DateTime" Precision="3" />
           <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Rate">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RateGroupID" Type="Int32" />
-          <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Zone">
           <Key>
@@ -308,6 +308,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="APIUserGroups">
+            <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
+              <MappingFragment StoreEntitySet="APIUserGroups">
+                <ScalarProperty Name="APIUserName" ColumnName="APIUserName" />
+                <ScalarProperty Name="RateGroupName" ColumnName="RateGroupName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="ratingAPIModel.Log">
               <MappingFragment StoreEntitySet="Log">
@@ -327,6 +336,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Rates">
+            <EntityTypeMapping TypeName="ratingAPIModel.Rate">
+              <MappingFragment StoreEntitySet="Rates">
+                <ScalarProperty Name="Rate1" ColumnName="Rate" />
+                <ScalarProperty Name="WeightTo" ColumnName="WeightTo" />
+                <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="ratingAPIModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UOMs">
             <EntityTypeMapping TypeName="ratingAPIModel.UOM">
               <MappingFragment StoreEntitySet="UOM">
@@ -341,23 +371,6 @@
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
                 <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="APIUserGroups">
-            <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
-              <MappingFragment StoreEntitySet="APIUserGroups">
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="APIUserID" ColumnName="APIUserID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Services">
-            <EntityTypeMapping TypeName="ratingAPIModel.Service">
-              <MappingFragment StoreEntitySet="Services">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -394,19 +407,6 @@
                 <ScalarProperty Name="Zone" ColumnName="Zone" />
                 <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
                 <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rates">
-            <EntityTypeMapping TypeName="ratingAPIModel.Rate">
-              <MappingFragment StoreEntitySet="Rates">
-                <ScalarProperty Name="Rate1" ColumnName="Rate" />
-                <ScalarProperty Name="WeightTo" ColumnName="WeightTo" />
-                <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
-                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

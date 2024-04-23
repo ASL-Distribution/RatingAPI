@@ -20,6 +20,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="APIUserGroups">
+      <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
+        <MappingFragment StoreEntitySet="APIUserGroups">
+          <ScalarProperty Name="APIUserName" ColumnName="APIUserName" />
+          <ScalarProperty Name="RateGroupName" ColumnName="RateGroupName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Logs">
       <EntityTypeMapping TypeName="ratingAPIModel.Log">
         <MappingFragment StoreEntitySet="Log">
@@ -39,6 +48,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Rates">
+      <EntityTypeMapping TypeName="ratingAPIModel.Rate">
+        <MappingFragment StoreEntitySet="Rates">
+          <ScalarProperty Name="Rate1" ColumnName="Rate" />
+          <ScalarProperty Name="WeightTo" ColumnName="WeightTo" />
+          <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+          <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+          <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="ratingAPIModel.Service">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UOMs">
       <EntityTypeMapping TypeName="ratingAPIModel.UOM">
         <MappingFragment StoreEntitySet="UOM">
@@ -53,23 +83,6 @@
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="AccessorialName" ColumnName="AccessorialName" />
           <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="APIUserGroups">
-      <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
-        <MappingFragment StoreEntitySet="APIUserGroups">
-          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-          <ScalarProperty Name="APIUserID" ColumnName="APIUserID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Services">
-      <EntityTypeMapping TypeName="ratingAPIModel.Service">
-        <MappingFragment StoreEntitySet="Services">
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -106,19 +119,6 @@
           <ScalarProperty Name="Zone" ColumnName="Zone" />
           <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
           <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Rates">
-      <EntityTypeMapping TypeName="ratingAPIModel.Rate">
-        <MappingFragment StoreEntitySet="Rates">
-          <ScalarProperty Name="Rate1" ColumnName="Rate" />
-          <ScalarProperty Name="WeightTo" ColumnName="WeightTo" />
-          <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
-          <ScalarProperty Name="Service" ColumnName="Service" />
-          <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
-          <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

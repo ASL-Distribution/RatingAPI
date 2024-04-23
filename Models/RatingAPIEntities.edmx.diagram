@@ -7,16 +7,16 @@
       <Diagram DiagramId="b2666ccc05a14c5e8ef2d21ff0870bfd" Name="Diagram1">
         <EntityTypeShape EntityType="ratingAPIModel.AccessorialRate" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Accessorial" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.APIUserGroup" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Log" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="ratingAPIModel.RateGroup" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.UOM" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.WebRequestAccessorial" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.APIUserGroup" Width="1.5" PointX="5.375" PointY="8.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.Service" Width="1.5" PointX="9.375" PointY="3.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.WebRequest" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.WebRespons" Width="1.5" PointX="5.375" PointY="3.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.Rate" Width="1.5" PointX="7.375" PointY="6.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.Zone" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.Rate" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.Service" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.UOM" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.WebRequestAccessorial" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.WebRequest" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.WebRespons" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.Zone" Width="1.5" PointX="8.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,15 +27,15 @@ namespace RatingAPI.Models
     
         public virtual DbSet<AccessorialRate> AccessorialRates { get; set; }
         public virtual DbSet<Accessorial> Accessorials { get; set; }
+        public virtual DbSet<APIUserGroup> APIUserGroups { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<RateGroup> RateGroups { get; set; }
+        public virtual DbSet<Rate> Rates { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<WebRequestAccessorial> WebRequestAccessorials { get; set; }
-        public virtual DbSet<APIUserGroup> APIUserGroups { get; set; }
-        public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<WebRequest> WebRequests { get; set; }
         public virtual DbSet<WebRespons> WebResponses { get; set; }
-        public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Zone> Zones { get; set; }
     }
 }

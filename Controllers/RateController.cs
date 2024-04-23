@@ -43,10 +43,13 @@ namespace RatingAPI.Controllers
                 if (authResult.Passed)
                 {
                     var apiUserGroup = re.APIUserGroups
-                                            .FirstOrDefault(m => m.APIUserID == authResult.APIUser.id);
+                                            .FirstOrDefault(m => m.APIUserName == authResult.APIUser.Name);
+
+                    var rateGroup = re.RateGroups
+                                        .FirstOrDefault(m => m.Name == apiUserGroup.RateGroupName);
 
                     var zones = re.Zones
-                                    .Where(m => m.RateGroupID == apiUserGroup.GroupID
+                                    .Where(m => m.RateGroupID == rateGroup.ID
                                                 &&
                                                     (request.FromPostal.CompareTo(m.OriginFromPostal) == 0
                                                     || request.FromPostal.CompareTo(m.OriginFromPostal) == 1)
@@ -73,7 +76,7 @@ namespace RatingAPI.Controllers
                     if (matchedZone != null)
                     {
                         rate = re.Rates
-                                    .FirstOrDefault(m =>    m.RateGroupID == apiUserGroup.GroupID
+                                    .FirstOrDefault(m =>    m.RateGroupID == rateGroup.ID
                                                             && m.ZoneName == matchedZone.Zone.Name
                                                             && m.Service == request.Service
                                                             && request.Weight >= m.WeightFrom
@@ -97,7 +100,7 @@ namespace RatingAPI.Controllers
                     }
                     else
                     {
-                        webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, apiUserGroup);
+                        webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, rateGroup);
                         webResponse.Height = request.Height;
                         webResponse.Width = request.Width;
                         webResponse.Length = request.Length;
@@ -141,14 +144,14 @@ namespace RatingAPI.Controllers
             return processedZones;
         }
 
-        private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request, APIUserGroup apiUserGroup)
+        private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request, RateGroup rateGroup)
         {
             decimal total = 0;
 
             foreach (var accessorial in request.Accessorials)
             {
                 var accessorialRate = re.AccessorialRates
-                                            .FirstOrDefault(m =>    m.RateGroupID == apiUserGroup.GroupID
+                                            .FirstOrDefault(m =>    m.RateGroupID == rateGroup.ID
                                                                     && m.Name == accessorial.AccessorialName);
 
                 if (accessorialRate != null)

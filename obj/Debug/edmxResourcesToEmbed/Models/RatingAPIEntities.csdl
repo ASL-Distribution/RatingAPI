@@ -3,15 +3,15 @@
   <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AccessorialRates" EntityType="ratingAPIModel.AccessorialRate" />
     <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
+    <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
     <EntitySet Name="RateGroups" EntityType="ratingAPIModel.RateGroup" />
+    <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
+    <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
     <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
     <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
-    <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
-    <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
     <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
-    <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
     <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
   </EntityContainer>
   <EntityType Name="AccessorialRate">
@@ -31,6 +31,14 @@
     <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="APIUserGroup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RateGroupName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="APIUserName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="Log">
     <Key>
       <PropertyRef Name="ID" />
@@ -48,6 +56,25 @@
     <Property Name="Created" Type="DateTime" Precision="3" />
     <Property Name="Modified" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="Rate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RateGroupID" Type="Int32" />
+    <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="UOM">
     <Key>
       <PropertyRef Name="ID" />
@@ -63,21 +90,6 @@
     <Property Name="WebRequestID" Type="Int32" />
     <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
-  </EntityType>
-  <EntityType Name="APIUserGroup">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="APIUserID" Type="Int32" />
-    <Property Name="GroupID" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Service">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="WebRequest">
     <Key>
@@ -112,18 +124,6 @@
     <Property Name="Milliseconds" Type="Int32" />
     <Property Name="Timestamp" Type="DateTime" Precision="3" />
     <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Rate">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RateGroupID" Type="Int32" />
-    <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Zone">
     <Key>

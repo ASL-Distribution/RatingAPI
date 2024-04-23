@@ -22,8 +22,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="APIUserID" Type="int" />
-    <Property Name="GroupID" Type="int" />
+    <Property Name="RateGroupName" Type="varchar" MaxLength="64" />
+    <Property Name="APIUserName" Type="varchar" MaxLength="64" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
