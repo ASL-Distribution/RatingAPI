@@ -74,6 +74,7 @@ namespace RatingAPI.Controllers
                     Rate rate = null;
 
                     decimal cubeWeight = 0;
+                    var originalWeight = request.Weight;
 
                     if (request.Dimensions != null
                         && request.Dimensions.Length != 0)
@@ -101,7 +102,7 @@ namespace RatingAPI.Controllers
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Dimensions = request.Dimensions;
                         webResponse.Service = request.Service;
-                        webResponse.Weight = request.Weight;
+                        webResponse.Weight = originalWeight;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
 
                         re.WebResponses.Add(webResponse);
@@ -115,7 +116,7 @@ namespace RatingAPI.Controllers
                         webResponse.Dimensions = request.Dimensions;
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
-                        webResponse.Weight = request.Weight;
+                        webResponse.Weight = originalWeight;
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
