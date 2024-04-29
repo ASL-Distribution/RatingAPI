@@ -73,11 +73,15 @@ namespace RatingAPI.Controllers
 
                     Rate rate = null;
 
-                    if (request.Length.HasValue 
-                        && request.Width.HasValue
-                        && request.Height.HasValue)
+                    decimal cubeWeight = 0;
+
+                    if (request.Dimensions != null
+                        && request.Dimensions.Length != 0)
                     {
-                        var cubeWeight = (request.Length * request.Width * request.Height) / rateGroup.DimensionFactor;
+                        foreach (var dimension in request.Dimensions)
+                        {
+                            cubeWeight += (dimension.Length.Value * dimension.Width.Value * dimension.Height.Value) / rateGroup.DimensionFactor.Value;
+                        }
 
                         request.Weight = request.Weight > cubeWeight ? request.Weight : cubeWeight;
                     }
@@ -95,9 +99,7 @@ namespace RatingAPI.Controllers
                     if (rate == null)
                     {
                         webResponse.Timestamp = DateTime.Now;
-                        webResponse.Height = request.Height;
-                        webResponse.Width = request.Width;
-                        webResponse.Length = request.Length;
+                        webResponse.Dimensions = request.Dimensions;
                         webResponse.Service = request.Service;
                         webResponse.Weight = request.Weight;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
@@ -110,9 +112,7 @@ namespace RatingAPI.Controllers
                     else
                     {
                         webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, rateGroup);
-                        webResponse.Height = request.Height;
-                        webResponse.Width = request.Width;
-                        webResponse.Length = request.Length;
+                        webResponse.Dimensions = request.Dimensions;
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
                         webResponse.Weight = request.Weight;

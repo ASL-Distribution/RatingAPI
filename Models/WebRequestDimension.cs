@@ -11,18 +11,13 @@ namespace RatingAPI.Models
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class WebRequest
+    
+    public partial class WebRequestDimension
     {
         public int ID { get; set; }
-        public Nullable<System.DateTime> Timestamp { get; set; }
-        public Nullable<int> APIUserID { get; set; }
-        public string Service { get; set; }
-        public string AuthenticationToken { get; set; }
-        public string FromPostal { get; set; }
-        public string ToPostal { get; set; }
-        public Nullable<decimal> Weight { get; set; }
-        public WebRequestAccessorial[] Accessorials { get; set; }
-        public WebRequestDimension[] Dimensions { get; set; }
+        public Nullable<int> WebRequestID { get; set; }
+        public Nullable<decimal> Length { get; set; }
+        public Nullable<decimal> Width { get; set; }
+        public Nullable<decimal> Height { get; set; }
     }
 }

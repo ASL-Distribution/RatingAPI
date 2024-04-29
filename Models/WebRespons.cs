@@ -20,12 +20,10 @@ namespace RatingAPI.Models
         public Nullable<int> Zone { get; set; }
         public string Service { get; set; }
         public Nullable<decimal> Rate { get; set; }
-        public Nullable<decimal> Length { get; set; }
-        public Nullable<decimal> Width { get; set; }
-        public Nullable<decimal> Height { get; set; }
         public Nullable<decimal> Weight { get; set; }
         public Nullable<int> Milliseconds { get; set; }
         public Nullable<System.DateTime> Timestamp { get; set; }
         public string ErrorMessages { get; set; }
+        public WebRequestDimension[] Dimensions { get; set; }
     }
 }

@@ -83,6 +83,16 @@
           <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
           <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
+        <EntityType Name="WebRequestDimensions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebRequestID" Type="int" />
+          <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="WebRequests">
           <Key>
             <PropertyRef Name="ID" />
@@ -95,9 +105,6 @@
           <Property Name="FromPostal" Type="varchar" MaxLength="16" />
           <Property Name="ToPostal" Type="varchar" MaxLength="16" />
           <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="WebResponses">
           <Key>
@@ -109,9 +116,6 @@
           <Property Name="Zone" Type="int" />
           <Property Name="Service" Type="varchar" MaxLength="64" />
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Milliseconds" Type="int" />
           <Property Name="Timestamp" Type="datetime" />
@@ -139,6 +143,7 @@
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebRequestDimensions" EntityType="Self.WebRequestDimensions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequests" EntityType="Self.WebRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebResponses" EntityType="Self.WebResponses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zones" EntityType="Self.Zones" Schema="dbo" store:Type="Tables" />
@@ -157,6 +162,7 @@
           <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
           <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
           <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
+          <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
           <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
           <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
           <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
@@ -239,6 +245,16 @@
           <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
+        <EntityType Name="WebRequestDimension">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebRequestID" Type="Int32" />
+          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="WebRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -251,9 +267,6 @@
           <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="WebRespons">
           <Key>
@@ -265,9 +278,6 @@
           <Property Name="Zone" Type="Int32" />
           <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Milliseconds" Type="Int32" />
           <Property Name="Timestamp" Type="DateTime" Precision="3" />
@@ -378,12 +388,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WebRequests">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
-              <MappingFragment StoreEntitySet="WebRequests">
+          <EntitySetMapping Name="WebRequestDimensions">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRequestDimension">
+              <MappingFragment StoreEntitySet="WebRequestDimensions">
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebRequests">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
+              <MappingFragment StoreEntitySet="WebRequests">
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="ToPostal" ColumnName="ToPostal" />
                 <ScalarProperty Name="FromPostal" ColumnName="FromPostal" />
@@ -402,9 +420,6 @@
                 <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
                 <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Width" ColumnName="Width" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Service" ColumnName="Service" />
                 <ScalarProperty Name="Zone" ColumnName="Zone" />

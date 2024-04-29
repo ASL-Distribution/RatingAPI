@@ -258,6 +258,9 @@
     <Compile Include="Models\WebRequestAccessorial.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WebRequestDimension.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WebRespons.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>

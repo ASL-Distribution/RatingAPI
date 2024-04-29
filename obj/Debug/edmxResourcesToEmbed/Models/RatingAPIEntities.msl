@@ -88,12 +88,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="WebRequests">
-      <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
-        <MappingFragment StoreEntitySet="WebRequests">
+    <EntitySetMapping Name="WebRequestDimensions">
+      <EntityTypeMapping TypeName="ratingAPIModel.WebRequestDimension">
+        <MappingFragment StoreEntitySet="WebRequestDimensions">
           <ScalarProperty Name="Height" ColumnName="Height" />
           <ScalarProperty Name="Width" ColumnName="Width" />
           <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebRequests">
+      <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
+        <MappingFragment StoreEntitySet="WebRequests">
           <ScalarProperty Name="Weight" ColumnName="Weight" />
           <ScalarProperty Name="ToPostal" ColumnName="ToPostal" />
           <ScalarProperty Name="FromPostal" ColumnName="FromPostal" />
@@ -112,9 +120,6 @@
           <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
           <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="Height" ColumnName="Height" />
-          <ScalarProperty Name="Width" ColumnName="Width" />
-          <ScalarProperty Name="Length" ColumnName="Length" />
           <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="Service" ColumnName="Service" />
           <ScalarProperty Name="Zone" ColumnName="Zone" />

@@ -10,6 +10,7 @@
     <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
     <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
     <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
+    <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
     <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
     <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
@@ -92,6 +93,16 @@
     <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
+  <EntityType Name="WebRequestDimension">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WebRequestID" Type="Int32" />
+    <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
   <EntityType Name="WebRequest">
     <Key>
       <PropertyRef Name="ID" />
@@ -104,9 +115,6 @@
     <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="WebRespons">
     <Key>
@@ -118,9 +126,6 @@
     <Property Name="Zone" Type="Int32" />
     <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Milliseconds" Type="Int32" />
     <Property Name="Timestamp" Type="DateTime" Precision="3" />

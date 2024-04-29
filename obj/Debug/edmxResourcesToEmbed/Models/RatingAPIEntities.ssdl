@@ -78,6 +78,16 @@
     <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
     <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
+  <EntityType Name="WebRequestDimensions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebRequestID" Type="int" />
+    <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
   <EntityType Name="WebRequests">
     <Key>
       <PropertyRef Name="ID" />
@@ -90,9 +100,6 @@
     <Property Name="FromPostal" Type="varchar" MaxLength="16" />
     <Property Name="ToPostal" Type="varchar" MaxLength="16" />
     <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="WebResponses">
     <Key>
@@ -104,9 +111,6 @@
     <Property Name="Zone" Type="int" />
     <Property Name="Service" Type="varchar" MaxLength="64" />
     <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="Length" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="Height" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Milliseconds" Type="int" />
     <Property Name="Timestamp" Type="datetime" />
@@ -134,6 +138,7 @@
     <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebRequestDimensions" EntityType="Self.WebRequestDimensions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebRequests" EntityType="Self.WebRequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebResponses" EntityType="Self.WebResponses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Zones" EntityType="Self.Zones" Schema="dbo" store:Type="Tables" />
