@@ -12,8 +12,8 @@
     <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
     <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
     <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
-    <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
     <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
+    <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
   </EntityContainer>
   <EntityType Name="AccessorialRate">
     <Key>
@@ -116,6 +116,18 @@
     <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
+  <EntityType Name="Zone">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TariffGroupID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="WebRespons">
     <Key>
       <PropertyRef Name="ID" />
@@ -130,17 +142,6 @@
     <Property Name="Milliseconds" Type="Int32" />
     <Property Name="Timestamp" Type="DateTime" Precision="3" />
     <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Zone">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TariffGroupID" Type="Int32" />
-    <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="CubeWeight" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
 </Schema>

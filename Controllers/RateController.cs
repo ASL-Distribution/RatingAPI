@@ -103,6 +103,7 @@ namespace RatingAPI.Controllers
                         webResponse.Dimensions = request.Dimensions;
                         webResponse.Service = request.Service;
                         webResponse.Weight = originalWeight;
+                        webResponse.CubeWeight = cubeWeight;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
 
                         re.WebResponses.Add(webResponse);
@@ -117,6 +118,7 @@ namespace RatingAPI.Controllers
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
                         webResponse.Weight = originalWeight;
+                        webResponse.CubeWeight = cubeWeight;
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
