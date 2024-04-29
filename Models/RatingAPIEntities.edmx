@@ -38,16 +38,6 @@
           <Property Name="timestamp" Type="datetime" />
           <Property Name="logentry" Type="varchar" MaxLength="1024" />
         </EntityType>
-        <EntityType Name="TariffGroups">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="64" />
-          <Property Name="Created" Type="datetime" />
-          <Property Name="Modified" Type="datetime" />
-          <Property Name="DimensionFactor" Type="decimal" Precision="6" Scale="2" />
-        </EntityType>
         <EntityType Name="Rates">
           <Key>
             <PropertyRef Name="ID" />
@@ -66,6 +56,16 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="TariffGroups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="DimensionFactor" Type="decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="UOM">
           <Key>
@@ -120,6 +120,7 @@
           <Property Name="Milliseconds" Type="int" />
           <Property Name="Timestamp" Type="datetime" />
           <Property Name="ErrorMessages" Type="text" />
+          <Property Name="CubeWeight" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Zones">
           <Key>
@@ -138,9 +139,9 @@
           <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequestDimensions" EntityType="Self.WebRequestDimensions" Schema="dbo" store:Type="Tables" />
@@ -164,8 +165,8 @@
           <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
           <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
           <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
-          <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
           <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
+          <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
         </EntityContainer>
         <EntityType Name="AccessorialRate">
           <Key>
@@ -268,6 +269,18 @@
           <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
+        <EntityType Name="Zone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TariffGroupID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="WebRespons">
           <Key>
             <PropertyRef Name="ID" />
@@ -282,18 +295,7 @@
           <Property Name="Milliseconds" Type="Int32" />
           <Property Name="Timestamp" Type="DateTime" Precision="3" />
           <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Zone">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TariffGroupID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CubeWeight" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -413,22 +415,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WebResponses">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebRespons">
-              <MappingFragment StoreEntitySet="WebResponses">
-                <ScalarProperty Name="ErrorMessages" ColumnName="ErrorMessages" />
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="Zone" ColumnName="Zone" />
-                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
-                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Zones">
             <EntityTypeMapping TypeName="ratingAPIModel.Zone">
               <MappingFragment StoreEntitySet="Zones">
@@ -438,6 +424,23 @@
                 <ScalarProperty Name="OriginFromPostal" ColumnName="OriginFromPostal" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebResponses">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRespons">
+              <MappingFragment StoreEntitySet="WebResponses">
+                <ScalarProperty Name="CubeWeight" ColumnName="CubeWeight" />
+                <ScalarProperty Name="ErrorMessages" ColumnName="ErrorMessages" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

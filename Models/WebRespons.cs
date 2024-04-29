@@ -25,5 +25,6 @@ namespace RatingAPI.Models
         public Nullable<System.DateTime> Timestamp { get; set; }
         public string ErrorMessages { get; set; }
         public WebRequestDimension[] Dimensions { get; set; }
+        public Nullable<decimal> CubeWeight { get; set; }
     }
 }
