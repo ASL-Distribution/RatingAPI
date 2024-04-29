@@ -42,14 +42,14 @@ namespace RatingAPI.Controllers
 
                 if (authResult.Passed)
                 {
-                    var apiUserGroup = re.APIUserGroups
+                    var apiUserGroup = re.APIUserTariffGroups
                                             .FirstOrDefault(m => m.APIUserName == authResult.APIUser.Name);
 
-                    var rateGroup = re.RateGroups
-                                        .FirstOrDefault(m => m.Name == apiUserGroup.RateGroupName);
+                    var tariffGroup = re.TariffGroups
+                                        .FirstOrDefault(m => m.Name == apiUserGroup.TariffGroupName);
 
                     var zones = re.Zones
-                                    .Where(m => m.RateGroupID == rateGroup.ID
+                                    .Where(m => m.TariffGroupID == tariffGroup.ID
                                                 &&
                                                     (request.FromPostal.CompareTo(m.OriginFromPostal) == 0
                                                     || request.FromPostal.CompareTo(m.OriginFromPostal) == 1)
@@ -80,7 +80,7 @@ namespace RatingAPI.Controllers
                     {
                         foreach (var dimension in request.Dimensions)
                         {
-                            cubeWeight += (dimension.Length.Value * dimension.Width.Value * dimension.Height.Value) / rateGroup.DimensionFactor.Value;
+                            cubeWeight += (dimension.Length.Value * dimension.Width.Value * dimension.Height.Value) / tariffGroup.DimensionFactor.Value;
                         }
 
                         request.Weight = request.Weight > cubeWeight ? request.Weight : cubeWeight;
@@ -89,7 +89,7 @@ namespace RatingAPI.Controllers
                     if (matchedZone != null)
                     {
                         rate = re.Rates
-                                    .FirstOrDefault(m =>    m.RateGroupID == rateGroup.ID
+                                    .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
                                                             && m.ZoneName == matchedZone.Zone.Name
                                                             && m.Service == request.Service
                                                             && request.Weight >= m.WeightFrom
@@ -111,7 +111,7 @@ namespace RatingAPI.Controllers
                     }
                     else
                     {
-                        webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, rateGroup);
+                        webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, tariffGroup);
                         webResponse.Dimensions = request.Dimensions;
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
@@ -153,14 +153,14 @@ namespace RatingAPI.Controllers
             return processedZones;
         }
 
-        private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request, RateGroup rateGroup)
+        private decimal GetAccessorialTotals(RatingAPIEntities re, Models.WebRequest request, TariffGroup tariffGroup)
         {
             decimal total = 0;
 
             foreach (var accessorial in request.Accessorials)
             {
                 var accessorialRate = re.AccessorialRates
-                                            .FirstOrDefault(m =>    m.RateGroupID == rateGroup.ID
+                                            .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
                                                                     && m.Name == accessorial.AccessorialName);
 
                 if (accessorialRate != null)

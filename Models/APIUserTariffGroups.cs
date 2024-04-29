@@ -12,10 +12,10 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class APIUserGroup
+    public partial class APIUserTariffGroups
     {
         public int ID { get; set; }
-        public string RateGroupName { get; set; }
+        public string TariffGroupName { get; set; }
         public string APIUserName { get; set; }
     }
 }

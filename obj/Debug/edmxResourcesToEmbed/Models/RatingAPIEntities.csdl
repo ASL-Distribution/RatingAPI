@@ -3,9 +3,9 @@
   <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AccessorialRates" EntityType="ratingAPIModel.AccessorialRate" />
     <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
-    <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
+    <EntitySet Name="APIUserTariffGroups" EntityType="ratingAPIModel.APIUserTariffGroups" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
-    <EntitySet Name="RateGroups" EntityType="ratingAPIModel.RateGroup" />
+    <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
     <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
     <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
     <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
@@ -20,7 +20,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RateGroupID" Type="Int32" />
+    <Property Name="TariffGroupID" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
@@ -32,12 +32,12 @@
     <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="APIUserGroup">
+  <EntityType Name="APIUserTariffGroups">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RateGroupName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="TariffGroupName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="APIUserName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Log">
@@ -48,7 +48,7 @@
     <Property Name="timestamp" Type="DateTime" Precision="3" />
     <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="RateGroup">
+  <EntityType Name="TariffGroup">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -63,7 +63,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RateGroupID" Type="Int32" />
+    <Property Name="TariffGroupID" Type="Int32" />
     <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
@@ -136,7 +136,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RateGroupID" Type="Int32" />
+    <Property Name="TariffGroupID" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />

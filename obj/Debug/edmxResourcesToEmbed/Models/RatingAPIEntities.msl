@@ -6,7 +6,7 @@
         <MappingFragment StoreEntitySet="AccessorialRates">
           <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -20,11 +20,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="APIUserGroups">
-      <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
-        <MappingFragment StoreEntitySet="APIUserGroups">
+    <EntitySetMapping Name="APIUserTariffGroups">
+      <EntityTypeMapping TypeName="ratingAPIModel.APIUserTariffGroups">
+        <MappingFragment StoreEntitySet="APIUserTariffGroups">
           <ScalarProperty Name="APIUserName" ColumnName="APIUserName" />
-          <ScalarProperty Name="RateGroupName" ColumnName="RateGroupName" />
+          <ScalarProperty Name="TariffGroupName" ColumnName="TariffGroupName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -38,9 +38,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RateGroups">
-      <EntityTypeMapping TypeName="ratingAPIModel.RateGroup">
-        <MappingFragment StoreEntitySet="RateGroups">
+    <EntitySetMapping Name="TariffGroups">
+      <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
+        <MappingFragment StoreEntitySet="TariffGroups">
           <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />
           <ScalarProperty Name="Created" ColumnName="Created" />
@@ -57,7 +57,7 @@
           <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
           <ScalarProperty Name="Service" ColumnName="Service" />
           <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
-          <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -137,7 +137,7 @@
           <ScalarProperty Name="OriginToPostal" ColumnName="OriginToPostal" />
           <ScalarProperty Name="OriginFromPostal" ColumnName="OriginFromPostal" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

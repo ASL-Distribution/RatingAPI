@@ -5,7 +5,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RateGroupID" Type="int" />
+    <Property Name="TariffGroupID" Type="int" />
     <Property Name="Name" Type="varchar" MaxLength="64" />
     <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
@@ -17,12 +17,12 @@
     <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
     <Property Name="UOM" Type="varchar" MaxLength="8" />
   </EntityType>
-  <EntityType Name="APIUserGroups">
+  <EntityType Name="APIUserTariffGroups">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RateGroupName" Type="varchar" MaxLength="64" />
+    <Property Name="TariffGroupName" Type="varchar" MaxLength="64" />
     <Property Name="APIUserName" Type="varchar" MaxLength="64" />
   </EntityType>
   <EntityType Name="Log">
@@ -33,7 +33,7 @@
     <Property Name="timestamp" Type="datetime" />
     <Property Name="logentry" Type="varchar" MaxLength="1024" />
   </EntityType>
-  <EntityType Name="RateGroups">
+  <EntityType Name="TariffGroups">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -48,7 +48,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RateGroupID" Type="int" />
+    <Property Name="TariffGroupID" Type="int" />
     <Property Name="ZoneName" Type="varchar" MaxLength="32" />
     <Property Name="Service" Type="varchar" MaxLength="64" />
     <Property Name="WeightFrom" Type="decimal" Precision="10" Scale="2" />
@@ -121,7 +121,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RateGroupID" Type="int" />
+    <Property Name="TariffGroupID" Type="int" />
     <Property Name="Name" Type="varchar" MaxLength="32" />
     <Property Name="OriginFromPostal" Type="varchar" MaxLength="16" />
     <Property Name="OriginToPostal" Type="varchar" MaxLength="16" />
@@ -131,9 +131,9 @@
   <EntityContainer Name="ratingAPIModelStoreContainer">
     <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="APIUserGroups" EntityType="Self.APIUserGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="RateGroups" EntityType="Self.RateGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />

@@ -184,11 +184,11 @@
     <Compile Include="Models\APIUser.cs">
       <DependentUpon>WebserviceEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\APIUserGroup.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\APIUsersSandbox.cs">
       <DependentUpon>WebserviceEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APIUserTariffGroups.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthenticationResult.cs" />
     <Compile Include="Models\AuthenticationResultSandbox.cs" />
@@ -200,9 +200,6 @@
     </Compile>
     <Compile Include="Models\ProcessedZone.cs" />
     <Compile Include="Models\Rate.cs">
-      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RateGroup.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RatingAPIEntities.Context.cs">
@@ -237,6 +234,9 @@
       <DependentUpon>ReportingEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Service.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TariffGroup.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TimedNotification.cs">

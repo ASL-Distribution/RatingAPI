@@ -10,7 +10,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RateGroupID" Type="int" />
+          <Property Name="TariffGroupID" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="64" />
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
@@ -22,12 +22,12 @@
           <Property Name="AccessorialName" Type="varchar" MaxLength="64" />
           <Property Name="UOM" Type="varchar" MaxLength="8" />
         </EntityType>
-        <EntityType Name="APIUserGroups">
+        <EntityType Name="APIUserTariffGroups">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RateGroupName" Type="varchar" MaxLength="64" />
+          <Property Name="TariffGroupName" Type="varchar" MaxLength="64" />
           <Property Name="APIUserName" Type="varchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="Log">
@@ -38,7 +38,7 @@
           <Property Name="timestamp" Type="datetime" />
           <Property Name="logentry" Type="varchar" MaxLength="1024" />
         </EntityType>
-        <EntityType Name="RateGroups">
+        <EntityType Name="TariffGroups">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -53,7 +53,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RateGroupID" Type="int" />
+          <Property Name="TariffGroupID" Type="int" />
           <Property Name="ZoneName" Type="varchar" MaxLength="32" />
           <Property Name="Service" Type="varchar" MaxLength="64" />
           <Property Name="WeightFrom" Type="decimal" Precision="10" Scale="2" />
@@ -126,7 +126,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RateGroupID" Type="int" />
+          <Property Name="TariffGroupID" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="32" />
           <Property Name="OriginFromPostal" Type="varchar" MaxLength="16" />
           <Property Name="OriginToPostal" Type="varchar" MaxLength="16" />
@@ -136,9 +136,9 @@
         <EntityContainer Name="ratingAPIModelStoreContainer">
           <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="APIUserGroups" EntityType="Self.APIUserGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RateGroups" EntityType="Self.RateGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
@@ -155,9 +155,9 @@
         <EntityContainer Name="RatingAPIEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccessorialRates" EntityType="ratingAPIModel.AccessorialRate" />
           <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
-          <EntitySet Name="APIUserGroups" EntityType="ratingAPIModel.APIUserGroup" />
+          <EntitySet Name="APIUserTariffGroups" EntityType="ratingAPIModel.APIUserTariffGroups" />
           <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
-          <EntitySet Name="RateGroups" EntityType="ratingAPIModel.RateGroup" />
+          <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
           <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
           <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
           <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
@@ -172,7 +172,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RateGroupID" Type="Int32" />
+          <Property Name="TariffGroupID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
@@ -184,12 +184,12 @@
           <Property Name="AccessorialName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="UOM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="APIUserGroup">
+        <EntityType Name="APIUserTariffGroups">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RateGroupName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="TariffGroupName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="APIUserName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Log">
@@ -200,7 +200,7 @@
           <Property Name="timestamp" Type="DateTime" Precision="3" />
           <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="RateGroup">
+        <EntityType Name="TariffGroup">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -215,7 +215,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RateGroupID" Type="Int32" />
+          <Property Name="TariffGroupID" Type="Int32" />
           <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
@@ -288,7 +288,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RateGroupID" Type="Int32" />
+          <Property Name="TariffGroupID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
@@ -306,7 +306,7 @@
               <MappingFragment StoreEntitySet="AccessorialRates">
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+                <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -320,11 +320,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="APIUserGroups">
-            <EntityTypeMapping TypeName="ratingAPIModel.APIUserGroup">
-              <MappingFragment StoreEntitySet="APIUserGroups">
+          <EntitySetMapping Name="APIUserTariffGroups">
+            <EntityTypeMapping TypeName="ratingAPIModel.APIUserTariffGroups">
+              <MappingFragment StoreEntitySet="APIUserTariffGroups">
                 <ScalarProperty Name="APIUserName" ColumnName="APIUserName" />
-                <ScalarProperty Name="RateGroupName" ColumnName="RateGroupName" />
+                <ScalarProperty Name="TariffGroupName" ColumnName="TariffGroupName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -338,9 +338,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RateGroups">
-            <EntityTypeMapping TypeName="ratingAPIModel.RateGroup">
-              <MappingFragment StoreEntitySet="RateGroups">
+          <EntitySetMapping Name="TariffGroups">
+            <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
+              <MappingFragment StoreEntitySet="TariffGroups">
                 <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
@@ -357,7 +357,7 @@
                 <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
                 <ScalarProperty Name="Service" ColumnName="Service" />
                 <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
-                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+                <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -437,7 +437,7 @@
                 <ScalarProperty Name="OriginToPostal" ColumnName="OriginToPostal" />
                 <ScalarProperty Name="OriginFromPostal" ColumnName="OriginFromPostal" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RateGroupID" ColumnName="RateGroupID" />
+                <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

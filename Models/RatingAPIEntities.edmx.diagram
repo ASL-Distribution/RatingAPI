@@ -7,9 +7,9 @@
       <Diagram DiagramId="b2666ccc05a14c5e8ef2d21ff0870bfd" Name="Diagram1">
         <EntityTypeShape EntityType="ratingAPIModel.AccessorialRate" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Accessorial" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.APIUserGroup" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.APIUserTariffGroups" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Log" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.RateGroup" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.TariffGroup" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Rate" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Service" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.UOM" Width="1.5" PointX="0.75" PointY="6.75" />
