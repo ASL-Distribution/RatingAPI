@@ -73,6 +73,15 @@ namespace RatingAPI.Controllers
 
                     Rate rate = null;
 
+                    if (request.Length.HasValue 
+                        && request.Width.HasValue
+                        && request.Height.HasValue)
+                    {
+                        var cubeWeight = (request.Length * request.Width * request.Height) / rateGroup.DimensionFactor;
+
+                        request.Weight = request.Weight > cubeWeight ? request.Weight : cubeWeight;
+                    }
+
                     if (matchedZone != null)
                     {
                         rate = re.Rates

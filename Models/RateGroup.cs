@@ -18,5 +18,6 @@ namespace RatingAPI.Models
         public string Name { get; set; }
         public Nullable<System.DateTime> Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
+        public Nullable<decimal> DimensionFactor { get; set; }
     }
 }

@@ -46,6 +46,7 @@
           <Property Name="Name" Type="varchar" MaxLength="64" />
           <Property Name="Created" Type="datetime" />
           <Property Name="Modified" Type="datetime" />
+          <Property Name="DimensionFactor" Type="decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="Rates">
           <Key>
@@ -201,6 +202,7 @@
           <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Precision="3" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="DimensionFactor" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="Rate">
           <Key>
@@ -329,6 +331,7 @@
           <EntitySetMapping Name="RateGroups">
             <EntityTypeMapping TypeName="ratingAPIModel.RateGroup">
               <MappingFragment StoreEntitySet="RateGroups">
+                <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

@@ -41,6 +41,7 @@
     <EntitySetMapping Name="RateGroups">
       <EntityTypeMapping TypeName="ratingAPIModel.RateGroup">
         <MappingFragment StoreEntitySet="RateGroups">
+          <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Name" ColumnName="Name" />
