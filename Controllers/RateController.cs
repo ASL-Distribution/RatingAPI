@@ -114,7 +114,7 @@ namespace RatingAPI.Controllers
                     else
                     {
                         webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, tariffGroup);
-                        webResponse.Dimensions = request.Dimensions;
+                        webResponse.Dimensions = request.Dimensions;    
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
                         webResponse.Weight = originalWeight;
