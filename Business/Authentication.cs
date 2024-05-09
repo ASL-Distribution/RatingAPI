@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
+using RatingAPI.AuthenticationModels;
 
 namespace RatingAPI.Business
 {
@@ -29,6 +30,21 @@ namespace RatingAPI.Business
             {
                 if (apiUser.TokenDateTime >= DateTime.Now.AddHours(-24))
                 {
+                    AuthenticationEntities ae = new AuthenticationEntities();
+
+                    var user = ae.Users
+                                    .FirstOrDefault(m =>    m.ID == apiUser.UserId
+                                                            && m.Authorized.HasValue
+                                                            && m.Authorized.Value
+                                                            && m.Verified.HasValue
+                                                            && m.Verified.Value);
+
+                    if (user == null)
+                    {
+                        message = "FAILED AUTHORIZATION.  USER IS NOT AUTHORIZED/VERIFIED.";
+                        return new AuthenticationResult(message, false, null);
+                    }
+
                     message = "VALID TOKEN";
                     return new AuthenticationResult(message, true, apiUser);
                 }
@@ -59,6 +75,21 @@ namespace RatingAPI.Business
             {
                 if (apiSandboxUser.TokenDateTime >= DateTime.Now.AddHours(-24))
                 {
+                    AuthenticationEntities ae = new AuthenticationEntities();
+
+                    var user = ae.Users
+                                    .FirstOrDefault(m =>    m.ID == apiSandboxUser.UserId
+                                                            && m.Authorized.HasValue
+                                                            && m.Authorized.Value
+                                                            && m.Verified.HasValue
+                                                            && m.Verified.Value);
+
+                    if (user == null)
+                    {
+                        message = "FAILED AUTHORIZATION.  USER IS NOT AUTHORIZED/VERIFIED.";
+                        return new AuthenticationResultSandbox(message, false, null);
+                    }
+
                     message = "VALID TOKEN";
                     return new AuthenticationResultSandbox(message, true, apiSandboxUser);
                 }

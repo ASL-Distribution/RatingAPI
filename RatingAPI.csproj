@@ -162,6 +162,30 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="AuthenticationModels\AuthenticationEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuthenticationEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuthenticationModels\AuthenticationEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuthenticationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuthenticationModels\AuthenticationEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuthenticationEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AuthenticationModels\LogTable.cs">
+      <DependentUpon>AuthenticationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuthenticationModels\User.cs">
+      <DependentUpon>AuthenticationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuthenticationModels\UserRole.cs">
+      <DependentUpon>AuthenticationEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Business\Authentication.cs" />
     <Compile Include="Business\Logging.cs" />
     <Compile Include="Business\PostalCodeHelper.cs" />
@@ -286,6 +310,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="AuthenticationModels\AuthenticationEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuthenticationEntities.edmx</DependentUpon>
+      <LastGenOutput>AuthenticationEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AuthenticationModels\AuthenticationEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuthenticationEntities.edmx</DependentUpon>
+      <LastGenOutput>AuthenticationEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -364,6 +398,13 @@
     </EntityDeploy>
     <Content Include="Models\ReportingEntities.edmx.diagram">
       <DependentUpon>ReportingEntities.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="AuthenticationModels\AuthenticationEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AuthenticationEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="AuthenticationModels\AuthenticationEntities.edmx.diagram">
+      <DependentUpon>AuthenticationEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

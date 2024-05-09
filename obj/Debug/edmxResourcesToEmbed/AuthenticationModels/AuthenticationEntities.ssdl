@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuthenticationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="LogTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="timestamp" Type="datetime" />
+    <Property Name="message" Type="text" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="user_role_id" />
+    </Key>
+    <Property Name="user_role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role_number" Type="int" />
+    <Property Name="role_name" Type="varchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="32" />
+    <Property Name="Email" Type="varchar" MaxLength="64" />
+    <Property Name="Password" Type="varchar" MaxLength="32" />
+    <Property Name="Phone" Type="varchar" MaxLength="64" />
+    <Property Name="FirstName" Type="varchar" MaxLength="32" />
+    <Property Name="LastName" Type="varchar" MaxLength="32" />
+    <Property Name="Company" Type="varchar" MaxLength="32" />
+    <Property Name="CompanyID" Type="int" />
+    <Property Name="VerificationCode" Type="varchar" MaxLength="64" />
+    <Property Name="Verified" Type="bit" />
+    <Property Name="PasswordResetVerificationCode" Type="varchar" MaxLength="64" />
+    <Property Name="SignInToken" Type="varchar" MaxLength="64" />
+    <Property Name="TokenTimeStamp" Type="datetime" />
+    <Property Name="role" Type="int" />
+    <Property Name="Authorized" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="AuthenticationModelStoreContainer">
+    <EntitySet Name="LogTable" EntityType="Self.LogTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
