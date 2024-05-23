@@ -21,12 +21,15 @@ namespace RatingAPI.Controllers
             re.WebRequests.Add(request);
             re.SaveChanges();
 
-            foreach (var accessorial in request.Accessorials)
+            if (request.Accessorials != null)
             {
-                accessorial.WebRequestID = request.ID;
+                foreach (var accessorial in request.Accessorials)
+                {
+                    accessorial.WebRequestID = request.ID;
+                }
+                re.WebRequestAccessorials.AddRange(request.Accessorials);
+                re.SaveChanges();
             }
-            re.WebRequestAccessorials.AddRange(request.Accessorials);
-            re.SaveChanges();
 
             var webResponse = new Models.WebRespons();
             webResponse.WebRequestID = request.ID;
@@ -93,8 +96,12 @@ namespace RatingAPI.Controllers
                                     .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
                                                             && m.ZoneName == matchedZone.Zone.Name
                                                             && m.Service == request.Service
-                                                            && request.Weight >= m.WeightFrom
-                                                            && request.Weight < m.WeightTo);
+                                                            && ((request.Weight >= m.WeightFrom
+                                                                && request.Weight < m.WeightTo)
+                                                                ||
+                                                                (request.Weight == m.WeightFrom
+                                                                || request.Weight == m.WeightTo))
+                                                            );
                     }
 
                     if (rate == null)
@@ -160,15 +167,18 @@ namespace RatingAPI.Controllers
         {
             decimal total = 0;
 
-            foreach (var accessorial in request.Accessorials)
+            if (request.Accessorials != null)
             {
-                var accessorialRate = re.AccessorialRates
-                                            .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
-                                                                    && m.Name == accessorial.AccessorialName);
-
-                if (accessorialRate != null)
+                foreach (var accessorial in request.Accessorials)
                 {
-                    total += accessorialRate.Rate.Value * accessorial.Amount.Value;
+                    var accessorialRate = re.AccessorialRates
+                                                .FirstOrDefault(m => m.TariffGroupID == tariffGroup.ID
+                                                                        && m.Name == accessorial.AccessorialName);
+
+                    if (accessorialRate != null)
+                    {
+                        total += accessorialRate.Rate.Value * accessorial.Amount.Value;
+                    }
                 }
             }
 
