@@ -90,7 +90,9 @@ namespace RatingAPI.Controllers
                         request.Weight = request.Weight > cubeWeight ? request.Weight : cubeWeight;
                     }
 
-                    if (matchedZone != null)
+                    if (matchedZone != null
+                        && tariffGroup.ChargeByWeight.HasValue
+                        && tariffGroup.ChargeByWeight.Value)
                     {
                         rate = re.Rates
                                     .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
@@ -104,7 +106,20 @@ namespace RatingAPI.Controllers
                                                             );
                     }
 
-                    if (rate == null)
+                    QuantityRate quantityRate = null;
+
+                    if (matchedZone != null
+                        && tariffGroup.ChargeByQuantity.HasValue
+                        && tariffGroup.ChargeByQuantity.Value)
+                    {
+                        quantityRate = re.QuantityRates
+                                            .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
+                                                                    && m.QuantityFrom <= request.Pieces
+                                                                    && m.QuantityTo >= request.Pieces
+                                                                    && m.ZoneName == matchedZone.Zone.Name);
+                    }
+
+                    if (rate == null && quantityRate == null)
                     {
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Dimensions = request.Dimensions;
@@ -120,13 +135,14 @@ namespace RatingAPI.Controllers
                     }
                     else
                     {
-                        webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, tariffGroup);
+                        webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate);
                         webResponse.Dimensions = request.Dimensions;    
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
                         webResponse.Weight = originalWeight;
                         webResponse.CubeWeight = cubeWeight;
                         webResponse.Timestamp = DateTime.Now;
+                        webResponse.Pieces = request.Pieces;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
 
@@ -149,6 +165,16 @@ namespace RatingAPI.Controllers
                 re.SaveChanges();
                 return Ok(webResponse);
             }
+        }
+
+        private decimal GetQuantityRate(QuantityRate quantityRate)
+        {
+            if (quantityRate == null)
+            {
+                return 0;
+            }
+
+            return quantityRate.Rate.HasValue ? quantityRate.Rate.Value : 0;
         }
 
         private List<ProcessedZone> GetProcessedZones(List<Zone> zones, Models.WebRequest webRequest)

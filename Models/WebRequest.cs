@@ -11,7 +11,7 @@ namespace RatingAPI.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class WebRequest
     {
         public int ID { get; set; }
@@ -22,6 +22,7 @@ namespace RatingAPI.Models
         public string FromPostal { get; set; }
         public string ToPostal { get; set; }
         public Nullable<decimal> Weight { get; set; }
+        public Nullable<int> Pieces { get; set; }
         public WebRequestAccessorial[] Accessorials { get; set; }
         public WebRequestDimension[] Dimensions { get; set; }
     }

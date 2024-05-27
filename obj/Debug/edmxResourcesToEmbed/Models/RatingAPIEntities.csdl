@@ -5,14 +5,15 @@
     <EntitySet Name="Accessorials" EntityType="ratingAPIModel.Accessorial" />
     <EntitySet Name="APIUserTariffGroups" EntityType="ratingAPIModel.APIUserTariffGroups" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
-    <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
     <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
     <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
     <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
     <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
     <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
-    <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
     <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
+    <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
+    <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
+    <EntitySet Name="QuantityRates" EntityType="ratingAPIModel.QuantityRate" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
   </EntityContainer>
   <EntityType Name="AccessorialRate">
@@ -47,16 +48,6 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="timestamp" Type="DateTime" Precision="3" />
     <Property Name="logentry" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="TariffGroup">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="Created" Type="DateTime" Precision="3" />
-    <Property Name="Modified" Type="DateTime" Precision="3" />
-    <Property Name="DimensionFactor" Type="Decimal" Precision="6" Scale="2" />
   </EntityType>
   <EntityType Name="Rate">
     <Key>
@@ -103,6 +94,31 @@
     <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
+  <EntityType Name="Zone">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TariffGroupID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TariffGroup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Created" Type="DateTime" Precision="3" />
+    <Property Name="Modified" Type="DateTime" Precision="3" />
+    <Property Name="DimensionFactor" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Name="ChargeByQuantity" Type="Boolean" />
+    <Property Name="ChargeByWeight" Type="Boolean" />
+  </EntityType>
   <EntityType Name="WebRequest">
     <Key>
       <PropertyRef Name="ID" />
@@ -115,18 +131,18 @@
     <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Pieces" Type="Int32" />
   </EntityType>
-  <EntityType Name="Zone">
+  <EntityType Name="QuantityRate">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TariffGroupID" Type="Int32" />
-    <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="OriginFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="QuantityFrom" Type="Int32" />
+    <Property Name="QuantityTo" Type="Int32" />
+    <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="WebRespons">
     <Key>
@@ -143,5 +159,6 @@
     <Property Name="Timestamp" Type="DateTime" Precision="3" />
     <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="CubeWeight" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Pieces" Type="Int32" />
   </EntityType>
 </Schema>

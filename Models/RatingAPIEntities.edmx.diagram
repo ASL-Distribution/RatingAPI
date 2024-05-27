@@ -9,15 +9,16 @@
         <EntityTypeShape EntityType="ratingAPIModel.Accessorial" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.APIUserTariffGroups" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Log" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.TariffGroup" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Rate" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Service" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="ratingAPIModel.UOM" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="ratingAPIModel.WebRequestAccessorial" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="ratingAPIModel.WebRequestDimension" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.WebRequest" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="ratingAPIModel.Zone" Width="1.5" PointX="8.75" PointY="4.75" />
-        <EntityTypeShape EntityType="ratingAPIModel.WebRespons" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.TariffGroup" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.WebRequest" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.QuantityRate" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ratingAPIModel.WebRespons" Width="1.5" PointX="9.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -33,6 +33,17 @@
     <Property Name="timestamp" Type="datetime" />
     <Property Name="logentry" Type="varchar" MaxLength="1024" />
   </EntityType>
+  <EntityType Name="QuantityRates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TariffGroupID" Type="int" />
+    <Property Name="QuantityFrom" Type="int" />
+    <Property Name="QuantityTo" Type="int" />
+    <Property Name="ZoneName" Type="varchar" MaxLength="32" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
   <EntityType Name="Rates">
     <Key>
       <PropertyRef Name="ID" />
@@ -61,6 +72,9 @@
     <Property Name="Created" Type="datetime" />
     <Property Name="Modified" Type="datetime" />
     <Property Name="DimensionFactor" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="Description" Type="varchar" MaxLength="512" />
+    <Property Name="ChargeByQuantity" Type="bit" />
+    <Property Name="ChargeByWeight" Type="bit" />
   </EntityType>
   <EntityType Name="UOM">
     <Key>
@@ -100,6 +114,7 @@
     <Property Name="FromPostal" Type="varchar" MaxLength="16" />
     <Property Name="ToPostal" Type="varchar" MaxLength="16" />
     <Property Name="Weight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Pieces" Type="int" />
   </EntityType>
   <EntityType Name="WebResponses">
     <Key>
@@ -116,6 +131,7 @@
     <Property Name="Timestamp" Type="datetime" />
     <Property Name="ErrorMessages" Type="text" />
     <Property Name="CubeWeight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Pieces" Type="int" />
   </EntityType>
   <EntityType Name="Zones">
     <Key>
@@ -134,6 +150,7 @@
     <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuantityRates" EntityType="Self.QuantityRates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
