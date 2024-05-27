@@ -35,9 +35,10 @@ namespace RatingAPI.Models
         public virtual DbSet<WebRequestAccessorial> WebRequestAccessorials { get; set; }
         public virtual DbSet<WebRequestDimension> WebRequestDimensions { get; set; }
         public virtual DbSet<Zone> Zones { get; set; }
-        public virtual DbSet<TariffGroup> TariffGroups { get; set; }
         public virtual DbSet<WebRequest> WebRequests { get; set; }
         public virtual DbSet<QuantityRate> QuantityRates { get; set; }
         public virtual DbSet<WebRespons> WebResponses { get; set; }
+        public virtual DbSet<TariffGroup> TariffGroups { get; set; }
+        public virtual DbSet<FuelRate> FuelRates { get; set; }
     }
 }

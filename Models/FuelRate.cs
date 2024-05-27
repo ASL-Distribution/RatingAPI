@@ -12,16 +12,12 @@ namespace RatingAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TariffGroup
+    public partial class FuelRate
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.DateTime> Created { get; set; }
-        public Nullable<System.DateTime> Modified { get; set; }
-        public Nullable<decimal> DimensionFactor { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> ChargeByQuantity { get; set; }
-        public Nullable<bool> ChargeByWeight { get; set; }
-        public Nullable<decimal> FuelRate { get; set; }
+        public Nullable<int> TariffGroupID { get; set; }
+        public Nullable<decimal> FuelRateFrom { get; set; }
+        public Nullable<decimal> FuelRateTo { get; set; }
+        public Nullable<decimal> PercentageRate { get; set; }
     }
 }

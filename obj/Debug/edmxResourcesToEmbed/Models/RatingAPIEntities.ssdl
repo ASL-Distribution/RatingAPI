@@ -25,6 +25,16 @@
     <Property Name="TariffGroupName" Type="varchar" MaxLength="64" />
     <Property Name="APIUserName" Type="varchar" MaxLength="64" />
   </EntityType>
+  <EntityType Name="FuelRates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TariffGroupID" Type="int" />
+    <Property Name="FuelRateFrom" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
   <EntityType Name="Log">
     <Key>
       <PropertyRef Name="ID" />
@@ -75,6 +85,7 @@
     <Property Name="Description" Type="varchar" MaxLength="512" />
     <Property Name="ChargeByQuantity" Type="bit" />
     <Property Name="ChargeByWeight" Type="bit" />
+    <Property Name="FuelRate" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="UOM">
     <Key>
@@ -149,6 +160,7 @@
     <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuelRates" EntityType="Self.FuelRates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="QuantityRates" EntityType="Self.QuantityRates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />

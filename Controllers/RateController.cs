@@ -119,6 +119,18 @@ namespace RatingAPI.Controllers
                                                                     && m.ZoneName == matchedZone.Zone.Name);
                     }
 
+                    FuelRate fuelRate = null;
+
+                    if (matchedZone != null
+                        && tariffGroup.FuelRate.HasValue
+                        && tariffGroup.FuelRate.Value != 0)
+                    {
+                        fuelRate = re.FuelRates
+                                        .FirstOrDefault(m => m.TariffGroupID == tariffGroup.ID
+                                                                && m.FuelRateFrom <= tariffGroup.FuelRate
+                                                                && m.FuelRateTo > tariffGroup.FuelRate);
+                    }
+
                     if (rate == null && quantityRate == null)
                     {
                         webResponse.Timestamp = DateTime.Now;
@@ -135,7 +147,8 @@ namespace RatingAPI.Controllers
                     }
                     else
                     {
-                        webResponse.Rate = (rate.Rate1.Value * request.Weight) + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate);
+                        var shippingRate = rate.Rate1.Value * request.Weight;
+                        webResponse.Rate = shippingRate + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate) + GetFuelRate(shippingRate, fuelRate);
                         webResponse.Dimensions = request.Dimensions;    
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
@@ -165,6 +178,16 @@ namespace RatingAPI.Controllers
                 re.SaveChanges();
                 return Ok(webResponse);
             }
+        }
+
+        private decimal GetFuelRate(decimal? shippingRate, FuelRate fuelRate)
+        {
+            if (fuelRate == null)
+            {
+                return 0;
+            }
+
+            return shippingRate.HasValue && shippingRate.Value != 0 ? fuelRate.PercentageRate.Value * shippingRate.Value : 0;
         }
 
         private decimal GetQuantityRate(QuantityRate quantityRate)

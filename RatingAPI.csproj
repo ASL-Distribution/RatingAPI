@@ -216,6 +216,9 @@
     </Compile>
     <Compile Include="Models\AuthenticationResult.cs" />
     <Compile Include="Models\AuthenticationResultSandbox.cs" />
+    <Compile Include="Models\FuelRate.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Log.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>

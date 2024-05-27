@@ -30,6 +30,16 @@
           <Property Name="TariffGroupName" Type="varchar" MaxLength="64" />
           <Property Name="APIUserName" Type="varchar" MaxLength="64" />
         </EntityType>
+        <EntityType Name="FuelRates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TariffGroupID" Type="int" />
+          <Property Name="FuelRateFrom" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="ID" />
@@ -80,6 +90,7 @@
           <Property Name="Description" Type="varchar" MaxLength="512" />
           <Property Name="ChargeByQuantity" Type="bit" />
           <Property Name="ChargeByWeight" Type="bit" />
+          <Property Name="FuelRate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="UOM">
           <Key>
@@ -154,6 +165,7 @@
           <EntitySet Name="AccessorialRates" EntityType="Self.AccessorialRates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FuelRates" EntityType="Self.FuelRates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuantityRates" EntityType="Self.QuantityRates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
@@ -181,10 +193,11 @@
           <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
           <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
           <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
-          <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
           <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
           <EntitySet Name="QuantityRates" EntityType="ratingAPIModel.QuantityRate" />
           <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
+          <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
+          <EntitySet Name="FuelRates" EntityType="ratingAPIModel.FuelRate" />
         </EntityContainer>
         <EntityType Name="AccessorialRate">
           <Key>
@@ -276,19 +289,6 @@
           <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="TariffGroup">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Created" Type="DateTime" Precision="3" />
-          <Property Name="Modified" Type="DateTime" Precision="3" />
-          <Property Name="DimensionFactor" Type="Decimal" Precision="6" Scale="2" />
-          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="ChargeByQuantity" Type="Boolean" />
-          <Property Name="ChargeByWeight" Type="Boolean" />
-        </EntityType>
         <EntityType Name="WebRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -330,6 +330,30 @@
           <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CubeWeight" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Pieces" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TariffGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="DimensionFactor" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="ChargeByQuantity" Type="Boolean" />
+          <Property Name="ChargeByWeight" Type="Boolean" />
+          <Property Name="FuelRate" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="FuelRate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TariffGroupID" Type="Int32" />
+          <Property Name="FuelRateFrom" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="FuelRateTo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PercentageRate" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -437,20 +461,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TariffGroups">
-            <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
-              <MappingFragment StoreEntitySet="TariffGroups">
-                <ScalarProperty Name="ChargeByWeight" ColumnName="ChargeByWeight" />
-                <ScalarProperty Name="ChargeByQuantity" ColumnName="ChargeByQuantity" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WebRequests">
             <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
               <MappingFragment StoreEntitySet="WebRequests">
@@ -492,6 +502,32 @@
                 <ScalarProperty Name="Zone" ColumnName="Zone" />
                 <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
                 <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TariffGroups">
+            <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
+              <MappingFragment StoreEntitySet="TariffGroups">
+                <ScalarProperty Name="FuelRate" ColumnName="FuelRate" />
+                <ScalarProperty Name="ChargeByWeight" ColumnName="ChargeByWeight" />
+                <ScalarProperty Name="ChargeByQuantity" ColumnName="ChargeByQuantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FuelRates">
+            <EntityTypeMapping TypeName="ratingAPIModel.FuelRate">
+              <MappingFragment StoreEntitySet="FuelRates">
+                <ScalarProperty Name="PercentageRate" ColumnName="PercentageRate" />
+                <ScalarProperty Name="FuelRateTo" ColumnName="FuelRateTo" />
+                <ScalarProperty Name="FuelRateFrom" ColumnName="FuelRateFrom" />
+                <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
