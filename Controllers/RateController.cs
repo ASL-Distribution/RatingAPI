@@ -148,7 +148,7 @@ namespace RatingAPI.Controllers
                     else
                     {
                         var shippingRate = rate.Rate1.Value * request.Weight;
-                        webResponse.Rate = shippingRate + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate) + GetFuelRate(shippingRate, fuelRate);
+                        webResponse.Rate = shippingRate + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate) + GetFuelRate(shippingRate, fuelRate) + GetSizeOverageCharge(request.Dimensions);
                         webResponse.Dimensions = request.Dimensions;    
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
@@ -178,6 +178,56 @@ namespace RatingAPI.Controllers
                 re.SaveChanges();
                 return Ok(webResponse);
             }
+        }
+
+        private decimal GetSizeOverageCharge(WebRequestDimension[] dimensions)
+        {
+            decimal charge = 0;
+
+            if (dimensions != null)
+            {
+                foreach (var dimension in dimensions)
+                {
+                    if (dimension != null)
+                    {
+                        int currentCharge = 0;
+
+                        if ((dimension.Width.HasValue && dimension.Width.Value > 33 && dimension.Width.Value < 55)
+                            || (dimension.Length.HasValue && dimension.Length.Value > 33 && dimension.Length.Value < 55)
+                            || (dimension.Height.HasValue && dimension.Height.Value > 33 && dimension.Height.Value < 55))
+                        {
+                            currentCharge = 5;
+                        }
+                        
+                        if ((dimension.Width.HasValue && dimension.Width.Value >= 55)
+                            || (dimension.Length.HasValue && dimension.Length.Value >= 55)
+                            || (dimension.Height.HasValue && dimension.Height.Value >= 55))
+                        {
+                            currentCharge = 12;
+                        }
+
+                        var dims = new List<decimal>();
+                        dims.Add(dimension.Width.HasValue ? dimension.Width.Value : 0);
+                        dims.Add(dimension.Length.HasValue ? dimension.Length.Value : 0);
+                        dims.Add(dimension.Height.HasValue ? dimension.Height.Value : 0);
+
+                        var orderedDims = dims
+                                            .OrderBy(m => m)
+                                            .ToList();
+
+                        var lowestTwoDoubleSum = (orderedDims[0] * 2) + (orderedDims[1] * 2);
+
+                        if (lowestTwoDoubleSum > 118)
+                        {
+                            currentCharge = 12;
+                        }
+
+                        charge += currentCharge;
+                    }
+                }
+            }
+
+            return charge;
         }
 
         private decimal GetFuelRate(decimal? shippingRate, FuelRate fuelRate)
