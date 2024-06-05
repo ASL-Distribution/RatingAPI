@@ -35,6 +35,15 @@
     <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="2" />
     <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
+  <EntityType Name="GirthOverage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TariffGroupID" Type="int" />
+    <Property Name="GirthOverInches" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Charge" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
   <EntityType Name="Log">
     <Key>
       <PropertyRef Name="ID" />
@@ -72,6 +81,15 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="64" />
+  </EntityType>
+  <EntityType Name="SizeSideOverage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TariffGroupID" Type="int" />
+    <Property Name="AnySideOverInches" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Charge" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="TariffGroups">
     <Key>
@@ -161,10 +179,12 @@
     <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FuelRates" EntityType="Self.FuelRates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GirthOverage" EntityType="Self.GirthOverage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="QuantityRates" EntityType="Self.QuantityRates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SizeSideOverage" EntityType="Self.SizeSideOverage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />

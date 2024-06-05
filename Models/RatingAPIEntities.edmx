@@ -40,6 +40,15 @@
           <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="2" />
           <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
+        <EntityType Name="GirthOverage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TariffGroupID" Type="int" />
+          <Property Name="GirthOverInches" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Charge" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="ID" />
@@ -77,6 +86,15 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="SizeSideOverage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TariffGroupID" Type="int" />
+          <Property Name="AnySideOverInches" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Charge" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="TariffGroups">
           <Key>
@@ -166,10 +184,12 @@
           <EntitySet Name="Accessorials" EntityType="Self.Accessorials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIUserTariffGroups" EntityType="Self.APIUserTariffGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FuelRates" EntityType="Self.FuelRates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GirthOverage" EntityType="Self.GirthOverage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuantityRates" EntityType="Self.QuantityRates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SizeSideOverage" EntityType="Self.SizeSideOverage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />
@@ -198,6 +218,8 @@
           <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
           <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
           <EntitySet Name="FuelRates" EntityType="ratingAPIModel.FuelRate" />
+          <EntitySet Name="GirthOverages" EntityType="ratingAPIModel.GirthOverage" />
+          <EntitySet Name="SizeSideOverages" EntityType="ratingAPIModel.SizeSideOverage" />
         </EntityContainer>
         <EntityType Name="AccessorialRate">
           <Key>
@@ -354,6 +376,24 @@
           <Property Name="FuelRateFrom" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="FuelRateTo" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="PercentageRate" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="GirthOverage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TariffGroupID" Type="Int32" />
+          <Property Name="GirthOverInches" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Charge" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="SizeSideOverage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TariffGroupID" Type="Int32" />
+          <Property Name="AnySideOverInches" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Charge" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -527,6 +567,26 @@
                 <ScalarProperty Name="PercentageRate" ColumnName="PercentageRate" />
                 <ScalarProperty Name="FuelRateTo" ColumnName="FuelRateTo" />
                 <ScalarProperty Name="FuelRateFrom" ColumnName="FuelRateFrom" />
+                <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GirthOverages">
+            <EntityTypeMapping TypeName="ratingAPIModel.GirthOverage">
+              <MappingFragment StoreEntitySet="GirthOverage">
+                <ScalarProperty Name="Charge" ColumnName="Charge" />
+                <ScalarProperty Name="GirthOverInches" ColumnName="GirthOverInches" />
+                <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SizeSideOverages">
+            <EntityTypeMapping TypeName="ratingAPIModel.SizeSideOverage">
+              <MappingFragment StoreEntitySet="SizeSideOverage">
+                <ScalarProperty Name="Charge" ColumnName="Charge" />
+                <ScalarProperty Name="AnySideOverInches" ColumnName="AnySideOverInches" />
                 <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

@@ -219,6 +219,9 @@
     <Compile Include="Models\FuelRate.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GirthOverage.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Log.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
@@ -264,6 +267,9 @@
       <DependentUpon>ReportingEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Service.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SizeSideOverage.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TariffGroup.cs">

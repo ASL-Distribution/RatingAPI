@@ -40,5 +40,7 @@ namespace RatingAPI.Models
         public virtual DbSet<WebRespons> WebResponses { get; set; }
         public virtual DbSet<TariffGroup> TariffGroups { get; set; }
         public virtual DbSet<FuelRate> FuelRates { get; set; }
+        public virtual DbSet<GirthOverage> GirthOverages { get; set; }
+        public virtual DbSet<SizeSideOverage> SizeSideOverages { get; set; }
     }
 }

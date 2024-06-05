@@ -41,10 +41,10 @@ namespace RatingAPI.Controllers
                 var authResult = Authentication.Validate(we, HttpContext.Current.Request.Headers);
                 Logging.Log("authentication fine.");
 
-                request.APIUserID = authResult.APIUser.id;
-
                 if (authResult.Passed)
                 {
+                    request.APIUserID = authResult.APIUser.id;
+
                     var apiUserGroup = re.APIUserTariffGroups
                                             .FirstOrDefault(m => m.APIUserName == authResult.APIUser.Name);
 
@@ -148,12 +148,19 @@ namespace RatingAPI.Controllers
                     else
                     {
                         var shippingRate = rate.Rate1.Value * request.Weight;
-                        webResponse.Rate = shippingRate + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate) + GetFuelRate(shippingRate, fuelRate) + GetSizeOverageCharge(request.Dimensions);
+                        webResponse.Rate = shippingRate + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate) + GetFuelRate(shippingRate, fuelRate) + GetSizeOverageCharge(re, tariffGroup, request.Dimensions);
+                        if (webResponse.Rate.HasValue)
+                        {
+                            webResponse.Rate = Math.Round(webResponse.Rate.Value, 2);
+                        }
                         webResponse.Dimensions = request.Dimensions;    
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
                         webResponse.Weight = originalWeight;
-                        webResponse.CubeWeight = cubeWeight;
+                        if (webResponse.CubeWeight.HasValue)
+                        {
+                            webResponse.CubeWeight = Math.Round(webResponse.CubeWeight.Value, 2);
+                        }
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Pieces = request.Pieces;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
@@ -180,36 +187,42 @@ namespace RatingAPI.Controllers
             }
         }
 
-        private decimal GetSizeOverageCharge(WebRequestDimension[] dimensions)
+        private decimal GetSizeOverageCharge(RatingAPIEntities re, TariffGroup tariffGroup, WebRequestDimension[] dimensions)
         {
             decimal charge = 0;
 
             if (dimensions != null)
             {
+                var sizeOverages = re.SizeSideOverages
+                                        .Where(m => m.TariffGroupID == tariffGroup.ID)
+                                        .OrderBy(m => m.AnySideOverInches)
+                                        .ToList();
+
+                var girthOverages = re.GirthOverages
+                                        .Where(m => m.TariffGroupID == tariffGroup.ID)
+                                        .OrderBy(m => m.GirthOverInches)
+                                        .ToList();
+
                 foreach (var dimension in dimensions)
                 {
                     if (dimension != null)
                     {
-                        int currentCharge = 0;
-
-                        if ((dimension.Width.HasValue && dimension.Width.Value > 33 && dimension.Width.Value < 55)
-                            || (dimension.Length.HasValue && dimension.Length.Value > 33 && dimension.Length.Value < 55)
-                            || (dimension.Height.HasValue && dimension.Height.Value > 33 && dimension.Height.Value < 55))
-                        {
-                            currentCharge = 5;
-                        }
-                        
-                        if ((dimension.Width.HasValue && dimension.Width.Value >= 55)
-                            || (dimension.Length.HasValue && dimension.Length.Value >= 55)
-                            || (dimension.Height.HasValue && dimension.Height.Value >= 55))
-                        {
-                            currentCharge = 12;
-                        }
+                        decimal currentSizeCharge = 0;
 
                         var dims = new List<decimal>();
                         dims.Add(dimension.Width.HasValue ? dimension.Width.Value : 0);
                         dims.Add(dimension.Length.HasValue ? dimension.Length.Value : 0);
                         dims.Add(dimension.Height.HasValue ? dimension.Height.Value : 0);
+
+                        foreach (var sizeOverage in sizeOverages)
+                        {
+                            if (dims.Any(m => m > sizeOverage.AnySideOverInches)
+                                && sizeOverage.Charge.HasValue
+                                && sizeOverage.Charge.Value > currentSizeCharge)
+                            {
+                                currentSizeCharge = sizeOverage.Charge.Value;
+                            }
+                        }
 
                         var orderedDims = dims
                                             .OrderBy(m => m)
@@ -217,12 +230,19 @@ namespace RatingAPI.Controllers
 
                         var lowestTwoDoubleSum = (orderedDims[0] * 2) + (orderedDims[1] * 2);
 
-                        if (lowestTwoDoubleSum > 118)
+                        decimal currentGirthCharge = 0;
+
+                        foreach (var girthOverage in girthOverages)
                         {
-                            currentCharge = 12;
+                            if (lowestTwoDoubleSum > girthOverage.GirthOverInches
+                                && girthOverage.Charge.HasValue
+                                && girthOverage.Charge.Value > currentGirthCharge)
+                            {
+                                currentGirthCharge = girthOverage.Charge.Value;
+                            }
                         }
 
-                        charge += currentCharge;
+                        charge += currentGirthCharge > currentSizeCharge ? currentGirthCharge : currentSizeCharge;
                     }
                 }
             }

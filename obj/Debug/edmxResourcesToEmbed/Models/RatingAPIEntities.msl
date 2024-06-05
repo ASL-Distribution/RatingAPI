@@ -172,5 +172,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GirthOverages">
+      <EntityTypeMapping TypeName="ratingAPIModel.GirthOverage">
+        <MappingFragment StoreEntitySet="GirthOverage">
+          <ScalarProperty Name="Charge" ColumnName="Charge" />
+          <ScalarProperty Name="GirthOverInches" ColumnName="GirthOverInches" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SizeSideOverages">
+      <EntityTypeMapping TypeName="ratingAPIModel.SizeSideOverage">
+        <MappingFragment StoreEntitySet="SizeSideOverage">
+          <ScalarProperty Name="Charge" ColumnName="Charge" />
+          <ScalarProperty Name="AnySideOverInches" ColumnName="AnySideOverInches" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

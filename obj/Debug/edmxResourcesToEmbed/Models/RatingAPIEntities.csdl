@@ -16,6 +16,8 @@
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
     <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
     <EntitySet Name="FuelRates" EntityType="ratingAPIModel.FuelRate" />
+    <EntitySet Name="GirthOverages" EntityType="ratingAPIModel.GirthOverage" />
+    <EntitySet Name="SizeSideOverages" EntityType="ratingAPIModel.SizeSideOverage" />
   </EntityContainer>
   <EntityType Name="AccessorialRate">
     <Key>
@@ -172,5 +174,23 @@
     <Property Name="FuelRateFrom" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="FuelRateTo" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="PercentageRate" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="GirthOverage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TariffGroupID" Type="Int32" />
+    <Property Name="GirthOverInches" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Charge" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="SizeSideOverage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TariffGroupID" Type="Int32" />
+    <Property Name="AnySideOverInches" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Charge" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
 </Schema>
