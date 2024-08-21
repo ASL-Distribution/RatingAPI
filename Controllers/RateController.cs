@@ -97,7 +97,7 @@ namespace RatingAPI.Controllers
                         rate = re.Rates
                                     .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
                                                             && m.ZoneName == matchedZone.Zone.Name
-                                                            && m.Service == request.Service
+                                                            && m.Service.ToLower() == request.Service.ToLower()
                                                             && ((request.Weight >= m.WeightFrom
                                                                 && request.Weight < m.WeightTo)
                                                                 ||
