@@ -26,6 +26,10 @@ namespace RatingAPI.Models
         public string ErrorMessages { get; set; }
         public Nullable<decimal> CubeWeight { get; set; }
         public Nullable<int> Pieces { get; set; }
+        public Nullable<decimal> FuelRate { get; set; }
+        public Nullable<decimal> AccessorialsRate { get; set; }
+        public Nullable<decimal> SizeSurchargeRate { get; set; }
+        public Nullable<decimal> GirthRate { get; set; }
         public WebRequestDimension[] Dimensions { get; set; }
     }
 }

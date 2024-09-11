@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using RatingAPI.Models;
 using RatingAPI.Business;
 using System.Net;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace RatingAPI.Controllers
 {
@@ -140,31 +143,39 @@ namespace RatingAPI.Controllers
                         webResponse.CubeWeight = cubeWeight;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
 
+                        webResponse.ErrorMessages = "Either the origin postal code, destination postal code, or weight is out of range.";
+
                         re.WebResponses.Add(webResponse);
                         re.SaveChanges();
 
-                        return StatusCode(HttpStatusCode.NoContent);
+                        IHttpActionResult response;
+
+                        HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.NotFound);
+                        responseMessage.Content = new StringContent(JsonConvert.SerializeObject(webResponse), Encoding.UTF8, "application/json");
+                        response = ResponseMessage(responseMessage);
+
+                        return response;
+
                     }
                     else
                     {
-                        var shippingRate = rate.Rate1.Value * request.Weight;
-                        webResponse.Rate = shippingRate + GetAccessorialTotals(re, request, tariffGroup) + GetQuantityRate(quantityRate) + GetFuelRate(shippingRate, fuelRate) + GetSizeOverageCharge(re, tariffGroup, request.Dimensions);
-                        if (webResponse.Rate.HasValue)
-                        {
-                            webResponse.Rate = Math.Round(webResponse.Rate.Value, 2);
-                        }
+                        var shippingRate = (rate.Rate1.Value * request.Weight) + GetQuantityRate(quantityRate);
+                        var accessorialRate = GetAccessorialTotals(re, request, tariffGroup);
+                        var fuelRateCharge = GetFuelRate(shippingRate, fuelRate);
+                        var sizeOverageCharge = GetSizeOverageCharge(re, tariffGroup, request.Dimensions);
+                        webResponse.Rate = Math.Round(shippingRate.Value + accessorialRate + fuelRateCharge + sizeOverageCharge, 2);
                         webResponse.Dimensions = request.Dimensions;    
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
                         webResponse.Weight = originalWeight;
-                        if (webResponse.CubeWeight.HasValue)
-                        {
-                            webResponse.CubeWeight = Math.Round(webResponse.CubeWeight.Value, 2);
-                        }
+                        webResponse.CubeWeight = Math.Round(cubeWeight, 2);
                         webResponse.Timestamp = DateTime.Now;
-                        webResponse.Pieces = request.Pieces;
+                        webResponse.Pieces = request.Dimensions == null ? (request.Pieces.HasValue ? request.Pieces.Value : 0) : request.Dimensions.Length;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
+                        webResponse.FuelRate = Math.Round(fuelRateCharge, 2);
+                        webResponse.SizeSurchargeRate = Math.Round(sizeOverageCharge, 2);
+                        webResponse.AccessorialsRate = Math.Round(accessorialRate, 2);
 
                         re.WebResponses.Add(webResponse);
                         re.SaveChanges();

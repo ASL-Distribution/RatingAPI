@@ -31,9 +31,9 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TariffGroupID" Type="int" />
-    <Property Name="FuelRateFrom" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="FuelRateFrom" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="4" />
   </EntityType>
   <EntityType Name="GirthOverage">
     <Key>
@@ -103,7 +103,7 @@
     <Property Name="Description" Type="varchar" MaxLength="512" />
     <Property Name="ChargeByQuantity" Type="bit" />
     <Property Name="ChargeByWeight" Type="bit" />
-    <Property Name="FuelRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="FuelRate" Type="decimal" Precision="10" Scale="4" />
   </EntityType>
   <EntityType Name="UOM">
     <Key>
@@ -161,6 +161,10 @@
     <Property Name="ErrorMessages" Type="text" />
     <Property Name="CubeWeight" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Pieces" Type="int" />
+    <Property Name="FuelRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="AccessorialsRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SizeSurchargeRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="GirthRate" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Zones">
     <Key>

@@ -36,9 +36,9 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TariffGroupID" Type="int" />
-          <Property Name="FuelRateFrom" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="FuelRateFrom" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="FuelRateTo" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="PercentageRate" Type="decimal" Precision="10" Scale="4" />
         </EntityType>
         <EntityType Name="GirthOverage">
           <Key>
@@ -108,7 +108,7 @@
           <Property Name="Description" Type="varchar" MaxLength="512" />
           <Property Name="ChargeByQuantity" Type="bit" />
           <Property Name="ChargeByWeight" Type="bit" />
-          <Property Name="FuelRate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="FuelRate" Type="decimal" Precision="10" Scale="4" />
         </EntityType>
         <EntityType Name="UOM">
           <Key>
@@ -166,6 +166,10 @@
           <Property Name="ErrorMessages" Type="text" />
           <Property Name="CubeWeight" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Pieces" Type="int" />
+          <Property Name="FuelRate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AccessorialsRate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SizeSurchargeRate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="GirthRate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Zones">
           <Key>
@@ -215,11 +219,11 @@
           <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
           <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
           <EntitySet Name="QuantityRates" EntityType="ratingAPIModel.QuantityRate" />
-          <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
           <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
           <EntitySet Name="FuelRates" EntityType="ratingAPIModel.FuelRate" />
           <EntitySet Name="GirthOverages" EntityType="ratingAPIModel.GirthOverage" />
           <EntitySet Name="SizeSideOverages" EntityType="ratingAPIModel.SizeSideOverage" />
+          <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
         </EntityContainer>
         <EntityType Name="AccessorialRate">
           <Key>
@@ -336,23 +340,6 @@
           <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
-        <EntityType Name="WebRespons">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WebRequestID" Type="Int32" />
-          <Property Name="StatusCode" Type="Int32" />
-          <Property Name="Zone" Type="Int32" />
-          <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Milliseconds" Type="Int32" />
-          <Property Name="Timestamp" Type="DateTime" Precision="3" />
-          <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CubeWeight" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Pieces" Type="Int32" />
-        </EntityType>
         <EntityType Name="TariffGroup">
           <Key>
             <PropertyRef Name="ID" />
@@ -365,7 +352,7 @@
           <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="ChargeByQuantity" Type="Boolean" />
           <Property Name="ChargeByWeight" Type="Boolean" />
-          <Property Name="FuelRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="FuelRate" Type="Decimal" Precision="10" Scale="4" />
         </EntityType>
         <EntityType Name="FuelRate">
           <Key>
@@ -373,9 +360,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TariffGroupID" Type="Int32" />
-          <Property Name="FuelRateFrom" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="FuelRateTo" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="PercentageRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="FuelRateFrom" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="FuelRateTo" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="PercentageRate" Type="Decimal" Precision="10" Scale="4" />
         </EntityType>
         <EntityType Name="GirthOverage">
           <Key>
@@ -394,6 +381,27 @@
           <Property Name="TariffGroupID" Type="Int32" />
           <Property Name="AnySideOverInches" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Charge" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="WebRespons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebRequestID" Type="Int32" />
+          <Property Name="StatusCode" Type="Int32" />
+          <Property Name="Zone" Type="Int32" />
+          <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Milliseconds" Type="Int32" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="ErrorMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CubeWeight" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Pieces" Type="Int32" />
+          <Property Name="FuelRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AccessorialsRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SizeSurchargeRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="GirthRate" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -528,24 +536,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WebResponses">
-            <EntityTypeMapping TypeName="ratingAPIModel.WebRespons">
-              <MappingFragment StoreEntitySet="WebResponses">
-                <ScalarProperty Name="Pieces" ColumnName="Pieces" />
-                <ScalarProperty Name="CubeWeight" ColumnName="CubeWeight" />
-                <ScalarProperty Name="ErrorMessages" ColumnName="ErrorMessages" />
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="Zone" ColumnName="Zone" />
-                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
-                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TariffGroups">
             <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
               <MappingFragment StoreEntitySet="TariffGroups">
@@ -588,6 +578,28 @@
                 <ScalarProperty Name="Charge" ColumnName="Charge" />
                 <ScalarProperty Name="AnySideOverInches" ColumnName="AnySideOverInches" />
                 <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebResponses">
+            <EntityTypeMapping TypeName="ratingAPIModel.WebRespons">
+              <MappingFragment StoreEntitySet="WebResponses">
+                <ScalarProperty Name="GirthRate" ColumnName="GirthRate" />
+                <ScalarProperty Name="SizeSurchargeRate" ColumnName="SizeSurchargeRate" />
+                <ScalarProperty Name="AccessorialsRate" ColumnName="AccessorialsRate" />
+                <ScalarProperty Name="FuelRate" ColumnName="FuelRate" />
+                <ScalarProperty Name="Pieces" ColumnName="Pieces" />
+                <ScalarProperty Name="CubeWeight" ColumnName="CubeWeight" />
+                <ScalarProperty Name="ErrorMessages" ColumnName="ErrorMessages" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Milliseconds" ColumnName="Milliseconds" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
