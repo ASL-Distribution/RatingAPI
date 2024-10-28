@@ -159,11 +159,11 @@ namespace RatingAPI.Controllers
                     }
                     else
                     {
-                        var shippingRate = (rate.Rate1.Value * request.Weight) + GetQuantityRate(quantityRate);
+                        var shippingRate = (rate.Rate1.Value) + GetQuantityRate(quantityRate);
                         var accessorialRate = GetAccessorialTotals(re, request, tariffGroup);
                         var fuelRateCharge = GetFuelRate(shippingRate, fuelRate);
                         var sizeOverageCharge = GetSizeOverageCharge(re, tariffGroup, request.Dimensions);
-                        webResponse.Rate = Math.Round(shippingRate.Value + accessorialRate + fuelRateCharge + sizeOverageCharge, 2);
+                        webResponse.Rate = Math.Round(shippingRate + accessorialRate + fuelRateCharge + sizeOverageCharge, 2);
                         webResponse.Dimensions = request.Dimensions;    
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
