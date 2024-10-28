@@ -176,6 +176,7 @@ namespace RatingAPI.Controllers
                         webResponse.FuelRate = Math.Round(fuelRateCharge, 2);
                         webResponse.SizeSurchargeRate = Math.Round(sizeOverageCharge, 2);
                         webResponse.AccessorialsRate = Math.Round(accessorialRate, 2);
+                        webResponse.AccessorialCharges = GetAccesorialCharges(re, request, tariffGroup);
 
                         re.WebResponses.Add(webResponse);
                         re.SaveChanges();
@@ -196,6 +197,39 @@ namespace RatingAPI.Controllers
                 re.SaveChanges();
                 return Ok(webResponse);
             }
+        }
+
+        private AccessorialCharge[] GetAccesorialCharges(RatingAPIEntities re, Models.WebRequest request, TariffGroup tariffGroup)
+        {
+            decimal total = 0;
+
+            var accessorialCharges = new List<AccessorialCharge>();
+
+            if (request.Accessorials != null)
+            {
+                foreach (var accessorial in request.Accessorials)
+                {
+                    var accessorialRate = re.AccessorialRates
+                                                .FirstOrDefault(m => m.TariffGroupID == tariffGroup.ID
+                                                                        && m.Name == accessorial.AccessorialName);
+
+                    if (accessorialRate != null)
+                    {
+                        AccessorialCharge ac = new AccessorialCharge();
+                        ac.Name = accessorialRate.Name;
+                        ac.Charge = accessorialRate.Rate.Value * accessorial.Amount.Value;
+
+                        accessorialCharges.Add(ac);
+                    }
+                }
+            }
+
+            if (accessorialCharges.Count != 0)
+            {
+                return accessorialCharges.ToArray();
+            }
+
+            return null;
         }
 
         private decimal GetSizeOverageCharge(RatingAPIEntities re, TariffGroup tariffGroup, WebRequestDimension[] dimensions)

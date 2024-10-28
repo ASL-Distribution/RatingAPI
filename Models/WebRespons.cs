@@ -31,5 +31,6 @@ namespace RatingAPI.Models
         public Nullable<decimal> SizeSurchargeRate { get; set; }
         public Nullable<decimal> GirthRate { get; set; }
         public WebRequestDimension[] Dimensions { get; set; }
+        public AccessorialCharge[] AccessorialCharges { get; set; }
     }
 }

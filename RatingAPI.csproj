@@ -202,6 +202,7 @@
     <Compile Include="Models\Accessorial.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccessorialCharge.cs" />
     <Compile Include="Models\AccessorialRate.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
