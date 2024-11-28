@@ -30,6 +30,9 @@ namespace RatingAPI.Models
         public Nullable<decimal> AccessorialsRate { get; set; }
         public Nullable<decimal> SizeSurchargeRate { get; set; }
         public Nullable<decimal> GirthRate { get; set; }
+        public Nullable<decimal> ShippingRate { get; set; }
+        public Nullable<decimal> ActualWeight { get; set; }
+        public Nullable<decimal> RatedWeight { get; set; }
         public WebRequestDimension[] Dimensions { get; set; }
         public AccessorialCharge[] AccessorialCharges { get; set; }
     }

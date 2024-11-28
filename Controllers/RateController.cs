@@ -79,18 +79,18 @@ namespace RatingAPI.Controllers
 
                     Rate rate = null;
 
-                    decimal cubeWeight = 0;
-                    var originalWeight = request.Weight;
+                    decimal weight = 0;
+                    decimal actualWeight = 0;
 
                     if (request.Dimensions != null
                         && request.Dimensions.Length != 0)
                     {
                         foreach (var dimension in request.Dimensions)
                         {
-                            cubeWeight += (dimension.Length.Value * dimension.Width.Value * dimension.Height.Value) / tariffGroup.DimensionFactor.Value;
+                            var cubeWeight = (dimension.Length.Value * dimension.Width.Value * dimension.Height.Value) / tariffGroup.DimensionFactor.Value;
+                            weight += cubeWeight > dimension.Weight ? cubeWeight : dimension.Weight.Value;
+                            actualWeight += dimension.Weight.Value;
                         }
-
-                        request.Weight = request.Weight > cubeWeight ? request.Weight : cubeWeight;
                     }
 
                     if (matchedZone != null
@@ -101,11 +101,11 @@ namespace RatingAPI.Controllers
                                     .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
                                                             && m.ZoneName == matchedZone.Zone.Name
                                                             && m.Service.ToLower() == request.Service.ToLower()
-                                                            && ((request.Weight >= m.WeightFrom
-                                                                && request.Weight < m.WeightTo)
+                                                            && ((weight >= m.WeightFrom
+                                                                && weight < m.WeightTo)
                                                                 ||
-                                                                (request.Weight == m.WeightFrom
-                                                                || request.Weight == m.WeightTo))
+                                                                (weight == m.WeightFrom
+                                                                || weight == m.WeightTo))
                                                             );
                     }
 
@@ -139,9 +139,10 @@ namespace RatingAPI.Controllers
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Dimensions = request.Dimensions;
                         webResponse.Service = request.Service;
-                        webResponse.Weight = originalWeight;
-                        webResponse.CubeWeight = cubeWeight;
+                        webResponse.RatedWeight = weight;
+                        webResponse.ActualWeight = actualWeight;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
+                        webResponse.Pieces = request.Dimensions.Length;
 
                         webResponse.ErrorMessages = "Either the origin postal code, destination postal code, or weight is out of range.";
 
@@ -162,19 +163,21 @@ namespace RatingAPI.Controllers
                         var shippingRate = (rate.Rate1.Value) + GetQuantityRate(quantityRate);
                         var accessorialRate = GetAccessorialTotals(re, request, tariffGroup);
                         var fuelRateCharge = GetFuelRate(shippingRate, fuelRate);
-                        var sizeOverageCharge = GetSizeOverageCharge(re, tariffGroup, request.Dimensions);
-                        webResponse.Rate = Math.Round(shippingRate + accessorialRate + fuelRateCharge + sizeOverageCharge, 2);
-                        webResponse.Dimensions = request.Dimensions;    
+                        var sizeAndGirthCharges = GetSizeOverageCharge(re, tariffGroup, request.Dimensions);
+                        webResponse.Rate = Math.Round(shippingRate + accessorialRate + fuelRateCharge + sizeAndGirthCharges.SizeCharges + sizeAndGirthCharges.GirthCharges, 2);
+                        webResponse.ShippingRate = Math.Round(shippingRate, 2);
+                        webResponse.Dimensions = request.Dimensions;
+                        webResponse.ActualWeight = actualWeight;
+                        webResponse.RatedWeight = weight;
                         webResponse.Service = request.Service;
                         webResponse.Zone = rate.ID;
-                        webResponse.Weight = originalWeight;
-                        webResponse.CubeWeight = Math.Round(cubeWeight, 2);
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Pieces = request.Dimensions == null ? (request.Pieces.HasValue ? request.Pieces.Value : 0) : request.Dimensions.Length;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
                         webResponse.FuelRate = Math.Round(fuelRateCharge, 2);
-                        webResponse.SizeSurchargeRate = Math.Round(sizeOverageCharge, 2);
+                        webResponse.SizeSurchargeRate = Math.Round(sizeAndGirthCharges.SizeCharges, 2);
+                        webResponse.GirthRate = Math.Round(sizeAndGirthCharges.GirthCharges, 2);
                         webResponse.AccessorialsRate = Math.Round(accessorialRate, 2);
                         webResponse.AccessorialCharges = GetAccesorialCharges(re, request, tariffGroup);
 
@@ -199,42 +202,9 @@ namespace RatingAPI.Controllers
             }
         }
 
-        private AccessorialCharge[] GetAccesorialCharges(RatingAPIEntities re, Models.WebRequest request, TariffGroup tariffGroup)
+        private SizeAndGirthCharges GetSizeOverageCharge(RatingAPIEntities re, TariffGroup tariffGroup, WebRequestDimension[] dimensions)
         {
-            decimal total = 0;
-
-            var accessorialCharges = new List<AccessorialCharge>();
-
-            if (request.Accessorials != null)
-            {
-                foreach (var accessorial in request.Accessorials)
-                {
-                    var accessorialRate = re.AccessorialRates
-                                                .FirstOrDefault(m => m.TariffGroupID == tariffGroup.ID
-                                                                        && m.Name == accessorial.AccessorialName);
-
-                    if (accessorialRate != null)
-                    {
-                        AccessorialCharge ac = new AccessorialCharge();
-                        ac.Name = accessorialRate.Name;
-                        ac.Charge = accessorialRate.Rate.Value * accessorial.Amount.Value;
-
-                        accessorialCharges.Add(ac);
-                    }
-                }
-            }
-
-            if (accessorialCharges.Count != 0)
-            {
-                return accessorialCharges.ToArray();
-            }
-
-            return null;
-        }
-
-        private decimal GetSizeOverageCharge(RatingAPIEntities re, TariffGroup tariffGroup, WebRequestDimension[] dimensions)
-        {
-            decimal charge = 0;
+            var sizeAndGirthCharges = new SizeAndGirthCharges();
 
             if (dimensions != null)
             {
@@ -287,12 +257,52 @@ namespace RatingAPI.Controllers
                             }
                         }
 
-                        charge += currentGirthCharge > currentSizeCharge ? currentGirthCharge : currentSizeCharge;
+                        if (currentSizeCharge > currentGirthCharge)
+                        {
+                            sizeAndGirthCharges.SizeCharges += currentSizeCharge;
+                        }
+                        else
+                        {
+                            sizeAndGirthCharges.GirthCharges += currentGirthCharge;
+                        }
                     }
                 }
             }
 
-            return charge;
+            return sizeAndGirthCharges;
+        }
+
+        private AccessorialCharge[] GetAccesorialCharges(RatingAPIEntities re, Models.WebRequest request, TariffGroup tariffGroup)
+        {
+            decimal total = 0;
+
+            var accessorialCharges = new List<AccessorialCharge>();
+
+            if (request.Accessorials != null)
+            {
+                foreach (var accessorial in request.Accessorials)
+                {
+                    var accessorialRate = re.AccessorialRates
+                                                .FirstOrDefault(m => m.TariffGroupID == tariffGroup.ID
+                                                                        && m.Name == accessorial.AccessorialName);
+
+                    if (accessorialRate != null)
+                    {
+                        AccessorialCharge ac = new AccessorialCharge();
+                        ac.Name = accessorialRate.Name;
+                        ac.Charge = accessorialRate.Rate.Value * accessorial.Amount.Value;
+
+                        accessorialCharges.Add(ac);
+                    }
+                }
+            }
+
+            if (accessorialCharges.Count != 0)
+            {
+                return accessorialCharges.ToArray();
+            }
+
+            return null;
         }
 
         private decimal GetFuelRate(decimal? shippingRate, FuelRate fuelRate)

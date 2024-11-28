@@ -11,12 +11,12 @@
     <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
     <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
     <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
-    <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
     <EntitySet Name="QuantityRates" EntityType="ratingAPIModel.QuantityRate" />
     <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
     <EntitySet Name="FuelRates" EntityType="ratingAPIModel.FuelRate" />
     <EntitySet Name="GirthOverages" EntityType="ratingAPIModel.GirthOverage" />
     <EntitySet Name="SizeSideOverages" EntityType="ratingAPIModel.SizeSideOverage" />
+    <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
   </EntityContainer>
   <EntityType Name="AccessorialRate">
@@ -96,6 +96,7 @@
     <Property Name="Length" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Height" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Zone">
     <Key>
@@ -108,20 +109,6 @@
     <Property Name="OriginToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="DestinationFromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="DestinationToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="WebRequest">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Timestamp" Type="DateTime" Precision="3" />
-    <Property Name="APIUserID" Type="Int32" />
-    <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="AuthenticationToken" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Pieces" Type="Int32" />
   </EntityType>
   <EntityType Name="QuantityRate">
     <Key>
@@ -176,6 +163,19 @@
     <Property Name="AnySideOverInches" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Charge" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
+  <EntityType Name="WebRequest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Timestamp" Type="DateTime" Precision="3" />
+    <Property Name="APIUserID" Type="Int32" />
+    <Property Name="Service" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="AuthenticationToken" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="FromPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="ToPostal" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Pieces" Type="Int32" />
+  </EntityType>
   <EntityType Name="WebRespons">
     <Key>
       <PropertyRef Name="ID" />
@@ -196,5 +196,8 @@
     <Property Name="AccessorialsRate" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="SizeSurchargeRate" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="GirthRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ShippingRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ActualWeight" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="RatedWeight" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
 </Schema>

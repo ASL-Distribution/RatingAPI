@@ -270,6 +270,7 @@
     <Compile Include="Models\Service.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SizeAndGirthCharges.cs" />
     <Compile Include="Models\SizeSideOverage.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>

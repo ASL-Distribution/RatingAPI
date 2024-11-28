@@ -80,6 +80,7 @@
     <EntitySetMapping Name="WebRequestDimensions">
       <EntityTypeMapping TypeName="ratingAPIModel.WebRequestDimension">
         <MappingFragment StoreEntitySet="WebRequestDimensions">
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
           <ScalarProperty Name="Height" ColumnName="Height" />
           <ScalarProperty Name="Width" ColumnName="Width" />
           <ScalarProperty Name="Length" ColumnName="Length" />
@@ -97,21 +98,6 @@
           <ScalarProperty Name="OriginFromPostal" ColumnName="OriginFromPostal" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="WebRequests">
-      <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
-        <MappingFragment StoreEntitySet="WebRequests">
-          <ScalarProperty Name="Pieces" ColumnName="Pieces" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="ToPostal" ColumnName="ToPostal" />
-          <ScalarProperty Name="FromPostal" ColumnName="FromPostal" />
-          <ScalarProperty Name="AuthenticationToken" ColumnName="AuthenticationToken" />
-          <ScalarProperty Name="Service" ColumnName="Service" />
-          <ScalarProperty Name="APIUserID" ColumnName="APIUserID" />
-          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -174,9 +160,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="WebRequests">
+      <EntityTypeMapping TypeName="ratingAPIModel.WebRequest">
+        <MappingFragment StoreEntitySet="WebRequests">
+          <ScalarProperty Name="Pieces" ColumnName="Pieces" />
+          <ScalarProperty Name="ToPostal" ColumnName="ToPostal" />
+          <ScalarProperty Name="FromPostal" ColumnName="FromPostal" />
+          <ScalarProperty Name="AuthenticationToken" ColumnName="AuthenticationToken" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+          <ScalarProperty Name="APIUserID" ColumnName="APIUserID" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="WebResponses">
       <EntityTypeMapping TypeName="ratingAPIModel.WebRespons">
         <MappingFragment StoreEntitySet="WebResponses">
+          <ScalarProperty Name="RatedWeight" ColumnName="RatedWeight" />
+          <ScalarProperty Name="ActualWeight" ColumnName="ActualWeight" />
+          <ScalarProperty Name="ShippingRate" ColumnName="ShippingRate" />
           <ScalarProperty Name="GirthRate" ColumnName="GirthRate" />
           <ScalarProperty Name="SizeSurchargeRate" ColumnName="SizeSurchargeRate" />
           <ScalarProperty Name="AccessorialsRate" ColumnName="AccessorialsRate" />
