@@ -170,7 +170,7 @@ namespace RatingAPI.Controllers
                         webResponse.ActualWeight = actualWeight;
                         webResponse.RatedWeight = weight;
                         webResponse.Service = request.Service;
-                        webResponse.Zone = rate.ID;
+                        webResponse.Zone = matchedZone.Zone.ID;
                         webResponse.Timestamp = DateTime.Now;
                         webResponse.Pieces = request.Dimensions == null ? (request.Pieces.HasValue ? request.Pieces.Value : 0) : request.Dimensions.Length;
                         webResponse.Milliseconds = (int)(DateTime.Now - request.Timestamp.Value).TotalMilliseconds;
