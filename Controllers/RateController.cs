@@ -37,6 +37,9 @@ namespace RatingAPI.Controllers
             var webResponse = new Models.WebRespons();
             webResponse.WebRequestID = request.ID;
 
+            request.FromPostal = request.FromPostal.Trim().Replace(" ", "");
+            request.ToPostal = request.ToPostal.Trim().Replace(" ", "");
+
             try
             {
                 //var start = DateTime.Now;
