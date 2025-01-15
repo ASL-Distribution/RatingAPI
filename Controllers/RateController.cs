@@ -60,17 +60,17 @@ namespace RatingAPI.Controllers
                     var zones = re.Zones
                                     .Where(m => m.TariffGroupID == tariffGroup.ID
                                                 &&
-                                                    (request.FromPostal.CompareTo(m.OriginFromPostal) == 0
-                                                    || request.FromPostal.CompareTo(m.OriginFromPostal) == 1)
-                                                &&
-                                                    (request.FromPostal.CompareTo(m.OriginToPostal) == 0
-                                                    || request.FromPostal.CompareTo(m.OriginToPostal) == -1)
-                                                &&
-                                                    (request.ToPostal.CompareTo(m.DestinationFromPostal) == 0
-                                                    || request.ToPostal.CompareTo(m.DestinationFromPostal) == 1)
-                                                &&
-                                                    (request.ToPostal.CompareTo(m.DestinationToPostal) == 0
-                                                    || request.ToPostal.CompareTo(m.DestinationToPostal) == -1))
+                                                (request.FromPostal.CompareTo(m.OriginFromPostal.Trim().Replace(" ", "")) == 0
+                                                || request.FromPostal.CompareTo(m.OriginFromPostal.Trim().Replace(" ", "")) == 1)
+                                            &&
+                                                (request.FromPostal.CompareTo(m.OriginToPostal.Trim().Replace(" ", "")) == 0
+                                                || request.FromPostal.CompareTo(m.OriginToPostal.Trim().Replace(" ", "")) == -1)
+                                            &&
+                                                (request.ToPostal.CompareTo(m.DestinationFromPostal.Trim().Replace(" ", "")) == 0
+                                                || request.ToPostal.CompareTo(m.DestinationFromPostal.Trim().Replace(" ", "")) == 1)
+                                            &&
+                                                (request.ToPostal.CompareTo(m.DestinationToPostal.Trim().Replace(" ", "")) == 0
+                                                || request.ToPostal.CompareTo(m.DestinationToPostal.Trim().Replace(" ", "")) == -1))
                                     .ToList();
 
                     var processedZones = GetProcessedZones(zones, request);
