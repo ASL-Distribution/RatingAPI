@@ -105,10 +105,7 @@ namespace RatingAPI.Controllers
                                                             && m.ZoneName == matchedZone.Zone.Name
                                                             && m.Service.ToLower() == request.Service.ToLower()
                                                             && ((weight >= m.WeightFrom
-                                                                && weight < m.WeightTo)
-                                                                ||
-                                                                (weight == m.WeightFrom
-                                                                || weight == m.WeightTo))
+                                                                && weight < m.WeightTo))
                                                             );
                     }
 
