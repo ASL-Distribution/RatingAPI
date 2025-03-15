@@ -16,5 +16,7 @@ namespace RatingAPI.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public Nullable<bool> ChargeByWeight { get; set; }
+        public Nullable<bool> ChargeByQuantity { get; set; }
     }
 }

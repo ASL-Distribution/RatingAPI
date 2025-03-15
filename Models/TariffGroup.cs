@@ -20,8 +20,7 @@ namespace RatingAPI.Models
         public Nullable<System.DateTime> Modified { get; set; }
         public Nullable<decimal> DimensionFactor { get; set; }
         public string Description { get; set; }
-        public Nullable<bool> ChargeByQuantity { get; set; }
-        public Nullable<bool> ChargeByWeight { get; set; }
         public Nullable<decimal> FuelRate { get; set; }
+        public string Origin { get; set; }
     }
 }

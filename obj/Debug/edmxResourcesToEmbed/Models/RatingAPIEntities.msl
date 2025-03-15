@@ -51,14 +51,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Services">
-      <EntityTypeMapping TypeName="ratingAPIModel.Service">
-        <MappingFragment StoreEntitySet="Services">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UOMs">
       <EntityTypeMapping TypeName="ratingAPIModel.UOM">
         <MappingFragment StoreEntitySet="UOM">
@@ -114,21 +106,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TariffGroups">
-      <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
-        <MappingFragment StoreEntitySet="TariffGroups">
-          <ScalarProperty Name="FuelRate" ColumnName="FuelRate" />
-          <ScalarProperty Name="ChargeByWeight" ColumnName="ChargeByWeight" />
-          <ScalarProperty Name="ChargeByQuantity" ColumnName="ChargeByQuantity" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
-          <ScalarProperty Name="Modified" ColumnName="Modified" />
-          <ScalarProperty Name="Created" ColumnName="Created" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="FuelRates">
       <EntityTypeMapping TypeName="ratingAPIModel.FuelRate">
         <MappingFragment StoreEntitySet="FuelRates">
@@ -153,6 +130,7 @@
     <EntitySetMapping Name="SizeSideOverages">
       <EntityTypeMapping TypeName="ratingAPIModel.SizeSideOverage">
         <MappingFragment StoreEntitySet="SizeSideOverage">
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Charge" ColumnName="Charge" />
           <ScalarProperty Name="AnySideOverInches" ColumnName="AnySideOverInches" />
           <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
@@ -195,6 +173,30 @@
           <ScalarProperty Name="Zone" ColumnName="Zone" />
           <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
           <ScalarProperty Name="WebRequestID" ColumnName="WebRequestID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="ratingAPIModel.Service">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="ChargeByQuantity" ColumnName="ChargeByQuantity" />
+          <ScalarProperty Name="ChargeByWeight" ColumnName="ChargeByWeight" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TariffGroups">
+      <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
+        <MappingFragment StoreEntitySet="TariffGroups">
+          <ScalarProperty Name="Origin" ColumnName="Origin" />
+          <ScalarProperty Name="FuelRate" ColumnName="FuelRate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DimensionFactor" ColumnName="DimensionFactor" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

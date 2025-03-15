@@ -51,11 +51,29 @@ namespace RatingAPI.Controllers
                 {
                     request.APIUserID = authResult.APIUser.id;
 
-                    var apiUserGroup = re.APIUserTariffGroups
-                                            .FirstOrDefault(m => m.APIUserName == authResult.APIUser.Name);
-
                     var tariffGroup = re.TariffGroups
-                                        .FirstOrDefault(m => m.Name == apiUserGroup.TariffGroupName);
+                                            .FirstOrDefault(m => m.ID == request.ID);
+
+                    if (tariffGroup == null)
+                    {
+                        webResponse.Timestamp = DateTime.Now;
+                        webResponse.Dimensions = request.Dimensions;
+                        webResponse.Service = request.Service;
+                        webResponse.StatusCode = (int)HttpStatusCode.NoContent;
+                        webResponse.Pieces = request.Dimensions.Length;
+                        webResponse.ErrorMessages = "Tariff Group ID incorret.";
+
+                        re.WebResponses.Add(webResponse);
+                        re.SaveChanges();
+
+                        IHttpActionResult response;
+
+                        HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.NotFound);
+                        responseMessage.Content = new StringContent(JsonConvert.SerializeObject(webResponse), Encoding.UTF8, "application/json");
+                        response = ResponseMessage(responseMessage);
+
+                        return response;
+                    }
 
                     var zones = re.Zones
                                     .Where(m => m.TariffGroupID == tariffGroup.ID
@@ -96,9 +114,35 @@ namespace RatingAPI.Controllers
                         }
                     }
 
+                    var service = re.Services
+                                        .FirstOrDefault(m => m.Name.ToLower().Trim() == request.Service.ToLower().Trim());
+
+                    if (service == null)
+                    {
+                        webResponse.Timestamp = DateTime.Now;
+                        webResponse.Dimensions = request.Dimensions;
+                        webResponse.Service = request.Service;
+                        webResponse.RatedWeight = weight;
+                        webResponse.ActualWeight = actualWeight;
+                        webResponse.StatusCode = (int)HttpStatusCode.NoContent;
+                        webResponse.Pieces = request.Dimensions.Length;
+                        webResponse.ErrorMessages = "Service is not set correctly.";
+
+                        re.WebResponses.Add(webResponse);
+                        re.SaveChanges();
+
+                        IHttpActionResult response;
+
+                        HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.NotFound);
+                        responseMessage.Content = new StringContent(JsonConvert.SerializeObject(webResponse), Encoding.UTF8, "application/json");
+                        response = ResponseMessage(responseMessage);
+
+                        return response;
+                    }
+
                     if (matchedZone != null
-                        && tariffGroup.ChargeByWeight.HasValue
-                        && tariffGroup.ChargeByWeight.Value)
+                        && service.ChargeByWeight.HasValue
+                        && service.ChargeByWeight.Value)
                     {
                         rate = re.Rates
                                     .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
@@ -112,8 +156,8 @@ namespace RatingAPI.Controllers
                     QuantityRate quantityRate = null;
 
                     if (matchedZone != null
-                        && tariffGroup.ChargeByQuantity.HasValue
-                        && tariffGroup.ChargeByQuantity.Value)
+                        && service.ChargeByQuantity.HasValue
+                        && service.ChargeByQuantity.Value)
                     {
                         quantityRate = re.QuantityRates
                                             .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
@@ -143,7 +187,6 @@ namespace RatingAPI.Controllers
                         webResponse.ActualWeight = actualWeight;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
                         webResponse.Pieces = request.Dimensions.Length;
-
                         webResponse.ErrorMessages = "Either the origin postal code, destination postal code, or weight is out of range.";
 
                         re.WebResponses.Add(webResponse);
@@ -156,7 +199,6 @@ namespace RatingAPI.Controllers
                         response = ResponseMessage(responseMessage);
 
                         return response;
-
                     }
                     else
                     {

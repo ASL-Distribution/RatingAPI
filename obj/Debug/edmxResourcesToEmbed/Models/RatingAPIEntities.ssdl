@@ -81,6 +81,8 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="64" />
+    <Property Name="ChargeByWeight" Type="bit" />
+    <Property Name="ChargeByQuantity" Type="bit" />
   </EntityType>
   <EntityType Name="SizeSideOverage">
     <Key>
@@ -90,6 +92,7 @@
     <Property Name="TariffGroupID" Type="int" />
     <Property Name="AnySideOverInches" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Charge" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Description" Type="varchar" MaxLength="1024" />
   </EntityType>
   <EntityType Name="TariffGroups">
     <Key>
@@ -101,9 +104,8 @@
     <Property Name="Modified" Type="datetime" />
     <Property Name="DimensionFactor" Type="decimal" Precision="6" Scale="2" />
     <Property Name="Description" Type="varchar" MaxLength="512" />
-    <Property Name="ChargeByQuantity" Type="bit" />
-    <Property Name="ChargeByWeight" Type="bit" />
     <Property Name="FuelRate" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="Origin" Type="varchar" MaxLength="16" />
   </EntityType>
   <EntityType Name="UOM">
     <Key>

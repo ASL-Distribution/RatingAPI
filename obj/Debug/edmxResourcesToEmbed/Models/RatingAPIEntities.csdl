@@ -6,18 +6,18 @@
     <EntitySet Name="APIUserTariffGroups" EntityType="ratingAPIModel.APIUserTariffGroups" />
     <EntitySet Name="Logs" EntityType="ratingAPIModel.Log" />
     <EntitySet Name="Rates" EntityType="ratingAPIModel.Rate" />
-    <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
     <EntitySet Name="UOMs" EntityType="ratingAPIModel.UOM" />
     <EntitySet Name="WebRequestAccessorials" EntityType="ratingAPIModel.WebRequestAccessorial" />
     <EntitySet Name="WebRequestDimensions" EntityType="ratingAPIModel.WebRequestDimension" />
     <EntitySet Name="Zones" EntityType="ratingAPIModel.Zone" />
     <EntitySet Name="QuantityRates" EntityType="ratingAPIModel.QuantityRate" />
-    <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
     <EntitySet Name="FuelRates" EntityType="ratingAPIModel.FuelRate" />
     <EntitySet Name="GirthOverages" EntityType="ratingAPIModel.GirthOverage" />
     <EntitySet Name="SizeSideOverages" EntityType="ratingAPIModel.SizeSideOverage" />
     <EntitySet Name="WebRequests" EntityType="ratingAPIModel.WebRequest" />
     <EntitySet Name="WebResponses" EntityType="ratingAPIModel.WebRespons" />
+    <EntitySet Name="Services" EntityType="ratingAPIModel.Service" />
+    <EntitySet Name="TariffGroups" EntityType="ratingAPIModel.TariffGroup" />
   </EntityContainer>
   <EntityType Name="AccessorialRate">
     <Key>
@@ -63,13 +63,6 @@
     <Property Name="WeightFrom" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="WeightTo" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Rate1" Type="Decimal" Precision="10" Scale="2" />
-  </EntityType>
-  <EntityType Name="Service">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="UOM">
     <Key>
@@ -121,20 +114,6 @@
     <Property Name="ZoneName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
-  <EntityType Name="TariffGroup">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <Property Name="Created" Type="DateTime" Precision="3" />
-    <Property Name="Modified" Type="DateTime" Precision="3" />
-    <Property Name="DimensionFactor" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-    <Property Name="ChargeByQuantity" Type="Boolean" />
-    <Property Name="ChargeByWeight" Type="Boolean" />
-    <Property Name="FuelRate" Type="Decimal" Precision="10" Scale="4" />
-  </EntityType>
   <EntityType Name="FuelRate">
     <Key>
       <PropertyRef Name="ID" />
@@ -162,6 +141,7 @@
     <Property Name="TariffGroupID" Type="Int32" />
     <Property Name="AnySideOverInches" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Charge" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="WebRequest">
     <Key>
@@ -199,5 +179,27 @@
     <Property Name="ShippingRate" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="ActualWeight" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="RatedWeight" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="ChargeByWeight" Type="Boolean" />
+    <Property Name="ChargeByQuantity" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TariffGroup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Created" Type="DateTime" Precision="3" />
+    <Property Name="Modified" Type="DateTime" Precision="3" />
+    <Property Name="DimensionFactor" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Name="FuelRate" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="Origin" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

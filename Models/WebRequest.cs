@@ -17,6 +17,7 @@ namespace RatingAPI.Models
         public int ID { get; set; }
         public Nullable<System.DateTime> Timestamp { get; set; }
         public Nullable<int> APIUserID { get; set; }
+        public Nullable<int> TariffGroupID { get; set; }
         public string Service { get; set; }
         public string AuthenticationToken { get; set; }
         public string FromPostal { get; set; }

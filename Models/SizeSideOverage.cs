@@ -18,5 +18,6 @@ namespace RatingAPI.Models
         public Nullable<int> TariffGroupID { get; set; }
         public Nullable<decimal> AnySideOverInches { get; set; }
         public Nullable<decimal> Charge { get; set; }
+        public string Description { get; set; }
     }
 }
