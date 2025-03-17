@@ -52,7 +52,7 @@ namespace RatingAPI.Controllers
                     request.APIUserID = authResult.APIUser.id;
 
                     var tariffGroup = re.TariffGroups
-                                            .FirstOrDefault(m => m.ID == request.ID);
+                                            .FirstOrDefault(m => m.ID == request.TariffGroupID);
 
                     if (tariffGroup == null)
                     {
