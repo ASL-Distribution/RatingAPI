@@ -163,7 +163,8 @@ namespace RatingAPI.Controllers
                                             .FirstOrDefault(m =>    m.TariffGroupID == tariffGroup.ID
                                                                     && m.QuantityFrom <= request.Pieces
                                                                     && m.QuantityTo >= request.Pieces
-                                                                    && m.ZoneName == matchedZone.Zone.Name);
+                                                                    && m.ZoneName == matchedZone.Zone.Name
+                                                                    && m.Service.ToLower() == request.Service.ToLower());
                     }
 
                     FuelRate fuelRate = null;

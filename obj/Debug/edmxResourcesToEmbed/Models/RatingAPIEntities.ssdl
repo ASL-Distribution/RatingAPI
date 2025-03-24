@@ -58,6 +58,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TariffGroupID" Type="int" />
+    <Property Name="Service" Type="varchar" MaxLength="64" />
     <Property Name="QuantityFrom" Type="int" />
     <Property Name="QuantityTo" Type="int" />
     <Property Name="ZoneName" Type="varchar" MaxLength="32" />
@@ -93,6 +94,16 @@
     <Property Name="AnySideOverInches" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Charge" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Description" Type="varchar" MaxLength="1024" />
+  </EntityType>
+  <EntityType Name="TariffGroupFuelRatesHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="32" />
+    <Property Name="Timestamp" Type="datetime" />
+    <Property Name="TariffGroupID" Type="int" />
+    <Property Name="FuelRate" Type="decimal" Precision="10" Scale="4" />
   </EntityType>
   <EntityType Name="TariffGroups">
     <Key>
@@ -194,6 +205,7 @@
     <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SizeSideOverage" EntityType="Self.SizeSideOverage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TariffGroupFuelRatesHistory" EntityType="Self.TariffGroupFuelRatesHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TariffGroups" EntityType="Self.TariffGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebRequestAccessorials" EntityType="Self.WebRequestAccessorials" Schema="dbo" store:Type="Tables" />

@@ -277,6 +277,9 @@
     <Compile Include="Models\TariffGroup.cs">
       <DependentUpon>RatingAPIEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TariffGroupFuelRatesHistory.cs">
+      <DependentUpon>RatingAPIEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TimedNotification.cs">
       <DependentUpon>ReportingEntities.tt</DependentUpon>
     </Compile>

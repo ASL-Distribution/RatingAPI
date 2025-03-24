@@ -94,34 +94,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="QuantityRates">
-      <EntityTypeMapping TypeName="ratingAPIModel.QuantityRate">
-        <MappingFragment StoreEntitySet="QuantityRates">
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
-          <ScalarProperty Name="QuantityTo" ColumnName="QuantityTo" />
-          <ScalarProperty Name="QuantityFrom" ColumnName="QuantityFrom" />
-          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="FuelRates">
       <EntityTypeMapping TypeName="ratingAPIModel.FuelRate">
         <MappingFragment StoreEntitySet="FuelRates">
           <ScalarProperty Name="PercentageRate" ColumnName="PercentageRate" />
           <ScalarProperty Name="FuelRateTo" ColumnName="FuelRateTo" />
           <ScalarProperty Name="FuelRateFrom" ColumnName="FuelRateFrom" />
-          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GirthOverages">
-      <EntityTypeMapping TypeName="ratingAPIModel.GirthOverage">
-        <MappingFragment StoreEntitySet="GirthOverage">
-          <ScalarProperty Name="Charge" ColumnName="Charge" />
-          <ScalarProperty Name="GirthOverInches" ColumnName="GirthOverInches" />
           <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -177,16 +155,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Services">
-      <EntityTypeMapping TypeName="ratingAPIModel.Service">
-        <MappingFragment StoreEntitySet="Services">
-          <ScalarProperty Name="ChargeByQuantity" ColumnName="ChargeByQuantity" />
-          <ScalarProperty Name="ChargeByWeight" ColumnName="ChargeByWeight" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TariffGroups">
       <EntityTypeMapping TypeName="ratingAPIModel.TariffGroup">
         <MappingFragment StoreEntitySet="TariffGroups">
@@ -197,6 +165,50 @@
           <ScalarProperty Name="Modified" ColumnName="Modified" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuantityRates">
+      <EntityTypeMapping TypeName="ratingAPIModel.QuantityRate">
+        <MappingFragment StoreEntitySet="QuantityRates">
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+          <ScalarProperty Name="QuantityTo" ColumnName="QuantityTo" />
+          <ScalarProperty Name="QuantityFrom" ColumnName="QuantityFrom" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GirthOverages">
+      <EntityTypeMapping TypeName="ratingAPIModel.GirthOverage">
+        <MappingFragment StoreEntitySet="GirthOverage">
+          <ScalarProperty Name="Charge" ColumnName="Charge" />
+          <ScalarProperty Name="GirthOverInches" ColumnName="GirthOverInches" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="ratingAPIModel.Service">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="ChargeByQuantity" ColumnName="ChargeByQuantity" />
+          <ScalarProperty Name="ChargeByWeight" ColumnName="ChargeByWeight" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TariffGroupFuelRatesHistories">
+      <EntityTypeMapping TypeName="ratingAPIModel.TariffGroupFuelRatesHistory">
+        <MappingFragment StoreEntitySet="TariffGroupFuelRatesHistory">
+          <ScalarProperty Name="FuelRate" ColumnName="FuelRate" />
+          <ScalarProperty Name="TariffGroupID" ColumnName="TariffGroupID" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
