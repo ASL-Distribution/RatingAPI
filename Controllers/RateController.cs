@@ -126,7 +126,34 @@ namespace RatingAPI.Controllers
                         webResponse.ActualWeight = actualWeight;
                         webResponse.StatusCode = (int)HttpStatusCode.NoContent;
                         webResponse.Pieces = request.Dimensions.Length;
-                        webResponse.ErrorMessages = "Service is not set correctly.";
+                        webResponse.ErrorMessages = "This service does not exist.";
+
+                        re.WebResponses.Add(webResponse);
+                        re.SaveChanges();
+
+                        IHttpActionResult response;
+
+                        HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.NotFound);
+                        responseMessage.Content = new StringContent(JsonConvert.SerializeObject(webResponse), Encoding.UTF8, "application/json");
+                        response = ResponseMessage(responseMessage);
+
+                        return response;
+                    }
+
+                    var serviceRate = re.Rates
+                                        .FirstOrDefault(m => m.Service.ToLower().Trim() == request.Service.ToLower().Trim()
+                                                                && m.TariffGroupID == tariffGroup.ID);
+
+                    if (serviceRate == null)
+                    {
+                        webResponse.Timestamp = DateTime.Now;
+                        webResponse.Dimensions = request.Dimensions;
+                        webResponse.Service = request.Service;
+                        webResponse.RatedWeight = weight;
+                        webResponse.ActualWeight = actualWeight;
+                        webResponse.StatusCode = (int)HttpStatusCode.NoContent;
+                        webResponse.Pieces = request.Dimensions.Length;
+                        webResponse.ErrorMessages = "This service is not assigned to this tariff group.";
 
                         re.WebResponses.Add(webResponse);
                         re.SaveChanges();
