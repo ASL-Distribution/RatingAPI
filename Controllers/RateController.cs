@@ -114,6 +114,8 @@ namespace RatingAPI.Controllers
                         }
                     }
 
+                    weight = Math.Ceiling(weight);
+
                     var service = re.Services
                                         .FirstOrDefault(m => m.Name.ToLower().Trim() == request.Service.ToLower().Trim());
 
